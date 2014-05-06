@@ -1,0 +1,163 @@
+@charset "utf-8";
+.search_title {
+  color: #555;
+  margin-top: 20px;
+}
+.search_title span {
+  color: #bc0c0c;
+}
+.nav {
+  margin-bottom: 10px;
+}
+.keyword {
+  color: #bc0c0c !important;
+}
+/******* works_list *********/
+.works_group ul {
+  margin: 0;
+}
+.works_group ul li {
+  list-style: none;
+  float: left;
+  margin: 0 25px 30px 0;
+}
+.works_group ul li:nth-child(4n) {
+  margin-right: 0;
+}
+.works_group .works_pic img {
+  width: 210px;
+  height: 150px;
+}
+.works_group .works_name h5 {
+  margin: 0px;
+}
+.works_group .works {
+  position: relative;
+  padding: 9px 9px 5px 9px;
+  background-color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.works_group .works .works_info {
+  margin: 5px 0 5px 0;
+  text-align: right;
+  height: 16px;
+}
+.works_group .works .works_info li {
+  float: right;
+  font-size: 13px;
+  margin: 0 0 0 10px;
+}
+.works_group .works .works_info li a {
+  color: #b1aabc;
+}
+.works_group .works .works_info li a i {
+  margin: 3px;
+}
+.works_author {
+  margin-top: 8px;
+}
+.works_author a {
+  margin-left: 10px;
+}
+.works_author a span {
+  color: #4083a9;
+  font-size: 14px;
+  margin-left: 5px;
+}
+.works_author a span:hover {
+  color: #142A36;
+}
+.works_author .department {
+  float: right;
+  margin-right: 10px;
+  color: #999;
+}
+/******* news_list ********/
+.news_list {
+  width: 700px;
+}
+.news_list ul {
+  margin: 0;
+}
+.news_list ul li {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.news_list .news_title {
+  font-size: 16px;
+  font-family: "Microsoft Yahei", "黑体", "宋体";
+  margin-bottom: 6px;
+}
+.news_list .news p {
+  overflow: ellipsis;
+}
+.news_info span {
+  color: #888;
+  padding-right: 5px;
+  font-size: 12px !important;
+}
+/******* users_list *********/
+.users_list ul li {
+  list-style: none;
+  margin: 0 30px 30px 0;
+  width: 460px;
+  float: left;
+}
+.users_list ul li:nth-child(2n) {
+  margin-right: 0;
+}
+.users_list ul li .users_hp {
+  float: left;
+}
+.users_list ul li .users_hp img {
+  width: 67px;
+  height: 67px;
+}
+.users_list ul li .users_info {
+  color: #444;
+  margin-left: 80px;
+}
+.users_list ul li .users_info span,
+.users_list ul li .users_info p {
+  color: #888;
+}
+.users_list ul li .users_info i {
+  margin: 5px;
+}
+.users_list ul li .users_info div {
+  margin: 3px 0;
+}
+.users_list ul li .users_info p {
+  text-indent: 0;
+  margin-bottom: 5px;
+  display: inline-block;
+  margin-left: 8px;
+}
+.users_list ul li .users_info .users_name a {
+  color: #4083a9;
+  font-weight: bold;
+}
+.users_list ul li .users_info .users_name a:hover {
+  color: #5b5f82;
+}
+.users_list ul li .users_info .users_sex {
+  width: 15px;
+  height: 20px;
+  background-image: url(../img/male_female.png);
+  display: inline-block;
+}
+.users_list ul li .users_info .users_sex_female {
+  background-position: 0 0;
+}
+.users_list ul li .users_info .users_sex_male {
+  background-position: -15px 0;
+}
+.users_list ul li .users_info .users_work_amount,
+.users_list ul li .users_info .users_work_views {
+  margin: 0 20px 0 8px;
+}

@@ -1,0 +1,60 @@
+<extend name="Common:base" />
+<block name="title">评论详细信息</block>
+<block name="ext-nav-item">
+<li class="current"><a>评论详细信息</a></li>
+</block>
+<block name="extra_css">
+<style>
+	.avatar{
+		max-width: 120px;
+	}
+	.imgbox img{
+		vertical-align: middle;
+	}
+	table tr td{
+		width: 13%;
+	}
+	table tr td:nth-child(odd){
+		background-color: #CCCCFF;
+		font-weight: bold;
+	}
+	h4{
+		margin-left: 30px;
+	}
+</style>
+</block>
+<block name="content">
+<volist name="cmt_data" id="li">
+<div class="row">
+	<h4>{$li.nickname}</h4>
+	<div class="span10">
+		<table class="table">
+			<tr>
+				<td>所属作品</td>
+				<td>{$li.opus.opus_name}</td>
+				<td>评论用户</td>
+				<td>{$li.user.nickname}</td>
+			</tr>
+			<tr>
+				<td>状态</td>
+				<td>
+				<eq name="li['force_hide']" value="0">
+					<a class="text-success">正常</a>
+				<else />
+					<a class="text-error">隐藏</a>
+				</eq>
+				</td>
+				<td>评论日期</td>
+				<td>{$li.date|date='Y-m-d H:i',###}</td>
+			</tr>
+
+			<tr>
+				<td>评论内容</td>
+				<td colspan="3">{$li.message}</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+</volist>
+</block>

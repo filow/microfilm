@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>跳转提示</title>
+<style>
+body{background-color: #efefef;font-family: "Microsoft Yahei";text-align: center;}
+.container{width: 900px;margin-left: auto;margin-right: auto;text-align: center;text-align: left;}
+.content{border-radius: 6px;background-color: #fff;height: 400px;-webkit-box-shadow: 0 2px 10px #9e9f9f;-moz-box-shadow: 0 2px 10px #9e9f9f;box-shadow: 0 2px 10px #9e9f9f;margin-top: 100px;}
+.left{float: left;margin-top: 20px;padding: 70px 80px;border-right: 2px solid #cbcbcb;font-size: 160px;}
+.success{color: #1E5215;}
+.error{color:#9b0000;}
+.right{float: left;padding-left: 40px;padding-top: 40px;}
+.message{font-size: 50px;width: 590px;}
+.hint{margin-top:30px;font-size: 18px;}
+.hint span{padding: 0 5px;color: #9e0000;}
+.hint a{text-decoration: none;}
+.more{margin-top: 5px;font-size: 14px;font-family: "宋体","Arial";color:#333;}
+.more a{float: right;}
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="content">
+
+		<div class="left">
+			<?php if(isset($message)){ ?>
+				<span class="success">:)</span>
+			<?php }else{ ?>
+				<span class="error">:(</span>
+			<?php } ?>
+		</div>
+		<div class="right">
+			<div class="message">
+				<span class="<?php echo isset($message)?'success':'error';?>">
+				<?php echo isset($message)?$message:$error; ?>
+				</span>
+			</div>
+			<div class="hint">
+				您将在 <b id="wait" class="error"><?php echo($waitSecond); ?></b> 秒后跳转至上一个页面，如果没有跳转可以点击<a id="href" href="<?php echo($jumpUrl); ?>">[返回]</a>。
+			</div>
+		</div>
+	</div>
+	<div class="more">
+		Copyright © 2014 河海大学远程与继续教育学院. 地址：江苏省南京市西康路1号 联系电话： 025-83787964
+		<a href="/">[回到首页]</a>
+	</div>
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</body>
+</html>

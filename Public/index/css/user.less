@@ -1,0 +1,153 @@
+@charset "utf-8";
+@import "mixins.less";
+/********* usercenter ******/
+.user{
+	margin-top: 10px;
+}
+.box{
+	background-color: #fff;
+	.border-radius(4px);
+	border: 1px solid #ddd;
+	margin: 5px 0;
+}
+.box-header{
+	border-bottom: 1px solid #ddd;
+	padding: 8px;
+	font-size: 14px;
+	font-weight: bold;
+	.border-top-radius(4px);
+	background-color: #eaf1f2;
+	#gradient > .vertical(#f8f8f8,#eaf1f2);
+}
+.box-body{
+	padding: 5px 5px 15px 5px;
+}
+.user_head{
+	text-align: center;
+	img{
+		.square(162px);
+		margin-top: 5px;
+	}
+	#user_name{
+		margin-top: 10px;
+		font-size: 16px;
+		.yahei();
+		display: block;
+		font-weight: bold;
+		color: #0066a5;
+	}
+}
+
+.user_info{
+	padding: 0 10px;
+	margin: 10px;
+		.user_statics{
+		text-align: center;
+		width: 100%;
+		margin: 15px 0;
+		padding: 10px 0;
+		td{
+			text-align: center;
+			padding: 0 15px;
+			border-left: 1px solid #ddd;
+			color: #777;
+			&:first-child{border-left: none;}
+		}
+		.user_statics_figure{
+			font-weight: bold;
+			font-size: 17px;
+			color: #000 !important;
+		}
+	}
+	hr{
+		margin: 10px 0;
+		border-top: 1px dashed #ddd;
+	}
+.user_info_list{
+		width: 100%;
+		td{
+			padding: 4px 5px;
+			color: #444;
+			text-align: right;
+			&.user_info_option{
+				color: #777;
+				text-align: left;
+			}
+		}
+	}
+	.user_intro{
+		margin: 5px 0;
+		padding: 5px ;
+		p{
+			color: #777;
+		}
+	}
+}
+
+.newest_work{
+	margin: 0 15px 20px 15px;
+	border-bottom: 1px dashed #e3e3e3;
+	.newest_work_video{
+		float: left;
+	}
+}
+
+.newest_work_info{
+	margin: 10px 10px 0 500px;
+	.newest_work_title{
+		font-size: 16px;
+		font-weight: bold;
+		p{
+			color: #999;
+			margin: 0 0 0 5px;
+		}
+
+	}
+	ul li{
+		list-style: none;
+		padding: 4px 0;
+		color: #555;
+		span{
+			float:right;
+			color: #999;
+			i{
+				margin: 5px;
+			}
+		}
+	}
+}
+.whole_work{
+	padding: 10px;
+}
+.whole_work_title{
+	margin:19px 17px 0px 17px;
+}
+.user_work_info{
+	margin-top: 10px;
+	font-size: 13px;
+	.user_work_name a{
+		.ellipsis();
+	}
+}
+.work_list ul,.vote_list ul{
+	margin: 0px 17px;
+}
+.work_list ul li,.vote_list ul li{
+	margin-top: 10px;
+	&:nth-child(4n+1){
+		margin-left: 0;
+	}
+}
+.user_work_author,.user_work_uploadtime,.user_work_vote{
+	color: #666;
+	span{
+		float: right;
+	}
+}
+.user_work{
+	min-height: 513px;
+}
+.work_thumb a img{
+	width: 160px;
+	height: 120px;
+}

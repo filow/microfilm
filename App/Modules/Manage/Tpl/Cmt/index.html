@@ -1,0 +1,84 @@
+<extend name="Common:base" />
+<block name="extra_css">
+<style>
+.highlighted{
+	background-color: #3f67c0 !important;
+	color:white;
+}
+
+</style>
+</block>
+<block name="content">
+<form action="{:U('action_handle')}" method="post" id="form">
+<a class="btn btn-info submit_form" data-type="view"><i class="icon-eye"></i> 查看详情</a>
+<a class="btn btn-warning submit_form" data-type="hide"><i class="icon-lock"></i> 隐藏/取消隐藏</a>
+<a class="btn btn-danger submit_form" data-type="delete" ><i class="icon-times"></i> 删除</a><br /><br />
+<input type="hidden" name="type" value="" id="hidden_type" />
+<table class="table">
+	<thead>
+		<th><input type="checkbox" id="checkall"></th>
+		<th>ID</th>
+		<th>所属作品</th>
+		<th>评论用户</th>
+		<th width="250px">评论内容</th>
+		<th>评论时间</th>
+		<th>状态</th>
+	</thead>
+	<tbody>
+		<volist name="cmt_data" id="li">
+		<tr>
+			<td class="select_row"><input type="checkbox" name="select[]" class="select" value="{$li.id}"></td>
+			
+			<td>{$li.id}</td>
+			<td><a href="{:U('viewByfilter',array('opus_id'=>$li['opus']['id']))}">{$li.opus.opus_name}</a></td>
+			<td><a href="{:U('viewByfilter',array('user_id'=>$li['user']['id']))}">{$li.user.nickname}</a></td>
+			<td>{$li.message}</td>
+			<td>{$li.date|date='Y-m-d H:i',###}</td>
+			<td>
+				<eq name="li['force_hide']" value="0">
+					<a class="text-success">正常</a>
+				<else />
+					<a class="text-error">隐藏</a>
+				</eq>
+			</td>	
+
+		</tr>
+		</volist>
+	</tbody>
+</table>
+</form>
+<div class="pagination">
+  <ul>{$show}</ul>
+</div>
+<br><br>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+    $('tr').click(function(){
+    	var checkbox=$(this).children('.select_row').children();
+    	if(checkbox.attr('checked')){
+    		checkbox.removeAttr('checked');
+    	}else{
+    		checkbox.attr('checked','checked');
+    	}
+    });
+
+    $('.submit_form').click(function(){
+    	var type=$(this).attr('data-type');
+    	$('#hidden_type').val(type);
+    	$('#form').submit();
+    });
+
+    $('#checkall').click(function(){
+    	var checked=$(this).attr('checked');
+    	if(checked){
+    		$('.select').attr('checked','checked');
+    	}else{
+    		$('.select').removeAttr('checked');
+    	}
+    	
+    });
+});
+</script>
+</block>

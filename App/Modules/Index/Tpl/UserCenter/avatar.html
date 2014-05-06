@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="__PUBLIC__/bootstrap/bootstrap.css" />
+</head>
+<body>
+	<div class="row-fluid">
+		<div class="span3">
+			<ul class="thumbnails"><li>
+		    <a href="#" class="thumbnail">
+		      <img data-src="holder.js/200x200" style="width: 120px; height: 120px;" src="{:getAvatar($aid)}" alt="">
+		    </a>
+			</li></ul>
+		</div>
+		<div class="span8">
+			<div class="alert alert-info">
+				<present name="msg">{$msg[1]}<else />温馨提醒：<br>
+				您可以上传小于3M的jpg,png格式的图片，图片太大会自动裁剪为最终尺寸为300×300的正方形图像。建议图片不要太小。</present>
+			</div>
+			<div>
+				<form action="{:U('avatar')}" enctype="multipart/form-data" method="post">
+					<input type="file" name="file" id=""/>
+					<input type="submit" value="提交" class="btn btn-primary span2">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<extend name="Common:base" />
+<block name="content">
+<h3>全局变量</h3>
+<table class="table config-table">
+	<thead>
+		<th>变量名</th>
+		<th>变量值</th>
+		<th>操作</th>
+	</thead>
+	<cfgrow var="$global" name="UPLOAD_DATE_FROM" form-action="$upload_url" type="time" />
+	<cfgrow var="$global" name="UPLOAD_DATE_TO" form-action="$upload_url" type="time" />
+	<cfgrow var="$global" name="VOTE_DATE_FROM" form-action="$upload_url" type="time" />
+	<cfgrow var="$global" name="VOTE_DATE_TO" form-action="$upload_url" type="time" />
+	<cfgrow var="$global" name="VOTE_PROFESSOR_DATE_FROM" form-action="$upload_url" type="time" />
+	<cfgrow var="$global" name="VOTE_PROFESSOR_DATE_TO" form-action="$upload_url" type="time" />
+</table>	
+<h3>后台变量</h3>
+<table class="table config-table">
+	<thead>
+		<th>变量名</th>
+		<th>变量值</th>
+		<th>操作</th>
+	</thead>
+	<cfgrow var="$manage" name="LOGIN_FAIL_TIME_VERIFY" form-action="$upload_url" type="text" />
+	<cfgrow var="$manage" name="LOGIN_FAIL_TIME_WAIT" form-action="$upload_url" type="text" />
+	<cfgrow var="$manage" name="LOGIN_FAIL_TIMEOUT" form-action="$upload_url" type="text" />
+	<cfgrow var="$manage" name="LOGIN_FAIL_TIME_SPAN" form-action="$upload_url" type="text" />
+	<cfgrow var="$manage" name="AJAX_VERIFY" form-action="$upload_url" type="text" />
+	</table>
+</form>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+    //初始化datetimepicker信息
+    $('.form_datetime').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 1,
+		maxView: 3, 
+		forceParse : 0,
+        startDate:"2014-01-01",
+        endDate:"2030-01-01",
+        format:"yyyy-mm-dd hh:mm",
+    });
+});
+</script>
+</block>	

@@ -1,0 +1,145 @@
+<extend name="Common:base" />
+<block name="extra_css">
+<style>
+.highlighted{
+	background-color: #3f67c0 !important;
+	color:white;
+}
+table.dataTable td {
+	padding: 5px 10px;
+}
+.dataTables_info {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.dataTables_paginate {
+	margin-top: 5px;
+}
+
+</style>
+</block>
+<block name="content">
+<form action="{:U('action_handle')}" method="post" id="form">
+<div class="btn-group">
+	<a class="btn btn-success" href="{:U('add')}"><i class="icon-plus-circle"></i> 新增用户</a>
+	<a class="btn submit_form" data-type="edit"><i class="icon-pencil"></i> 编辑</a>
+	<a class="btn btn-info submit_form" data-type="view"><i class="icon-eye"></i> 查看详情</a>
+	<a class="btn btn-success submit_form" data-type="sendmsg"><i class="icon-envelope-o"></i> 发送短消息</a>
+	<a class="btn btn-warning submit_form" data-type="lock"><i class="icon-lock"></i> 锁定/取消锁定</a>
+	<a class="btn btn-danger submit_form" data-type="delete" disabled><i class="icon-times"></i> 删除</a>
+</div><br /><br />
+<input type="hidden" name="type" value="" id="hidden_type" />
+<table class="" id="datatable">
+	<thead>
+		<th><input type="checkbox" id="checkall"></th>
+		<th>头像</th>
+		<th>ID</th>
+		<th>用户名</th>
+		<th>姓名</th>
+		<th>性别</th>
+		<th>作品数</th>
+		<th width="180px">所属部门/学院/专业/年级</th>
+		<th>手机号</th>
+		<th>电子邮箱</th>
+		<th>状态</th>
+	</thead>
+	<tbody>
+		<volist name="user_data" id="li">
+		<tr>
+			<td class="select_row"><input type="checkbox" name="select[]" class="select" value="{$li.id}"></td>
+			<td>
+				<if condition="$li['avatar']">
+					<img src="{:atcLocation($li['avatar'])}" width="32px" height="32px" />
+				<else />
+					<img src="__PUBLIC__/images/user-thumb-mini.jpg" width="32px" height="32px" />
+				</if>
+			</td>
+			<td>{$li.id}</td>
+			<td>{$li.uid}</td>
+			<td>{$li.nickname}</td>
+			<td>{$li.sex}</td>
+			<td>{$li.opus_count}</td>
+			<td>
+				{$li.department}
+				<present name="li['belong']">
+					/{$li.belong.college}/{$li.belong.profession}/{$li.belong.grade}
+				</present>
+			</td>
+			<td>{$li.phone}</td>
+			<td>{$li.email}</td>
+			<td>
+				<eq name="li['forbidden']" value="0">
+					<a class="text-success">正常</a>
+				<else />
+					<a class="text-error">禁用</a>
+				</eq>
+
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+</form>
+<br><br><br><br>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+	var oTable=$('#datatable').dataTable({
+		"sPaginationType": "full_numbers",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+            "sUrl": "__PUBLIC__/plugins/datatables/lan.json"
+        },
+        "aaSorting": [[ 2, "desc" ]],
+        "aoColumns": [
+	        { "asSorting": [] },  
+        	{ "asSorting": [] },
+        	null,null,null,null,null,null,null,null,  null     
+        ] ,
+        'iDisplayLength':25,
+        "bStateSave": true
+	});
+	oTable.$('tr').hover( function() {
+        $(this).addClass('highlighted');
+    }, function() {
+        oTable.$('tr.highlighted').removeClass('highlighted');
+    } );
+    oTable.$('tr').click(function(){
+    	var checkbox=$(this).children('.select_row').children();
+    	if(checkbox.attr('checked')){
+    		checkbox.removeAttr('checked');
+    	}else{
+    		checkbox.attr('checked','checked');
+    	}
+    	
+    });
+
+    $('.submit_form').click(function(){
+    	var type=$(this).attr('data-type');
+    	$('#hidden_type').val(type);
+    	$('#form').submit();
+    });
+
+    $('#checkall').click(function(){
+    	var checked=$(this).attr('checked');
+    	if(checked){
+    		$('.select').attr('checked','checked');
+    	}else{
+    		$('.select').removeAttr('checked');
+    	}
+    });
+    //消除checkbox点击时不响应的bug
+    $('.select').click(function(){
+    	var checked=$(this).attr('checked');
+    	console.log(checked);
+    	// alert('132');
+    	if(!checked){
+    		$(this).attr('checked','checked');
+    	}else{
+    		$(this).removeAttr('checked');
+    	}
+    });
+});
+</script>
+</block>

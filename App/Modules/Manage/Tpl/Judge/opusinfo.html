@@ -1,0 +1,149 @@
+<extend name="Common:base" />
+<block name="title">
+	作品详细信息
+</block>
+<block name="ext-nav-item">
+	<li class="current"><a>作品详细信息</a></li>
+</block>
+<block name="extra_css">
+<style>
+.label{
+	padding: 8px;
+	font-size: 13px;
+	font-weight: normal;
+}
+table#judge_table tr td:nth-child(1){
+	font-weight: bold;
+}
+#comment{width: 100%}
+#submit_btn{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 240px;
+	height: 54px;
+	font-size: 16px;
+	font-family: "微软雅黑","黑体","宋体";
+}
+#opus_thumb{
+	display: block;
+	float: right;
+	width: 220px;
+	height: 180px;
+	margin-right: 30px;
+
+}
+</style>
+</block>
+<block name="content">
+<div class="well">
+<img src="{:getThumbMini($opus_info['id'])}" id="opus_thumb">
+<h4>{$opus_info.opus_name}
+	<if condition="$status">
+		<span class="label label-success"><i class="icon-check-circle"></i> 已评审</span>
+	<else />
+		<span class="label"><i class="icon-circle-o"></i> 未评审</span>
+	</if>
+</h4>
+
+	<table>
+		<tr>
+			<td width="60px"><b>简介</b></td>
+			<td>{$opus_info.overview}</td>
+		</tr>
+		<tr>
+			<td width="60px"><b>作者</b></td>
+			<td>
+				<volist name="author_list" id="li">
+					{$li.author} 
+				</volist>
+			</td>
+		</tr>
+		<tr>
+			<td width="60px"><b>数值信息</b></td>
+			<td>
+				<span class="label label-info">浏览量：{$opus_info.view_count}</span>
+				<span class="label label-info">投票量：{$opus_info.vote_count}</span>
+				<span class="label label-info">评论量：{$opus_info.comment_count}</span>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<a href="{:U('Index/Opus/View',array('id'=>$opus_info['id']))}" class="btn" target="_blank">查看作品详细介绍</a>
+</div>
+<hr>
+<present name="judge_list">
+<div class="well">
+<h4>评分信息</h4>
+	<table class="table">
+		<thead>
+			<th width="200px">评委姓名</th>
+			<th width="150px">评分</th>
+			<th>评语</th>
+		</thead>
+		<volist name="judge_list" id="li">
+		<tr>
+			<td>{$li.uid}--{$li.realname}</td>
+			<td>{$li.rank}</td>
+			<td>{$li.comment}</td>
+		</tr>
+		</volist>
+		<tr>
+			<td>评分记录数：{$judge_list_count}</td>
+			<td>平均分：{$judge_list_average}</td>
+			<td>提示：表格内容可以直接复制粘贴到excel中</td>
+		</tr>
+	</table>
+</div>
+<hr>
+</present>
+<form action="{:U('submitJudge')}" method="post">
+<input type="hidden" name="opus_id" value="{$opus_info.id}">
+<table id="judge_table">
+	<tr>
+		<td width="120px">评分(1-100分)</td>
+		<td><input type="number" name="grade" min="1" max="100" id="grade" value="{$status.rank}"> <span id="notice"></span></td>
+	</tr>
+	<tr>
+		<td>评语</td>
+		<td>
+			<textarea name="comment" cols="80" rows="10" id="comment">{$status.comment}</textarea>
+		</td>
+	</tr>
+	<tr>
+		<td>评分人</td>
+		<td>{:session('realname')}</td>
+	</tr>
+</table>
+<input type="submit" value="提交" class="btn btn-success" id="submit_btn">
+</form>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+	$('#grade').bind('keyup change',function(){
+		var grade=parseInt($(this).val());
+		var result="";
+		if(grade){
+			switch(parseInt(grade/10)){
+				case 0:case 1:case 2:case 3:case 4: case 5:
+					result='<span class="label label-important">较差</span>';break;
+				case 6:case 7:
+					result='<span class="label label-warning">一般</span>';break;
+				case 8:
+					result='<span class="label label-info">不错</span>';break;
+				case 9:
+					result='<span class="label label-success">非常棒</span>';break;
+				case 10:
+					result='<span class="label label-success">佳作</span>';break;
+				default:
+					result='<span class="label label-inverse">数据应当在1-100之间</span>';break;
+			}
+		}else{
+			result='<span class="label label-inverse">数据不合法</span>';
+		}
+		$('#notice').html(result);
+	});
+});
+</script>
+</block>

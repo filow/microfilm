@@ -1,0 +1,88 @@
+<extend name="Common:base" />
+<block name="title">消息箱</block>
+<block name="extra_css">
+	<link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css">
+	<style>
+		.bold{font-weight: bold;color:red;}
+		tr{
+			cursor: pointer;
+		}
+	</style>
+</block>
+<block name="content">
+<div class="usercenter">
+	<div class="row-fluid">
+		<include file="sidebar" />
+		<div class="main span9">
+			<div class="box">
+				<div class="box-header">消息箱</div>
+				<div class="box-body">
+					<table class="table">
+						<thead>
+							<th>#</th>
+							<th>消息标题</th>
+							<th width="120px">发送时间</th>
+							<th width="120px">发送人</th>
+						</thead>
+						<tbody>
+							<volist name="msg" id="li" key="k">
+							<tr <?php if($li['has_read']=="0") echo "class=\"bold\"" ?> data-id="{$li.id}">
+								<td>{$k}</td>
+								<td>{$li.title}</td>
+								<td>{$li.time|date="m-d H:i",###}</td>
+								<td>{$li.from}</td>
+							</tr>		
+							</volist>
+						</tbody>
+					</table>
+					<div class="pagination pagination-centered">
+					  <ul>
+					{$show}
+				</ul></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal hide fade" id="msgbox">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 id="msg_title">正在加载中</h3>
+  </div>
+  <div class="modal-body">
+    <div id="msg_content">正在加载中</div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
+  </div>
+</div>
+
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+	$('tr').click(function(){
+		var thetr=$(this);
+		var id=thetr.attr('data-id');
+		url="{:U('getMsg')}"+"?id="+id;
+		$.get(url,function (data){
+			if(data=="0"){
+				$('#msg_title').html("抱歉，数据加载失败");
+				$('#msg_content').html("抱歉，数据加载失败");
+			}else{
+				$('#msg_title').html(data['title']);
+				$('#msg_content').html(data['content']);
+			}
+		});
+		url2="{:U('readMsg')}"+"?id="+id;
+		$.get(url2,function (data){
+			thetr.removeClass('bold');
+		});
+		$('#msgbox').modal();
+
+	});
+
+});
+</script>
+</block>

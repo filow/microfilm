@@ -1,0 +1,504 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <title>后台管理--河海计信</title>
+    <link rel="stylesheet" href="css/UILib/uilib.css" />
+    <link rel="stylesheet" href="css/icheck/skins/square/blue.css">
+    <link rel="stylesheet" href="css/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/icons.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+</head>
+<body>
+    <!--header-->
+	<div class="header">
+		<div class="row">
+			<div class="header-logo">
+                <a href="index.html"><img src="img/logo.png" id="logo" /></a>
+            </div>
+            <!-- 搜索框 -->
+		    <div class="panel-search pull-right">
+				<input class="search-input" type="text" placeholder="搜索功能及站内内容...">
+            </div>
+            <!--/搜索框-->
+            <!-- 用户信息栏 -->
+			<div class="pull-right userinfo" id="nav-bar">
+				<img class="corner-all" align="middle" src="img/user-thumb.jpg" id="user-headphoto" width="40" height="40"/> 
+				<div class="btn-group user-group ">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <button class="btn btn-primary">用户名 Username  <span class="caret"></span></button> 
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <div class="media">
+                                <a class="pull-left">
+                                    <img class="img-circle" src="img/user.jpg" />
+                                </a>
+                                <div class="media-body description">
+                                    <p><strong>User Name</strong></p>
+                                    <p class="muted">用户的详细介绍与说明....................................................</p>
+                                    <p class="action"><a class="link" href="#">个人账户</a> - <a class="link" href="#">设置</a></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="dropdown-footer">
+                            <div>
+                                <a class="btn btn-small pull-right" href="login.html">退出登录</a>
+                                <a class="btn btn-small" href="#">更换账号</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary">回到前台</button>
+			</div>
+		</div>
+	</div>
+    <!--main-->
+    <div class="main">
+        <!-- navigator -->
+        <div class="navigator">
+            <ul>
+                <li class="active"><a href="#">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</a></li>
+                <li><a href="#">用户信息</a></li>
+                <li><a href="#"><i class="icons-num1 icons-white"></i>其他设置</a></li>
+                <li><a href="#"><i class="icons-num2 icons-white"></i>其他设置</a></li>
+                <li><a href="#"><i class="icons-num3 icons-white"></i>其他设置</a></li>
+                <li><a href="#"><i class="icons-num4 icons-white"></i>其他设置</a></li>
+                <li><a href="#"><i class="icons-num5 icons-white"></i>其他设置</a></li>
+                <li><a href="#"><i class="icons-num6 icons-white"></i>其他设置</a></li>
+                <li><a href="#"><i class="icons-num7 icons-white"></i>其他设置</a></li>
+                <li><a href="#"><i class="icons-num8 icons-white"></i>其他设置</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <!-- nav-bar -->
+            <div class="nav-bar">
+                <!--breadcrumb-->
+                <ul class="nav-item">
+                    <li class="current"><a href="index.html"><i class="icons-num5 icons-white"></i>首页</a></li>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="index.html">首页</a></li>
+                </ul><!--/breadcrumb-->
+            </div><!-- /nav-bar -->
+
+
+
+            <div class="content-body">
+              <div class="page-header">
+  <h1>来到这里 <small>子标题</small></h1>
+</div>
+                <div class="bs-docs-example">
+                    <h1>h1. 标题1</h1>
+                    <h2>h2. 标题2</h2>
+                    <h3>h3. 标题3</h3>
+                    <h4>h4. 标题4</h4>
+                    <h5>h5. 标题5</h5>
+                    <h6>h6. 标题6</h6>
+                    <h6>h6. 标题6</h6>
+                </div>
+                <ul class="breadcrumb">
+  <li><a href="#">首页</a> <span class="divider">/</span></li>
+  <li><a href="#">Library</a> <span class="divider">/</span></li>
+  <li class="active">Data</li>
+</ul>
+<div class="pagination pagination-right">
+  <ul>
+    <li class="previous"><a href="#"><i class="icon-ok"></i>前一页</a></li>
+    <li class="active"><a href="#">1</a></li>
+    <li class="disabled"><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#"><i class="icon-ok"></i></a></li>
+    <li><a href="#">5</a></li>
+    <li class="next"><a href="#">后一页</a></li>
+  </ul>
+</div>
+<ul class="nav nav-tabs">
+              <li class="active"><a href="#">首页</a></li>
+              <li><a href="#">Profile</a></li>
+              <li class="disabled"><a href="#">Messages</a></li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+
+            <ul class="nav nav-list">
+                <li class="nav-header">List header</li>
+                <li class="active"><a href="#">首页</a></li>
+                <li><a href="#">Library</a></li>
+                <li><a href="#">Applications</a></li>
+                <li class="nav-header">Another list header</li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Help</a></li>
+              </ul>
+
+<div class="tabbable tabs-below">
+              <div class="tab-content">
+                <div class="tab-pane active" id="A">
+                  <p>I'm in Section A.</p>
+                </div>
+                <div class="tab-pane" id="B">
+                  <p>Howdy, I'm in Section B.</p>
+                </div>
+                <div class="tab-pane" id="C">
+                  <p>What up girl, this is Section C.</p>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#A" data-toggle="tab">Section 1</a></li>
+                <li class=""><a href="#B" data-toggle="tab">Section 2</a></li>
+                <li class=""><a href="#C" data-toggle="tab">Section 3</a></li>
+              </ul>
+            </div>
+
+<div class="navbar navbar-inverse">
+              <div class="navbar-inner">
+                <div class="container">
+                  <a class="btn btn-navbar" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </a>
+                  <a class="brand" href="#">Title</a>
+                  <div class="nav-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav">
+                      <li class="active"><a href="#">首页</a></li>
+                      <li><a href="#">Link</a></li>
+                      <li><a href="#">Link</a></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li class="nav-header">Nav header</li>
+                          <li><a href="#">Separated link</a></li>
+                          <li><a href="#">One more separated link</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                    <form class="navbar-search pull-left" action="">
+                      <input type="text" class="search-query span2" placeholder="Search">
+                    </form>
+                    <ul class="nav pull-right">
+                      <li><a href="#">Link</a></li>
+                      <li class="divider-vertical"></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#">Action</a></li>
+                          <li><a href="#">Another action</a></li>
+                          <li><a href="#">Something else here</a></li>
+                          <li class="divider"></li>
+                          <li><a href="#">Separated link</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div><!-- /.nav-collapse -->
+                </div>
+              </div><!-- /navbar-inner -->
+            </div>
+                <abbr title="attribute">attr</abbr>
+                <blockquote>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                  <p>你好，世界</p>
+                   <small>你好</small>
+                </blockquote>
+                <ol class="inline">
+                  <li>...</li>
+                  <li>...</li>
+                  <li>...</li>
+                  <li>...</li>
+                </ol>
+                <dl class="dl-horizontal">
+                    <dt>Description lists</dt>
+                    <dd>A description list is perfect for defining terms.</dd>
+                    <dt>Euismod</dt>
+                    <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
+                    <dd>Donec id elit non mi porta gravida at eget metus.</dd>
+                    <dt>Malesuada porta</dt>
+                    <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
+                    <dt>Felis euismod semper eget lacinia</dt>
+                    <dd>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</dd>
+                  </dl>
+<pre>
+  &lt;p&gt;Sample text here...&lt;/p&gt;
+</pre>
+<table class="table table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="info">
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+<form class="form-horizontal">
+  <fieldset>
+    <legend>Legend</legend>
+    <label>用户名：
+    <input type="text" placeholder="Type something…">
+    <span class="help-block">Example block-level help text here.</span></label>
+    <label class="checkbox">
+      <input type="checkbox"> Check me out
+    </label>
+
+    <label class="checkbox">
+  <input type="checkbox" value="">
+  Option one is this and that—be sure to include why it's great
+</label>
+<label class="radio">
+  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+  Option one is this and that—be sure to include why it's great
+</label>
+<label class="radio">
+  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+  Option two can be something else and selecting it will deselect option one
+</label>
+<select class="selectpicker" data-style="btn-primary">
+  <option data-icon="icon-pencil">选项1</option>
+  <option data-icon="icon-bell">选项2</option>
+  <option data-icon="icon-barcode">选项3</option>
+  <option data-icon="icon-ok" data-content="<span class='label label-success'>推荐</span>">选项4</option>
+  <option data-icon="icon-minus">选项5</option>
+</select>
+   <select class="selectpicker">
+    <optgroup label="Picnic" disabled>
+      <option>Mustard</option>
+      <option>Ketchup</option>
+      <option>Relish</option>
+    </optgroup>
+    <optgroup label="Camping">
+      <option>Tent</option>
+      <option>Flashlight</option>
+      <option>Toilet Paper</option>
+    </optgroup>
+  </select>
+<select multiple="multiple" class="selectpicker" data-style="btn-primary" data-selected-text-format="count>3">
+  <option>选项1</option>
+  <option>选项2</option>
+  <option>选项3</option>
+  <option>选项4</option>
+  <option>选项5</option>
+</select>
+<div class="input-prepend">
+  <span class="add-on">@</span>
+  <input class="span2" id="prependedInput" type="text" placeholder="Username">
+</div>
+<div class="input-append">
+  <input class="span2" id="appendedInput" type="text">
+  <span class="add-on">.00</span>
+</div>
+<div class="input-prepend input-append">
+  <span class="add-on">$</span>
+  <input class="span2" id="appendedPrependedInput" type="text">
+    <button class="btn btn-success" type="button">Search</button>
+  <button class="btn" type="button">Options</button>
+</div>
+<div class="input-prepend input-append">
+                <div class="btn-group">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </div><!-- /btn-group -->
+              <input class="span2" id="appendedDropdownButton" type="text">
+              <div class="btn-group">
+                <button class="btn dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </div><!-- /btn-group -->
+            </div><br />
+<div class="input-prepend input-append">
+              <div class="btn-group">
+                <button class="btn" tabindex="-1">Action</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </div>
+              <input type="text">
+                            <div class="btn-group">
+                <button class="btn" tabindex="-1">Action</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </div>
+            </div>
+            <input type="text" name="" id="" class="span5" disabled>
+            <div class="form-actions">
+  <button type="submit" class="btn btn-primary">Save changes</button>
+  <button type="button" class="btn">Cancel</button>
+</div>
+<input type="text"><span class="help-inline">Inline help text</span>
+<input class="span3" type="email" required>
+    <button type="submit" class="btn">Submit</button>
+  </fieldset>
+</form>
+<form class="form-search">
+  <div class="input-append">
+    <input type="text" class="span2 search-query">
+    <button type="submit" class="btn">Search</button>
+  </div>
+  <div class="input-prepend">
+    <button type="submit" class="btn">Search</button>
+    <input type="text" class="span2 search-query ">
+  </div>
+</form>
+<a class="btn">你好</a>
+<a class="btn btn-primary">你好</a>
+<a class="btn btn-info">你好</a>
+<a class="btn btn-success">你好</a>
+<a class="btn btn-warning">你好</a>
+<a class="btn btn-danger">登陆</a>
+<a class="btn btn-inverse">你好</a>
+<a class="btn btn-link">你好</a><br />
+<a class="btn btn-large">This is a big big button</a>
+<a class="btn btn-small">你好</a>
+<a class="btn btn-mini ">你好</a>
+<input name="tags" id="tags" value="oo,br,bz" />
+<i class="icon-ambulance"></i>
+<i class="icon-ok icon-2x"></i>dawewq
+<div class="btn-toolbar">
+  <div class="btn-group">
+    <a class="btn" href="#"><i class="icon-align-left"></i></a>
+    <a class="btn" href="#"><i class="icon-align-center"></i></a>
+    <a class="btn" href="#"><i class="icon-align-right"></i></a>
+    <a class="btn" href="#"><i class="icon-align-justify"></i></a>
+  </div>
+</div>
+<div class="btn-group">
+  <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> User</a>
+  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+    <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+    <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+    <li class="divider"></li>
+    <li><a href="#"><i class="i"></i> Make admin</a></li>
+  </ul>
+</div>
+<div class="control-group">
+  <label class="control-label" for="inputIcon">Email address</label>
+  <div class="controls">
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-envelope"></i></span>
+      <input class="span2" id="inputIcon" type="text">
+    </div>
+  </div>
+</div>
+<div class="btn-group">
+                <button class="btn">1</button>
+                <button class="btn">2</button>
+                <button class="btn">3</button>
+                <button class="btn">4</button>
+              </div>
+<!-- Button to trigger modal -->
+<a href="#myModal" role="button" class="btn" data-toggle="modal">查看演示案例</a>
+ 
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+<a class="btn" id="tip" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." title="" data-original-title="Popover on top">Popover on top</a>
+
+
+                <!--footer -->
+                <div class="footer">
+                    <small> &#169; Copyright 2013 HHUJX | Powered by <a href="#">JetMuffin XD</a> | <a href="#">Top</a> </small>
+                </div>
+                <!--/footer -->
+            </div>
+                                    </div>
+
+                        </div>
+                            
+            </div>
+
+	    <script src="js/jquery.js"></script>
+      <!-- 模拟产生本地ajax请求 -->
+      <script src="js/jquery.mockjax.js"></script>
+      <script src="js/bootstrap.js"></script>
+      <script src="css/icheck/jquery.icheck.min.js"></script>
+      <script src="css/bootstrap-select/bootstrap-select.min.js"></script>
+      <script src="css/tags-input/jquery.tagsinput.min.js"></script>
+      <script src="js/jquery.autocomplete.js"></script>
+      <script src="css/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+      <script>
+        $(document).ready(function(){
+            $('input').iCheck({
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
+            });
+            $('.selectpicker').selectpicker({"countSelectedText":"选中{0}个，共{1}个"});
+            $('#tags').tagsInput({ 'defaultText':''});
+            $('#tip').popover();
+        });
+      </script>
+</body>
+</html>

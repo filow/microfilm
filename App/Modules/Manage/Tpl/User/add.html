@@ -1,0 +1,115 @@
+<extend name="Common:base" />
+<block name="title">添加新用户</block>
+<block name="ext-nav-item">
+<li class="current"><a>添加新用户</a></li>
+</block>
+<block name="extra_css">
+<style>
+	.avatar{
+		max-width: 120px;
+	}
+	.imgbox img{
+		vertical-align: middle;
+	}
+	table tr td{
+		width: 13%;
+	}
+	table tr td:nth-child(odd){
+		background-color: #CCCCFF;
+		font-weight: bold;
+	}
+	h4{
+		margin-left: 30px;
+	}
+</style>
+</block>
+<block name="content">
+<div class="row">
+	<h4>添加新用户</h4>
+	<div class="span2 imgbox">
+		<div class="container">
+		<img src="__PUBLIC__/images/user.jpg" class="avatar" />
+			<div>用户创建后才能设定头像</div>
+		</div>
+	</div>
+	<div class="span10">
+		<form action="{:U('add_handle')}" method="post">
+		<table class="table">
+			<input type="hidden" name="id" value="{$li.id}" class="id"/>
+			<tr>
+				<td>用户名</td>
+				<td><input type="text" class="span2" name="uid" /></td>
+				<td>姓名</td>
+				<td><input type="text" class="span2" name="nickname" /></td>
+				<td>密码</td>
+				<td><input type="text" name="password" class="span2" /></td>
+			</tr>
+			<tr>
+				<td>性别</td>
+				<td>
+					<select name="sex" class="span2">
+						<option value="0" selected>男</option>
+						<option value="1">女</option>
+					</select>
+				</td>
+				<td>手机号码</td>
+				<td><input type="text" name="phone" class="span2"></td>
+				<td>状态</td>
+				<td>
+					<select name="forbidden" class="span2">
+						<option value="0" selected>正常</option>
+						<option value="1">>禁用</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>邮箱</td>
+				<td><input type="text" name="email" class="span2"></td>
+				<td>身份证号码</td>
+				<td colspan="3"><input type="text" name="idcard" class="span4"></td>
+			</tr>
+			<tr>
+				<td>类型</td>
+				<td>
+					<select name="belong_type" class="span2">
+						<option value="1" selected>本校学生</option>
+						<option value="0">其他</option>
+					</select>
+				</td>
+				<td>所属部门</td>
+				<td colspan="3" class="depart_td">
+					<input type="text" name="department" class="span2"  placeholder="单位"/>
+					<input type="text" name="college" class="college span2" placeholder="学院" />
+					<input type="text" name="profession" class="profession span2" placeholder="专业" />
+					<input type="text" name="grade" class="grade span2" placeholder="年级" />
+				</td>
+			</tr>
+		</table>
+		<br><input type="submit" value="添加新用户" class="btn">
+		</form>
+	</div>
+</div>
+
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+	$(':input').change(function(){
+		var selector  =  $(this).parents('table');
+		selector.find('a.submit').removeAttr('disabled');
+		if($(this).attr('name')=="belong_type"){
+			if($(this).val()=="1"){
+				var node=selector.find('.depart_td');
+				node.append("<input type=\"text\" name=\"college\" class=\"college span2\" placeholder=\"学院\" /> ");
+				node.append("<input type=\"text\" name=\"profession\" class=\"college span2\" placeholder=\"专业\" /> ");
+				node.append("<input type=\"text\" name=\"grade\" class=\"college span2\" placeholder=\"年级\" />");
+			}else{
+				selector.find('.college').remove();
+				selector.find('.profession').remove();
+				selector.find('.grade').remove();
+			}
+		}
+	});
+});
+</script>
+</block>

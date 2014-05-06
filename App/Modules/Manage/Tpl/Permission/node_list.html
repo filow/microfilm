@@ -1,0 +1,63 @@
+<extend name="Common:base" />
+<block name="extra_css">
+</block>
+<block name="content">
+<h3><present name="edit_role">修改角色权限<else />系统权限列表</present></h3>
+<div class="alert alert-info">
+	<present name="edit_role">
+		选中权限前方的复选框后，提交便可更改权限设置
+    <else />
+        由于系统权限列表与系统的设计息息相关，不能随意更改。因此此处只提供权限系统的查看，不给予修改/删除的功能
+	</present>
+</div>
+<present name="edit_role">
+<a class="btn" id="select_all">全选</a>
+<a class="btn" id="unselect_all">全不选</a>
+</present>
+<form action="{:U('access_modify')}" method="post">
+	<input type="hidden" name="id" value="{:I('role_id')}">
+<volist name="node" id="li">
+<h4 class="<?php if($li['_self']['owned']==1) echo "owned"; ?>">
+	<present name="edit_role">
+	<input type="checkbox" name="access[]" value="{$li._self.id}" <?php if($li['_self']['owned']==1) echo "checked"; ?>>
+	</present>
+	<i class="icon-{$li._self.icon}"></i>
+	 {$li._self.title}({$li._self.name})
+</h4>
+<php>unset($li['_self']);</php>
+<table class="table">
+	<tr>
+		<php>$count=0;</php>
+		<foreach name="li" item="child" key="child_key">
+			<php>$count++;if($count%4==0){ echo "</tr><tr>";$count=1;}</php>
+			<td class="<?php if($child['owned']==1) echo "owned"; ?>">
+				<label>
+				<present name="edit_role">
+				<input type="checkbox" name="access[]" value="{$child.id}" <?php if($child['owned']==1) echo "checked"; ?>>
+				</present>
+				<if condition="$child['is_nav']==1"><i class="icon-list-alt"></i></if> {$child.title}({$child.name})
+				</label>
+			</td>
+		</foreach>
+	</tr>
+</table>
+</volist>
+<present name="edit_role">
+<input type="submit" value="提交职位权限更改" class="btn btn-success">
+</present>
+</form>
+</block>
+<block name="extra_js">
+<present name="edit_role">
+<script>
+$(document).ready(function(){
+	$('#select_all').click(function(){
+		$('input:checkbox').attr('checked','checked');
+	});
+	$('#unselect_all').click(function(){
+		$('input:checkbox').removeAttr('checked');
+	});
+});
+</script>
+</present>
+</block>

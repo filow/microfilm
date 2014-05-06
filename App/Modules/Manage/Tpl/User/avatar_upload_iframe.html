@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="__PUBLIC__/dark_ui/uilib.css" />
+    <style>
+		body{
+			background-color: transparent;
+		}
+		.avatar{
+			max-width: 120px;
+			max-height: 100px;
+		}
+    </style>
+</head>
+<body class="span2">
+	<if condition="$avatar">
+		<img src="{:atcLocation($avatar['avatar_large'])}" class="avatar" />
+	<else />
+		<img src="__PUBLIC__/images/user.jpg" class="avatar" />
+	</if><br><br>
+	<div>
+		只能上传jpg,png<br>格式的3M以内的<br>照片，图片太大<br>会自动等比例缩放。
+	</div>
+	<br>
+	<form action="{:U('avatar_upload_iframe')}?id={$id}" enctype="multipart/form-data" method="post">
+		<input type="hidden" name="id" value="{$id}">
+		<input id="File1" name="UpLoadFile" type="file" width="160px" /> 
+		<input type="submit" value="上传照片" class="btn">
+	</form>
+	<div id="err_box">
+		<eq name="msg[0]" value="0">
+			<a class="text-error">{$msg[1]}</a>
+		<else />
+			<a class="text-success">{$msg[1]}</a>
+		</eq>
+	</div>
+</body>
+</html>

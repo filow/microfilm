@@ -1,0 +1,93 @@
+<extend name="Common:base" />
+<block name="title">上传视频</block>
+<block name="extra_css">
+	<link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css">
+</block>
+<block name="content">
+<div class="usercenter">
+	<div class="row-fluid">
+		<include file="sidebar" />
+		<div class="main span9">
+			<div class="user_info box">
+				<div class="box-header">上传视频</div>
+				<div class="box-body">
+					<if condition="$old_video">
+					<div class="alert alert-error">
+						<h5>请注意！！</h5>
+						<p>您已经上传了视频文件：{$old_video.filename}，重复上传将覆盖这个文件。因此，除非您对视频有所改动，否则请尽量不要重新上传！</p>
+					</div>
+					</if>
+					<div class="well">
+						<h5>注意事项：</h5>
+						<ul>
+							<li>为了视频能够在线播放，您只能上传mp4,flv,mov格式的视频。如果您制作的视频不是这三种格式，请使用转码工具转换。推荐使用<a href="http://format-factory.softonic.cn/download" target="_blank">格式工厂</a></li>
+							<li>您只能上传一个文件且文件大小不得超过400MB。</li>
+							<li>上传进度条满了以后，若无错误提示，便已上传。您可以回到作品管理页面将作品发布。</li>
+						</ul>
+					</div>
+				<form class="form-inline" method="post" enctype="multipart/form-data" action="{:U('Opus/uploadVideo')}">
+					<div id="queue"></div>
+					<input id="file_upload" name="file_upload" type="file" multiple="true">
+				</form>
+				
+				<div class="progress">
+				  <div class="bar" style="width: 0%;" id="progress"></div>
+				</div>
+				<a href="{:U('opusmanage')}" class="btn btn-success" id="return_to_manage" style="display:block;margin-left:auto;margin-right:auto;width: 60%;padding: 15px;">上传完成，返回作品管理界面</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="extra_js">
+<script src="__PUBLIC__/plugins/uploadify/jquery.uploadify.js" type="text/javascript"></script>
+<script type="text/javascript">
+<?php $timestamp = time();?>
+$(function() {
+	$('#file_upload').uploadify({
+		'formData'     : {
+			'timestamp' : '<?php echo $timestamp;?>',
+			'token'     : "<?php echo md5('MC_OPUS_VIDEO_UPLOAD'. I('opus_id') . $timestamp);?>",
+			'opus_id'   : "{:I('opus_id')}",
+		},
+		'buttonClass' : "btn btn-primary",
+		'swf'      : '__PUBLIC__/plugins/uploadify/uploadify.swf',
+		'uploader' : "{:U('Opus/uploadVideo')}",
+		'buttonText' : '上传微课程视频',
+		'fileTypeDesc' : '视频文件(flv,mp4,mov)',
+		'fileTypeExts' : ' *.flv; *.mp4; *.mov',
+		'height':38,
+		'width':130,
+		'multi' : false,
+		'progressData' : 'speed',
+		'queueSizeLimit' : 1,
+		'removeCompleted' : false,
+		// 'auto'     : false,
+		'itemTemplate' : '<div id="${fileID}" class="well">'+
+            '<span class="fileName">正在上传${fileName}</span><span class="label label-info">${fileSize}</span><span class="data"></span>'+
+            '</div>',
+        'onUploadProgress':function(file,bytesUploaded,bytesTotal,totalBytesUploaded,totalBytesTotal){
+        	$('#progress').attr('style',"width:"+bytesUploaded/bytesTotal*100+"%");
+        },
+        'onUploadSuccess' : function(file, data, response) {
+        	var result=eval(data);
+        	if(result[0]==1){
+        		$('#file_upload').uploadify('destroy');
+        		$('#file_upload').hide();
+        		$('#return_to_manage').show();
+        	}else{
+        		alert(result[1]);
+        		location.reload();
+        	}
+	    },
+	    'fileSizeLimit' : '410MB',
+	});
+	$('#return_to_manage').hide();
+
+	$('.cancel_task').click(function(){
+		$('#file_upload').uploadify('cancel','*');
+	});
+});
+</script>
+</block>

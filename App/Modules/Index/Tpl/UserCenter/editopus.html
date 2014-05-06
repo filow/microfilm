@@ -1,0 +1,152 @@
+<extend name="Common:base" />
+<block name="title">编辑作品基本信息</block>
+<block name="extra_css">
+	<link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css">
+	<link rel="stylesheet" href="__PUBLIC__/plugins/bootstrap-select/bootstrap-select.css">
+	<link rel="stylesheet" href="__PUBLIC__/index/css/opusmanage.css">
+</block>
+<block name="content">
+<div class="usercenter">
+	<div class="row-fluid">
+		<include file="sidebar" />
+		<div class="main span9">
+			<div class="box">
+				<div class="box-header">编辑作品基本信息</div>
+				<div class="box-body">
+					<form action="{:U('editOpus_handle')}" method="post" enctype="multipart/form-data" >
+						<input type="hidden" name="id" id="opus_id" value="{$data.id}" />
+						<table class="table">
+							<tr>
+								<td>作品标题：</td>
+								<td>
+									<input type="text" name="opus_name" value="{$data.opus_name}" id="opus_name">
+									<span class="label label-success hide" id="opus_name_status"></span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">作者：(可以点击单元格编辑作者信息)
+									<table class="table-bordered" id="author_table">
+										<thead>
+											<th>姓名</th>
+											<th>性别</th>
+											<th>所属单位</th>
+											<th>手机号码</th>
+											<th>电子邮箱</th>
+											<th></th>
+										</thead>
+										<volist name="authors" id="li" key="key">
+										<tr>
+											<td>
+												<input type="text" name="author_name[]" value="{$li.author}">
+											</td>
+											<td>
+												<select name="sex[]">
+													<option value="0" >男</option>
+													<option value="1" <if condition="$li['sex']=='1'">selected</if>>女</option>
+												</select>
+											</td>
+											<td>
+												<input type="text" name="author_belong[]" value="{$li.department}">
+											</td>
+											<td>
+												<input type="text" name="phone[]" value="{$li.phone}">
+											</td>
+											<td>
+												<input type="text" name="email[]" value="{$li.email}">
+											</td>
+											<td><if condition="$key!=1"><a class="btn btn-danger btn-small deleteline"><i class="icon-minus"></i></a></if></td>
+										</tr>
+										</volist>
+									</table>
+	
+									<a class="btn btn-success" id="add_author"><i class="icon-plus"></i> 添加作者</a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">作品介绍：<textarea name="intro" id="editor" cols="30" rows="10">{$data.content}</textarea></td>
+							</tr>
+							<tr>
+								<td>视频说明文档：</td>
+								<td>
+									<if condition="$att_info['filename']">
+									<div class="alert alert-info">您已经上传了：{$att_info.filename},不需要再次上传。再次上传将覆盖原来的文件</div>
+									</if>
+									<input type="file" name="document" id="">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" class="btn btn-success" value="提交作品基本信息	" id="submit_btn" onclick="return checkform()"></td>
+							</tr>
+
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="extra_js">
+<script src="__PUBLIC__/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="__PUBLIC__/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<script>
+function checkform(){
+	var opus_name=$('#opus_name').val();
+	
+	if(opus_name=="未命名作品"){
+		alert("作品名称不能为”未命名作品“！");
+		$('#opus_name').focus();
+		return false;
+	}
+	if(opus_name==""){
+		alert("作品名称不能为空！");
+		$('#opus_name').focus();
+		return false;
+	}
+}
+$(document).ready(function(){
+    window.UEDITOR_HOME_URL= '__PUBLIC__/plugins/ueditor/';
+    window.UEDITOR_CONFIG.initialFrameHeight=300;
+    window.UEDITOR_CONFIG.imageUrl = "{:U('upload_pic',null,'')}"  //图片上传提交地址
+    window.UEDITOR_CONFIG.imagePath = "";  //图片上传提交地址
+    window.UEDITOR_CONFIG.imageManagerUrl="{:U('getOpusImage',null,'')}";
+    window.UEDITOR_CONFIG.imageManagerPath="";
+	window.UEDITOR_CONFIG.toolbars=[
+["undo","redo","|",
+"fontfamily","fontsize","forecolor","bold","italic","underline","strikethrough","forecolor","|",
+"superscript","subscript","justifyleft","justifycenter","justifyright","indent","lineheight","|",
+"pasteplain","removeformat","formatmatch","autotypeset","|",
+"insertunorderedlist","insertorderedlist","|",
+"inserttable","link","unlink","horizontal","|",
+"insertimage","imagenone","imageleft","imageright","imagecenter"]];
+
+    UE.getEditor('editor');
+
+	$('#add_author').click(function(){
+		$('#author_table').append('<tr><td><input type="text" name="author_name[]"></td><td><select name="sex[]"><option value="0">男</option><option value="1">女</option></select></td><td><input type="text" name="author_belong[]"></td><td><input type="text" name="phone[]"></td><td><input type="text" name="email[]"></td><td><a class="btn btn-danger btn-small deleteline"><i class="icon-minus"></i></a></td></tr>');
+	});
+	$('.deleteline').live("click",function(){
+		$(this).parent().parent().remove();
+	});
+
+	$('#opus_name').focusout(function(){
+		var opus_id=$('#opus_id').val();
+		var validate_url="{:U('checkOpusName_ajax')}?opus_id="+opus_id+"&new_name="+$(this).val();
+		$.get(validate_url,function (data){
+			if(data){
+				$('#opus_name_status').html(data[1]).removeClass('hide');
+				if(data[0]==1){
+					$('#opus_name_status').removeClass("label-warning").addClass('label-success');
+				}else{
+					$('#opus_name_status').removeClass("label-success").addClass('label-warning');
+				}
+			}
+		});
+	});
+
+});
+</script>
+</block>

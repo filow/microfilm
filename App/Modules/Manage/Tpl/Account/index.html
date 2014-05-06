@@ -1,0 +1,48 @@
+<extend name="Common:base" />
+<block name="title">
+  修改账户信息
+</block>
+<block name="extra_css">
+<style>
+td:nth-child(1){
+  font-weight: bold;
+}
+#submit_btn{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 169px;
+  height: 45px;
+  font-size: 16px;
+  font-family: "微软雅黑","黑体","宋体";
+}
+</style>
+</block>
+<block name="content">
+<form action="{:U('editInfo')}" method="post">
+<table width="400px" class="table">
+  <tr>
+    <td width="260px">uid(登录帐号)</td>
+    <td>{$info.uid}</td>
+  </tr>
+  <tr>
+    <td>姓名</td>
+    <td><input type="text" name="realname" value="{$info.realname}" class="ipt"></td>
+  </tr>
+  <tr>
+    <td>密码(留空则不修改)</td>
+    <td><input type="text" name="password" class="ipt"></td>
+  </tr>
+</table>
+<input type="submit" value="提交修改" class="btn btn-success" id="submit_btn" disabled="disabled">
+</form>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+  $('.ipt').bind('keyup change',function(){
+    $('#submit_btn').removeAttr('disabled');
+  });
+});
+</script>
+</block>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+    <title><block name="title">{$title|default="网站管理中心"}</block>--__NAME__</title>
+    <link rel="stylesheet" href="__PUBLIC__/dark_ui/uilib.css" />
+    <link rel="stylesheet" href="__PUBLIC__/plugins/icheck/skins/square/blue.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/bootstrap-select/bootstrap-select.css">
+    <link rel="stylesheet" href="__PUBLIC__/backyard/style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="__PUBLIC__/plugins/datatables/datatables.css" />
+
+    <block name="extra_css"></block>
+</head>
+<body>
+<!--header-->
+<div class="header">
+	<div class="row">
+		<div class="header-logo">
+            <a href="{:U('Index/Index')}"><img src="__PUBLIC__/backyard/img/logo.png" id="logo" /></a>
+        </div>
+        <!-- 用户信息栏 -->
+		<div class="pull-right userinfo" id="nav-bar">
+            <button class="btn">{:session('realname')} {:session('uid')}</button> 
+            <a class="btn" href="{:U('Account/Index')}">账户管理</a>
+            <a class="btn" href="{:U('Index/Index/Index')}">回到前台</a>
+            <a class="btn btn-warning" href="{:U('Public/logout')}">退出登录</a>
+		</div>
+	</div>
+</div>
+<!--main-->
+<div class="main">
+    <!-- navigator -->
+    <div class="navigator">
+        <ul>
+            {//输出目录列表}
+            <?php foreach($_SESSION[CF('NAV_KEY')] as $key=>$val): ?>
+            <li <?php if($key==ucfirst(strtolower(MODULE_NAME))) echo "class=\"active\"" ?>>
+                <a href="<?php echo U($key.'/'.current(array_keys($val))); ?>">
+                    <i class="icon-{$val.MODULE_ICON} icons-white"></i>
+                    {$val.MODULE_TITLE}</a>
+            </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+
+    <div class="content">
+        <!-- nav-bar -->
+        <div class="nav-bar">
+            <!--breadcrumb-->
+            <ul class="nav-item">
+                <block name="nav-item">
+                <?php foreach($_SESSION[CF('NAV_KEY')][MODULE_NAME] as $key=>$val): ?>
+                <?php if(in_array($key, array('MODULE_ICON','MODULE_TITLE'))) continue; ?>
+                <li <?php if($key==ucfirst(strtolower(ACTION_NAME))) echo "class=\"current\"" ?>>
+                	<a href="<?php echo U(MODULE_NAME.'/'.$key); ?>">
+                        <i class="icon-<?php echo $val[1]; ?> icons-white"></i>
+                        <?php echo $val[0]; ?></a>
+                </li>
+                <?php endforeach; ?>
+                </block>
+                <block name="ext-nav-item"></block>
+            </ul><!--/breadcrumb-->
+        </div><!-- /nav-bar -->
+
+        <div class="content-body">
+        <present name="msg">
+        <div class="alert <if condition='$msg[0]==0'>alert-error<else />alert-success</if>">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {$msg.1}
+        </div>
+        <php>XS('message',null);</php>
+        </present>
+          <block name="content"></block>
+
+            <!--footer -->
+            <div class="footer">
+                <small> __NAME__ 后台管理系统 &#169; Copyright {:date('Y')} __DEPART__ | <a href="#">回到顶部</a> </small>
+            </div>
+            <!--/footer -->
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="__PUBLIC__/js/jquery.js"></script>
+{// 模拟产生本地ajax请求 }
+<script src="__PUBLIC__/js/jquery.mockjax.js"></script>
+<script src="__PUBLIC__/js/bootstrap.js"></script>
+<script src="__PUBLIC__/plugins/icheck/jquery.icheck.min.js"></script>
+<script src="__PUBLIC__/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="__PUBLIC__/js/jquery.autocomplete.js"></script>
+<script src="__PUBLIC__/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/bootstrap-datetimepicker/js/locale.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/datatables/dataTables.js"></script>
+<script type="text/javascript" src="__PUBLIC__/plugins/datatables/bootstrap.plugin.js"></script>
+
+<block name="extra_js"></block>
+
+</body>
+</html>

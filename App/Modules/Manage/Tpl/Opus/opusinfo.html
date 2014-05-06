@@ -1,0 +1,60 @@
+<extend name="Common:base" />
+<block name="extra_css">
+<style>
+	#thumb{
+		width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		display: block;
+	}
+</style>
+</block>
+<block name="ext-nav-item">
+<li class="current"><a>作品详细信息</a></li>
+</block>
+<block name="content">
+<h3>{$opus_info.opus_name}</h3>
+<table class="table">
+	<thead>
+		<th width="25%"></th>
+		<th width="25%"></th>
+		<th width="25%"></th>
+		<th width="25%"></th>
+	</thead>
+	<tr>
+		<td colspan="4" align="center"><img src="{:getThumb($opus_info['id'])}" alt="" id="thumb"></td>
+	</tr>
+	<tr>
+		<td><b>作品简介</b></td>
+		<td colspan="3">{$opus_info.overview}</td>
+	</tr>
+	<tr>
+		<td>上传时间</td>
+		<td>{$opus_info.add_time|date="Y-m-d H:i:s",###}</td>
+		<td>受欢迎度</td>
+		<td>{$opus_info.popularity}</td>
+	</tr>
+	<tr>
+		<td>评分数</td>
+		<td>{$opus_info.vote_count}</td>
+		<td>评论数</td>
+		<td>{$opus_info.comment_count}</td>
+	</tr>
+	<tr>
+		<td>浏览数</td>
+		<td>{$opus_info.view_count}</td>
+		<td>提前权重</td>
+		<td>{$opus_info.force_top}</td>
+	</tr>
+	<tr>
+		<td>作者列表</td>
+		<td colspan="3">{$user_info}</td>
+	</tr>
+	<tr>
+		<td>视频下载</td>
+		<td><a href="{:U('download',array('secret'=>$video['access_key'],'fn'=>$video['download_filename']))}">{$video.filename}</a></td>
+		<td>视频重新上传</td>
+		<td><a href="{:U('reupload',array('opus_id'=>$opus_info['id']))}">重新上传</a></td>
+	</tr>
+</table>
+</block>

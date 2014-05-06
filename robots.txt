@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /Manage/
+Disallow: /Index/User/
+Disallow: /Index/Opus/vote/
+Disallow: /opus/vote.html
+Disallow: /user/forgot.html

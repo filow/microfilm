@@ -1,0 +1,246 @@
+@charset "utf-8";
+body {
+  background: url(../img/back.png) no-repeat;
+  background-color: #f3f3f3;
+}
+a:hover {
+  text-decoration: none;
+  color: #2a609f;
+}
+.clear {
+  clear: both;
+}
+.container {
+  width: 1040px !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+.header {
+  height: 140px;
+  margin-bottom: 15px;
+}
+.notification {
+  display: inline;
+  float: left;
+  margin-top: 30px;
+  margin-left: 19px;
+  width: 415px;
+}
+.header_top {
+  margin: 10px 0;
+}
+.header_top img {
+  float: left;
+}
+#ie7_margin {
+  height: 20px;
+}
+/******* 搜索 *******/
+.search {
+  padding-top: 30px;
+  float: right;
+}
+.search form {
+  margin: 0;
+}
+.search input {
+  width: 220px;
+  height: 28px;
+  border-right: none;
+}
+.search a {
+  display: inline-block;
+  *display: inline;
+  /* IE7 inline-block hack */
+  *zoom: 1;
+  font-size: 17px;
+  color: #989898;
+  margin-left: -28px;
+}
+.search .search_button {
+  border: 1px solid #ccc !important;
+  padding: 8px 18px !important;
+  margin-left: 0 !important;
+}
+/******* 导航条 *******/
+.header_nav {
+  width: 760px;
+  height: 42px;
+  -webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  float: left;
+  margin-left: 280px;
+  margin-top: -52px;
+}
+.header_nav ul {
+  width: 100%;
+  background-color: #fbfbfb;
+  background-image: -moz-linear-gradient(top, #ffffff, #f4f4f4);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#f4f4f4));
+  background-image: -webkit-linear-gradient(top, #ffffff, #f4f4f4);
+  background-image: -o-linear-gradient(top, #ffffff, #f4f4f4);
+  background-image: linear-gradient(to bottom, #ffffff, #f4f4f4);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff4f4f4', GradientType=0);
+  margin: 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  list-style: none;
+  position: relative;
+  display: inline-table;
+}
+.header_nav ul li {
+  float: left;
+  -webkit-transition: background-color 0.7s;
+  -moz-transition: background-color 0.7s;
+  -o-transition: background-color 0.7s;
+  transition: background-color 0.7s;
+}
+.header_nav ul li a {
+  display: block;
+  padding: 11px 30px;
+  color: #757575;
+  font-weight: bold;
+  text-decoration: none;
+}
+.header_nav ul li a:hover {
+  color: #fff;
+}
+.header_nav ul li a i {
+  margin: 0 5px;
+}
+.header_nav ul li:hover {
+  background: #4e9cdf;
+}
+.header_nav ul li.active {
+  background-color: #5ea6e4;
+  background-image: -moz-linear-gradient(top, #68ade8, #4e9cdf);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#68ade8), to(#4e9cdf));
+  background-image: -webkit-linear-gradient(top, #68ade8, #4e9cdf);
+  background-image: -o-linear-gradient(top, #68ade8, #4e9cdf);
+  background-image: linear-gradient(to bottom, #68ade8, #4e9cdf);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff68ade8', endColorstr='#ff4e9cdf', GradientType=0);
+}
+.header_nav ul li.active a {
+  color: #fff;
+}
+.header_nav ul li:first-child {
+  -webkit-border-top-left-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+}
+/********** 用户性别图标显示 **********/
+.user_sex {
+  width: 15px;
+  height: 20px;
+  background-image: url(../img/male_female.png);
+  display: inline-block;
+}
+.user_sex_female {
+  background-position: 0 0;
+}
+.user_sex_male {
+  background-position: -15px 0;
+}
+/********** 页面底部 **********/
+.footer {
+  background-color: #313131;
+  margin-top: 10px;
+  color: #E6E6E6;
+}
+.footer_wrap {
+  width: 1040px;
+  height: 260px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer_wrap .footer_logo,
+.footer_wrap .footer_question,
+.footer_wrap .footer_contact {
+  margin-top: 40px;
+  height: 150px;
+  float: left;
+}
+.footer_wrap .footer_question {
+  margin-right: 100px;
+}
+.footer_wrap .footer_question,
+.footer_wrap .footer_contact {
+  margin-left: 80px;
+}
+.footer_logo div {
+  width: 230px;
+  text-align: center;
+  margin-top: 5px;
+}
+.qa_title {
+  margin: 0 0 20px 25px ;
+  font-family: "微软雅黑";
+  color: #fff;
+  font-size: 25px;
+}
+.qa_title span {
+  margin: 0 10px;
+  font-size: 25px;
+  font-family: "微软雅黑";
+  color: #fff;
+}
+.qa_question ul li {
+  list-style: none;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.qa_question ul li span {
+  color: #fff;
+}
+.footer_contact span {
+  color: #fff;
+  font-size: 25px;
+  font-family: "Microsoft Yahei";
+}
+.friend_link {
+  margin-top: 10px;
+}
+.friend_link a {
+  display: block;
+  color: #E6E6E6;
+  margin-bottom: 5px;
+}
+.friend_link a i {
+  color: #fff;
+  margin: 0 5px;
+}
+.friend_link a:hover {
+  color: #fff;
+}
+.footer_copyright {
+  clear: both;
+  text-align: center;
+  color: #fff;
+}
+/******* to top button ********/
+.to_top {
+  cursor: pointer;
+  height: 50px;
+  bottom: 20px;
+  right: 20px;
+  position: fixed;
+}
+.to_top .to_top_icon {
+  height: 50px;
+  width: 50px;
+  background-image: url(../img/totop.png);
+}
+.to_top .to_top_icon:hover {
+  background-position: 0 -50px;
+}

@@ -1,0 +1,345 @@
+<extend name="Common:base" />
+<block name="extra_css">
+<style>
+    input[type="text"]{
+        width: 280px;
+    }
+</style>
+</block>
+<block name="content">
+<h2>管理员列表</h2><hr />
+<table class="table">
+    <thead>
+        <th>#</th>
+        <th>管理员ID</th>
+        <th>管理员姓名</th>
+        <th>职位</th>
+        <th>是否启用</th>
+        <th width="200">操作</th>
+    </thead>
+    <tbody>
+        <volist name="admin_list" id="li" key="k">
+        <tr>
+            <td>{$k}</td>
+            <td>{$li.uid}</td>
+            <td>{$li.realname}</td>
+            <td>
+                <volist name="li['role']" id="role">
+                    <a class="role_detail btn" data-id="{$role.role_id}" data-toggle="modal" data-target="#role_modal">{$role.remark}</a><br />
+                </volist>
+            </td>
+            <td>
+                <eq name="li['is_forbidden']" value="1">
+                    <span class="label">禁用</span>
+                <else />
+                    <span class="label label-success">启用</span>
+                </eq>
+            </td>
+            <td>
+                <a class="user_edit btn btn-warning" data-id="{$li.id}" data-toggle="modal" data-target="#edit_modal">编辑</a>
+                <a class="delete btn btn-danger user_delete" data-id="{$li.id}" data-remark="{$li.realname}" data-toggle="modal" data-target="#delete_modal" >删除</a>
+                <span class="user_role_info" style="display:none;"><volist name="li['role']" id="role">{$role.role_id},</volist></span>
+            </td>
+        </tr>
+        </volist>
+    </tbody>
+</table>
+<a href="" class="btn btn-success user_create" data-toggle="modal" data-target="#create_user_modal">新增管理员</a> 
+<h2>职位列表</h2><hr />
+<table class="table">
+    <thead>
+        <th>#</th>
+        <th>职位名称</th>
+        <th>是否启用</th>
+        <th>权限信息</th>
+        <th width="200">操作</th>
+    </thead>
+    <tbody>
+        <volist name="role_list" id="li" key="k">
+        <tr>
+            <td>{$k}</td>
+            <td>{$li.remark}</td>
+            <td align="center">
+                <eq name="li['status']" value="1">
+                    <span class="label label-success">启用</span>
+                <else />
+                    <span class="label">禁用</span>
+                </eq>
+            </td>
+            <td><a class="role_detail btn" data-id="{$li.id}" data-toggle="modal" data-target="#role_modal">查看</a><br /></td>
+            <td>
+                <a class="btn btn-warning role_edit" data-id="{$li.id}" data-remark="{$li.remark}" data-status="{$li.status}" data-toggle="modal" data-target="#create_role_modal">编辑</a>
+                <a class="btn btn-danger delete role_delete"  data-id="{$li.id}" data-remark="{$li.remark}" data-toggle="modal" data-target="#delete_modal" >删除</a>
+            </td>
+        </tr>
+        </volist>
+        <tr>
+            <form action="{:U('addRole')}" method="post">
+            <td></td>
+            <td><input type="text" name="remark" placeholder="要新增的职位名称" /></td>
+            <td>
+                <span class="label label-success">启用</span>
+            </td>
+            <td><input type="submit" value="新增职位" class="btn btn-success"> </td>
+            </form>
+        </tr>
+    </tbody>
+</table>
+
+
+<!--Delete User&Role Modal -->
+<div id="delete_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="role_model_label" aria-hidden="true">
+    <div class="modal-body">
+        <div>确认要删除”<a id="delete_user_name"></a>“？</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" id="user_delete_button">确认删除</button>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">取消</button>
+    </div>
+</div>
+
+    <!-- Create User Modal -->
+<div id="create_user_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="role_model_label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 id="role_model_label">增加管理员</h4>
+        </div>
+              <div class="modal-body">
+                <form class="user_create_form" action="{:U('addUserHandle')}" method="post">
+                    <div class="user_uid">
+                        <label for="user_uid_create">管理员ID：</label>
+                        <input type="text" id="user_uid_create" name="uid"/>
+                    </div>
+                    <div class="user_password">
+                        <label for="user_password_create">管理员密码：</label>
+                        <input type="text" id="user_password_create" name="password"/>
+                    </div>
+                    <div class="user_realname">
+                        <label for="user_realname_create">管理员姓名：</label>
+                        <input type="text" id="user_realname_create" name="realname"/>
+                    </div>
+                    <div class="user_role">
+                        <label>管理员职位：</label>
+                            <select multiple="multiple" class="selectpicker" data-style="btn-success" data-selected-text-format="count>3" data-title="请选择职位" name="role[]">
+                            </select>
+                </div>
+              </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn" value="提交"/> </form>
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">取消</button>
+          </div>
+        </div>
+
+<!-- Edit User Modal -->
+<div id="edit_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="role_model_label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 id="role_model_label">编辑管理员</h4>
+        </div>
+              <div class="modal-body">
+                <form class="user_edit_form" action="{:U('modifyUserHandle')}" method="post">
+                    <input type="hidden" name="id" value="" />
+                    <div class="user_uid">
+                        <label for="user_uid_edit">管理员ID：</label>
+                        <input type="text" id="user_uid_edit" name="uid"/>
+                    </div>
+                    <div class="user_password">
+                        <label for="user_password_edit">管理员密码：</label>
+                        <input type="text" id="user_password_edit" placeholder="留空则为不改密码" name="password"/>
+                    </div>
+                    <div class="user_realname">
+                        <label for="user_realname_edit">管理员姓名：</label>
+                        <input type="text" id="user_realname_edit" name="realname"/>
+                    </div>
+                        <select multiple="multiple" class="selectpicker" data-style="btn-success" data-selected-text-format="count>3" data-title="请选择职位" name="role[]">
+                        </select>
+                    <div>
+                        <label>是否启用：</label>
+                        <input type="checkbox" id="user_isforbidden_edit" name="is_forbidden">
+                        <label class="checkbox" for="user_isforbidden_edit">启用</label>
+                    </div>       
+              </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn" value="提交"/></form>
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">取消</button>
+          </div>
+        </div>
+
+<!-- RoleAccess Modal -->
+<div id="role_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="role_model_label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="role_model_label">职位信息</h4>
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+        <a href="" class="btn" id="role_access_edit">编辑</a>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" id="role_modal_close">关闭</button>
+    </div>
+</div>
+
+<!-- Edit Role Modal -->
+<form class="role_create_form" action="{:U('editRole')}" method="post">
+<div id="create_role_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="role_model_label" aria-hidden="true">
+    <input type="hidden" name="id" value="" />
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 id="role_model_label">编辑职位</h4>
+    </div>
+    <div class="modal-body">
+        <div class="role_remark">
+            <label for="role_remark_create">职位名字:</label>
+            <input type="text" id="role_remark_create" name="remark"/>
+        </div>
+        <div class="role_isforbidden">
+            <label for="role_isforbidden_edit">是否启用：</label>
+            <input type="checkbox" id="role_edit_checkbox" name="status">
+            <label class="checkbox" for="role_edit_checkbox">启用</label>
+        </div>       
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn" value="提交"/> 
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">取消</button>
+    </div>
+</div>
+</form>
+
+</block>
+<block name="extra_js">
+<script>
+
+$(document).ready(function(){
+    //插件初始化操作
+    $("input[type='checkbox']").iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+    });    //iCheck插件初始化
+    $('.selectpicker').selectpicker({"countSelectedText":"选中{0}个，共{1}个"});
+    var role=new Array(); //role对象数组存储JSON信息
+    //获取ROLE对象JSON信息,存储在role数组中
+    $.ajax({      
+        url: "{:U('ajax_getRoleAll')}",
+        contentType: "application/json; charset=utf-8",      
+        dataType: "json",     
+        success: function(data) {
+            role=data;
+            for(i=0; i<role.length ; i++)
+                $('select.selectpicker').append("<option value='"+role[i].id+"'>"+role[i].remark+"</option>");
+            $('.selectpicker').selectpicker('refresh');
+        },     
+        error: function(err) {     
+            alert("抱歉，职位信息读取失败，您可能无法使用系统的一些功能");     
+        }
+    }); 
+    
+    //删除用户
+    $(".user_delete").click(function(){
+        var user_id=$(this).attr("data-id");  
+        var user_remark=$(this).attr("data-remark");  
+        $("#delete_user_name").html(user_remark);
+        $("#user_delete_button").click(function(){
+            url="{:U('deleteUser')}"+"?id="+user_id;
+            window.location=url;
+        }); 
+    });
+
+    //编辑用户信息
+    $(".user_edit").click(function(){
+        //用户角色信息
+        var role_info=$(this).next().next().html().split(',');
+        delete role_info[role_info.length-1];
+        $('.selectpicker').val(role_info);
+        $('.selectpicker').selectpicker('render');
+
+        $.ajax({      
+            url: "{:U('ajax_getUserInfo')}"+"?user_id="+$(this).attr("data-id"),
+            contentType: "application/json; charset=utf-8",     
+            dataType: "json",     
+            success: function(data) {     
+                // 用户信息编辑
+                // $("#user_id_edit").val(data.id);
+                $("#user_uid_edit").val(data.uid);
+                $("#user_realname_edit").val(data.realname);
+                $("#edit_modal input[name='id']").val(data.id);
+                //是否启用
+                if(data.is_forbidden==0)
+                    $('#user_isforbidden_edit').iCheck('check');
+                else
+                    $('#user_isforbidden_edit').iCheck('uncheck');
+            },
+            error: function(err) {     
+                alert("抱歉，用户信息读取失败");     
+            }     
+        }); 
+    });
+
+    //显示职位信息
+    $(".role_detail").click(function() {
+        var role_id=$(this).attr('data-id');
+        $.ajax({
+            url: "{:U('ajax_getRoleAccess')}"+"?role_id="+$(this).attr("data-id"),
+            contentType: "application/json; charset=utf-8",     
+            dataType: "json",     
+            success: function(data) {    
+                var role_detail="<div id='role_access_data'>";
+                for(var i=0;i<data.length;i++)
+                {
+                    
+                    role_detail=role_detail+"<h4>"+data[i]["_self"].title+"</h4><table><tr>";
+                    delete data[i]["_self"];
+                    $.each(data[i],function(j){
+                        if ((j)%3==0) role_detail=role_detail+"</tr><tr>";
+                        if(data[i][j].owned==1) role_detail+="<td class='owned'>";
+                        else role_detail+="<td>";
+                        
+                        if(data[i][j].is_nav==1) role_detail+="<i class='icon-list-alt'></i>";
+
+                        role_detail+=data[i][j].title;
+                        if(data[i][j].owned==1) role_detail+="<i class='icon-ok'></i>";
+                        role_detail+="</td>";
+                    });
+
+                    role_detail+="</tr></table>";
+                }
+                role_detail+="</div>";
+                $("#role_access_edit").attr('href',"{:U('node_list')}"+"?role_id="+role_id);
+                $("#role_modal .modal-body").html(role_detail);
+            },     
+            error: function(err) {     
+                alert("抱歉，职位信息读取失败");       
+            }     
+        });     
+    });
+    //关闭role_modal时清空role_data数据
+    $("#role_modal").on('hidden', function(){
+        $("#role_access_data").remove();
+    });
+
+    //删除职位
+    $(".role_delete").click(function(){
+        var role_id=$(this).attr("data-id");
+        var role_remark=$(this).attr("data-remark");
+        $("#delete_user_name").html(role_remark);
+        $("#user_delete_button").click(function(){
+            window.location="{:U('deleteRole')}"+"?id="+role_id;
+        }); 
+    });
+
+    //编辑职位
+    $(".role_edit").click(function(){
+        var role_id=$(this).attr("data-id");
+        var role_remark=$(this).attr("data-remark");
+        var role_status=$(this).attr("data-status");
+        $("#role_remark_create").val(role_remark);
+        $("#create_role_modal input[name='id']").val(role_id);
+        //是否启用
+        if(role_status==1)
+            $('#role_edit_checkbox').iCheck('check');
+        else
+            $('#role_edit_checkbox').iCheck('uncheck');
+    });
+
+});
+</script>
+</block>

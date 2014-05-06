@@ -1,0 +1,89 @@
+<extend name="Common:base" />
+<block name="extra_css">
+<style>
+.well{padding:8px;background-color: #FFF;}
+.opus_thumb{width: 113px;height: 85px;}
+.highlighted{
+	background-color: #3f67c0 !important;
+	color:white;
+}
+table.dataTable td {
+	padding: 5px 10px;
+}
+.dataTables_info {
+	margin-left: 10px;
+	margin-top: 10px;
+}
+.dataTables_paginate {
+	margin-top: 5px;
+}
+.label{padding: 10px;display: block;margin-left: auto;margin-right: auto;font-size: 13px;text-align: center;}
+</style>
+</block>
+<block name="content">
+<table class="" id="datatable">
+	<thead>
+		<th>缩略图</th>
+		<th>作品名称</th>
+		<th>上传用户</th>
+		<th width="170px">作品简介</th>
+		<th>投票数</th>
+		<th>浏览数</th>
+		<th>评论数</th>
+		<th>热度</th>
+		<th>评审状态</th>
+	</thead>
+	<tbody>
+		<volist name="opus_list" id="li">
+		<tr>
+			<td>
+				<a href="{:U('OpusInfo',array('opus_id'=>$li['id']))}">
+					<img src="{:getThumbMini($li['id'])}" class="opus_thumb">
+				</a>
+			</td>
+			<td>
+				<a href="{:U('OpusInfo',array('opus_id'=>$li['id']))}">{$li.opus_name}</a>
+			</td>
+			<td>{$li.username}</td>
+			<td>{$li.overview}</td>
+			<td>{$li.vote_count}</td>
+			<td>{$li.view_count}</td>
+			<td>{$li.comment_count}</td>
+			<td>{$li.popularity}</td>
+			<td>
+				<if condition="$li['judged']==1">
+				<span class="label label-success"><i class="icon-check-circle"></i> 已评审</span>
+				<else />
+				<span class="label"><i class="icon-circle-o"></i> 未评审</span>
+				</if>
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+<br><br><br>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+	var oTable=$('#datatable').dataTable({
+		"sPaginationType": "full_numbers",
+		"sPaginationType": "bootstrap",
+		"oLanguage": {
+            "sUrl": "__PUBLIC__/plugins/datatables/lan.json"
+        },
+        "aaSorting": [[ 2, "desc" ]],
+	    "aoColumns": [
+	        { "asSorting": [] },null,null,{ "asSorting": [] },null,null,null,null,null
+        ] ,
+        'iDisplayLength':25,
+        "bStateSave": true
+	});
+	oTable.$('tr').hover( function() {
+        $(this).addClass('highlighted');
+    }, function() {
+        oTable.$('tr.highlighted').removeClass('highlighted');
+    } );
+});
+</script>
+</block>

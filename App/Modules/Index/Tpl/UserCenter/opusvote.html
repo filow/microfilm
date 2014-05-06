@@ -1,0 +1,53 @@
+<extend name="Common:base" />
+<block name="title">我投过票的作品</block>
+<block name="extra_css">
+	<link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css">
+	<style>
+	.clear{clear:both;}
+	.work_thumb a img{
+		width: 170px;
+		height: 120px;
+	}
+	</style>
+</block>
+<block name="content">
+<div class="usercenter">
+	<div class="row-fluid">
+		<include file="sidebar" />
+		<div class="main span9">
+			<div class="box">
+				<div class="box-header">我投过票的作品</div>
+				<div class="box-body">
+					<div style="margin:10px;">您已经给{$count}个作品投票过。</div>
+					<div class="tab-pane active work_list " id="tab1">
+					    <ul>
+						<volist name="vote_data" id="li">
+					      	<li class="span3">
+					      		<div class="work_thumb">
+					      			<a href="{:U('Opus/view',array('id'=>$li['id']))}" class="thumbnail">
+                                      <img data-src="holder.js/160x160" src="{:getThumb($li['id'])}" alt="{$li.opus_name}" >
+					                </a>
+					            </div>
+					      		<div class="user_work_info">
+					      			<div class="user_work_name"><a href="{:U('Opus/view',array('id'=>$li['id']))}">{$li.opus_name}</a></div>
+					      			<div class="user_work_vote">当前票数：<span>{$li.vote_count}</span></div>
+					      			<div class="user_work_uploadtime">投票时间:<span>{$li.vote_date|date="Y-m-d H:i",###}</span></div>
+					      		</div>
+					      	</li>
+						</volist>
+				    	</ul>
+				    </div>
+				    <div class="clear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+
+});
+</script>
+</block>

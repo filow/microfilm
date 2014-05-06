@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title><block name="title">网站管理中心</block>--__NAME__</title>
+	<!-- 让ie浏览器使用最新的渲染引擎 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<css href="__PUBLIC__/dark_ui/uilib.css" />
+	<css href="__PUBLIC__/backyard/style.css" />
+	<!--[if IE]>
+		<link rel="stylesheet" href="__PUBLIC__/backyard/ie.css">
+	<![endif]-->
+
+</head>
+<body>
+	<div class="container">
+    <!--header-->
+		<div class="header">
+				<div class="header-logo">
+	                <a href="#"><img src="__PUBLIC__/backyard/img/logo.png" id="logo" /></a>
+	            </div>
+		</div>
+		<present name="show_info_box">
+			<div class="alert alert-info login-alert">
+			{$login_fail_message}
+			{$login_fail_type}
+			<a class="text-error">
+			<if condition="XS('fail_wait') gt 0">
+				由于你多次登录失败，您暂时不能登录了，请在<span class="time-data"><php>echo XS('fail_wait')-time();</php></span>秒后重新尝试
+			<else />
+				<if condition="$login_fail_time egt 2">您已经连续登录失败{$login_fail_time}次，失败{:CF('LOGIN_FAIL_TIME_WAIT')}次则{:CF('LOGIN_FAIL_TIMEOUT')}秒内不得再度登录
+				</if>
+			</if>
+			</a>
+			<i class="icon-times removing-tag"></i><i class="icon-white"></i>
+			</div>
+		</present>
+		<div class="login-box center corner-all">
+			<div class="login-header"><span>用户登录</span></div>
+			<div class="login-body center">
+
+				<if condition="XS('fail_wait') gt 0"><else />
+				<form class="login-form" action="{:U('Public/login')}" method="post" name="form" onSubmit="return check()" >
+					<div class="login-label">
+						<label for="login-name">用户名：</label>
+					</div>
+					<input type="text" class="login-input" name="uid" id="login-name" placeholder="请输入用户名" value="{:I('uid')}" autofocus data-toggle="popover" title="" data-content="用户名不能为空" />
+					<div class="login-label">
+						<label for="login-password">密码：</label>
+						<a>忘记密码？</a>
+					</div>
+					<input type="password" name="password" class="login-input" placeholder="请输入密码" id="login-password" data-toggle="popover" title="" data-content="密码不能为空" />
+					<if condition="XS('show_verify') eq 1">
+						<div class="login-label">
+							<label for="login-validate">验证码：</label>
+							<a id="change-pic">看不清？请点击图片</a>
+						</div>
+							<input type="text" name="vcode" class="login-input validate" id="login-validate" placeholder="请输入验证码" data-toggle="popover" title="" data-content="验证码不能为空"/>
+
+							<img src="{:U('Public/vcode')}" alt="验证码" class="validate-pic"/>
+					</if>
+				<input type="submit" class="btn btn-large login-button" value="登录" />
+				</form>
+				</if>
+			</div>
+		</div>
+		<div class="time-out"></div>
+	</div>
+</body>
+<js href="__PUBLIC__/jquery-2.0.3.min.js" />
+<js href="__PUBLIC__/js/bootstrap.min.js" />
+
+<script>
+	function check()
+	{
+		var flag = true;
+		$("input").each(function(){
+			var value=$(this).val();
+			if(value=="")
+			{
+				$(this).css("border-color","red");
+				$(this).popover('show');
+				flag=false;
+			}
+		});
+		return flag;
+	}
+
+	$(document).ready(function(){
+		$(".removing-tag").click(function(){
+			$(".login-alert").fadeOut();
+		});	
+	//close login-alert 
+		
+			var pic=$(".validate-pic");
+		$(".validate-pic").click(function(){
+			var url="{:U('vcode')}?"+Math.random();
+			pic.attr("src",url);
+		});
+
+		$("#change-pic").click(function(){
+			var url="{:U('vcode')}?"+Math.random();
+			pic.attr("src",url);
+		});
+	//change validate picture
+
+		$("input").focus(function(){
+  			$(this).css("border-color","#8b969d");
+		});
+	//close the tips
+
+			var TIME_OUT =parseInt($(".time-data").html());
+            var interval=setInterval(function(){
+                $(".time-data").html(TIME_OUT--);
+                if(TIME_OUT == -1) 
+                {
+             		clearInterval(interval)
+                    location.href = "{:U('Public/Index')}?"+Math.random();
+                }
+            },1000);
+    //Shows the remaining time. 
+	});
+
+
+</script>
+</html>

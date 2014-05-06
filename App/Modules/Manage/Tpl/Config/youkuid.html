@@ -1,0 +1,82 @@
+<extend name="Common:base" />
+<block name="content">
+<h3>优酷账号设置</h3>
+<table class="table">
+	<tr>
+		<td>账户状态</td>
+		<td><span id="status">正在读取(如果一直没有改变则不正常)</span></td>
+	</tr>
+	<tr>
+		<td>用户名</td>
+		<td><span id="username">正在读取</span></td>
+	</tr>
+	<tr>
+		<td>描述</td>
+		<td><span id="description">正在读取</span></td>
+	</tr>
+	<tr>
+		<td>当前refresh_token</td>
+		<td>{:CF('REFRESH_TOKEN')}</td>
+	</tr>
+	<tr>
+		<td>修改账户refresh_token</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			请在下面的页面中完成账户验证并把提交后出现的字符串写到这个文本框里去：
+			<input type="text" name="code" class="span4" id="code"/>
+			<a class="btn" id="submit_code">生成新刷新码</a>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+
+			<iframe src="{$url}" frameborder="0" width="100%" height="400"></iframe>
+		</td>
+	</tr>
+</table>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+	var user_info_url="https://openapi.youku.com/v2/users/myinfo.json";
+	var mypost={
+		'client_id':"{:CF('CLIENT_ID')}",
+		'access_token':"{:accessToken()}",
+	}
+	$.post(user_info_url,mypost,function (result){
+		$('#status').html('正常');
+		$('#username').html(result.name);
+		$('#description').html(result.description);
+	});
+	$('#submit_code').click(function(){
+		var code=$('#code').val();
+		console.log(code.length);
+		if(code.length!=32){
+			alert('code格式有问题！');
+			return false;
+		}else{
+			url="https://openapi.youku.com/v2/oauth2/token";
+			var data={
+				'client_id':"{:CF('CLIENT_ID')}",
+				'client_secret':"{:CF('CLIENT_SECRET')}",
+				'grant_type':"authorization_code",
+				'code':code,
+				'redirect_uri':"{:CF('REDIRECT_URI')}",
+			};
+			$.post(url,data,function (returndata){
+				url="{:U('setNewToken')}"+"?refresh_token="+returndata.refresh_token;
+				$.get(url,function (result){
+					if(result=="-1") alert('更改失败！');
+					else if(result=="1"){
+						alert('修改成功！当前的刷新口令为'+returndata.refresh_token);
+						window.location.reload();
+					}
+				});
+			});
+		}
+	});
+});
+</script>
+</block>	

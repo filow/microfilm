@@ -1,0 +1,160 @@
+<extend name="Common:base" />
+<block name="title">修改用户</block>
+<block name="ext-nav-item">
+<li class="current"><a>修改用户信息</a></li>
+</block>
+<block name="extra_css">
+<style>
+	.avatar{
+		max-width: 120px;
+	}
+	.imgbox img{
+		vertical-align: middle;
+	}
+	table tr td{
+		width: 13%;
+	}
+	table tr td:nth-child(odd){
+		background-color: #CCCCFF;
+		font-weight: bold;
+	}
+	h4{
+		margin-left: 30px;
+	}
+</style>
+</block>
+<block name="content">
+<volist name="user_data" id="li">
+<div class="row">
+	<h4>{$li.nickname}</h4>
+	<div class="span2 imgbox">
+		<iframe src="{:U('avatar_upload_iframe')}?id={$li.id}" frameborder="0" class="span2" height="300px" scrolling="no">
+			<div class="container">
+			<if condition="$li['avatar']">
+				<img src="{:atcLocation($li['avatar'])}" class="avatar" />
+			<else />
+				<img src="__PUBLIC__/images/user.jpg" class="avatar" />
+			</if><br><br>
+			<a class="btn" id="upload_avatar" disabled>上传功能展示不能使用</a>
+			</div>
+		</iframe>
+	</div>
+	<div class="span10">
+		<table class="table">
+			<input type="hidden" name="id" value="{$li.id}" class="id"/>
+			<tr>
+				<td>用户ID</td>
+				<td>{$li.id}</td>
+				<td>用户名</td>
+				<td>{$li.uid}</td>
+				<td>姓名</td>
+				<td><input type="text" class="nickname span2" name="nickname" id="" value="{$li.nickname}"></td>
+			</tr>
+			<tr>
+				<td>性别</td>
+				<td>
+					<select name="sex" class="sex span2">
+						<option value="0" <?php if($li['sex']=='男') echo 'selected';?>>男</option>
+						<option value="1" <?php if($li['sex']=='女') echo 'selected';?>>女</option>
+					</select>
+				</td>
+				<td>手机号码</td>
+				<td><input type="text" name="phone" value="{$li.phone}" class="phone span2"></td>
+				<td>状态</td>
+				<td>
+					<select name="forbidden" class="forbidden span2">
+						<option value="0" <?php if($li['forbidden']==0) echo 'selected';?>>正常</option>
+						<option value="1" <?php if($li['forbidden']==1) echo 'selected';?>>禁用</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>邮箱</td>
+				<td><input type="text" name="email" value="{$li.email}" class="email span2"></td>
+				<td>身份证号码</td>
+				<td colspan="3"><input type="text" name="idcard" value="{$li.idcard}" class="idcard span4"></td>
+			</tr>
+			<tr>
+				<td>类型</td>
+				<td>
+					<select name="belong_type" class="belong_type span2">
+						<option value="1" <?php if($li['belong_type']==1) echo 'selected';?>>本校学生</option>
+						<option value="0" <?php if($li['belong_type']==0) echo 'selected';?>>其他</option>
+					</select>
+				</td>
+				<td>所属部门</td>
+				<td colspan="3" class="depart_td">
+					<input type="text" name="department" class="department span2" value="{$li.department}" placeholder="单位"/>
+					<eq name="li['belong_type']" value="1">
+						<input type="text" name="college" class="college span2" value="{$li.belong.college}" placeholder="学院" />
+						<input type="text" name="profession" class="profession span2" value="{$li.belong.profession}" placeholder="专业" />
+						<input type="text" name="grade" class="grade span2" value="{$li.belong.grade}" placeholder="年级" />
+					</eq>
+				</td>
+			</tr>
+			<tr>
+				<td>密码</td>
+				<td><input type="text" name="password" id="" class="password span2" /></td>
+				<td>确认提交</td>
+				<td colspan="3">
+					<a class="submit btn" disabled="disabled">提交对该用户的更改</a>
+					<span class="status"></span>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+</volist>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+	$('.submit').click(function(){
+		var selector  =  $(this).parents('table');
+		var id        =  selector.find('.id').val();
+		var nickname  =  selector.find('.nickname').val();
+		var sex       =  selector.find('.sex').val();
+		var phone     =  selector.find('.phone').val();
+		var forbidden =  selector.find('.forbidden').val();
+		var email     =  selector.find('.email').val();
+		var idcard    =  selector.find('.idcard').val();
+		var belong_type =  selector.find('.belong_type').val();
+		var password  =  selector.find('.password').val();
+		var department  =  selector.find('.department').val();
+		var college  =  selector.find('.college').val();
+		var profession  =  selector.find('.profession').val();
+		var grade  =  selector.find('.grade').val();
+		var queryString="id="+id+"&nickname="+nickname+"&sex="+sex+
+						"&phone="+phone+"&forbidden="+forbidden+
+						"&email="+email+"&idcard="+idcard+
+						"&belong_type="+belong_type+"&password="+password+
+						"&department="+department+"&college="+college+
+						"&profession="+profession+"&grade="+grade;
+		var url="{:U('edit_handle')}";
+		$.post(url,queryString,function (data){
+			selector.find("span.status").html(data);
+			selector.find('a.submit').attr('disabled','disabled');
+		});
+	});
+	$(':input').change(function(){
+		var selector  =  $(this).parents('table');
+		selector.find('a.submit').removeAttr('disabled');
+		if($(this).attr('name')=="belong_type"){
+			if($(this).val()=="1"){
+				var node=selector.find('.depart_td');
+				node.append("<input type=\"text\" name=\"college\" class=\"college span2\" placeholder=\"学院\" /> ");
+				node.append("<input type=\"text\" name=\"profession\" class=\"college span2\" placeholder=\"专业\" /> ");
+				node.append("<input type=\"text\" name=\"grade\" class=\"college span2\" placeholder=\"年级\" />");
+			}else{
+				selector.find('.college').remove();
+				selector.find('.profession').remove();
+				selector.find('.grade').remove();
+			}
+		}
+	});
+
+
+});
+</script>
+</block>

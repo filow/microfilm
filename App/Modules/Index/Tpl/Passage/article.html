@@ -1,0 +1,18 @@
+<extend name="Common:base" />
+<block name="title">
+	{$passage.title}
+</block>
+<block name="extra_css">
+	<link rel="stylesheet" href="__PUBLIC__/index/css/article.css">
+</block>
+<block name="content">
+<div class="article_wrapper">
+	<div class="article_title"><h3>{$passage.title}</h3></div>
+	<div class="article_info">
+		<span>发布时间: {$passage.date|date="Y年m月d日 H:i",###}</span>
+	</div>
+	<div class="article_body">
+		{$passage.content}
+	</div>
+</div><!-- article_wrapper end -->
+</block>

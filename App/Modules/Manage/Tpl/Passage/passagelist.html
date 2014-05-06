@@ -1,0 +1,73 @@
+<extend name="Common:base" />
+<block name="extra_css">
+<style>
+.highlighted{
+	background-color: #3f67c0 !important;
+	color:white;
+}
+.greyline{
+	color:#999;
+}
+</style>
+</block>
+<block name="content">
+<h3>文章列表</h3>
+<form action="{:U('action_handle')}" method="get" id="form">
+<a class="btn btn-info submit_form" data-type="view" disabled><i class="icon-eye"></i> 预览</a>
+<a class="btn btn-success submit_form" data-type="edit" disabled><i class="icon-pencil"></i> 编辑</a>
+<a class="btn btn-warning submit_form" data-type="force_top" disabled><i class="icon-pencil"></i> 置顶</a>
+<a class="btn submit_form" data-type="switch" disabled><i class="icon-pencil"></i> 切换发表状态</a>
+<a class="btn btn-danger submit_form" data-type="delete" disabled><i class="icon-times"></i> 删除</a><br /><br />
+<input type="hidden" name="type" value="" id="hidden_type" />
+<table class="table table-hover">
+	<thead>
+		<th></th>
+		<th>ID</th>
+		<th width="180px">标题</th>
+		<th>内容</th>
+		<th width="100px">起始日期</th>
+		<th width="100px">发布日期</th>
+		<th width="60px">状态</th>
+	</thead>
+	<tbody>
+		<volist name="notify" id="li">
+		<tr class="{$li.class}">
+			<td class="select_row"><input type="radio" name="select" class="select" value="{$li.id}"></td>
+			<td>{$li.id}</td>
+			<td>{$li.title}</td>
+			<td>{$li.content_notag}</td>
+			<td>{$li.valid_from}</td>
+			<td>{$li.date}</td>
+			<td>{$li.status}
+			</td>
+		</tr>
+		</volist>
+	</tbody>
+</table>
+</form>
+<div class="pagination">
+  <ul>{$show}</ul>
+</div>
+
+<br><br>
+</block>
+<block name="extra_js">
+<script>
+$(document).ready(function(){
+    $('tr').click(function(){
+    	var selector=$(this).find('.select');
+    	selector.iCheck('check');
+    	$(".submit_form").removeAttr('disabled');
+    });
+    $('.select').iCheck({
+    	radioClass: 'iradio_square-blue',
+    });
+    $(".submit_form").click(function(){
+    	if($(this).attr('disabled')) return false;
+    	var type=$(this).attr('data-type');
+    	$('#hidden_type').val(type);
+    	$('#form').submit();
+    });
+});
+</script>
+</block>

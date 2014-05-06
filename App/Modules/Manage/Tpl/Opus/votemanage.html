@@ -1,0 +1,54 @@
+<extend name="Common:base" />
+<block name="extra_css"></block>
+<block name="content">
+<table class="table table-hover">
+<thead>
+	<th><input type="checkbox" id="top_checkbox"></th>
+	<th>#</th>
+	<th>作品名称</th>
+	<th>ip</th>
+	<th>时间</th>
+</thead>
+<form action="{:U('deleteVote')}" method="post">
+<tbody>
+	<volist name="vote_data" id="li">
+	<tr class="data_row">
+		<td><input type="checkbox" name="vote_list[]" value="{$li.id}" class="ckbox" id=""></td>
+		<td>{$li.order}</td>
+		<td><a href="?filter={$li.opus_name}">{$li.opus_name}</a></td>
+		<td><a href="http://www.ip138.com/ips138.asp?ip={$li.user_ip}" target="_blank">{$li.user_ip}</a></td>
+		<td>{$li.date|date="m-d H:i",###}</td>
+	</tr>
+	</volist>
+</tbody>
+</table>
+
+<input type="submit" value="删除" onclick="return confirm('确定要删除这些投票吗？')" class="btn btn-danger" /><br>
+<div class="pagination">
+<ul>{$show}</ul>
+</div>
+</form>
+</block>
+<block name="extra_js">
+<script>
+
+$(document).ready(function(){
+	$('#top_checkbox').click(function(){
+		if($(this).attr('checked')=="checked"){
+			$('.ckbox').attr('checked','checked');
+		}else{
+			$('.ckbox').removeAttr('checked');
+		}
+		console.log();
+	});
+	$('tr.data_row').click(function(){
+		var inputs=$(this).find('input');
+		if(inputs.attr('checked')){
+			inputs.removeAttr('checked');
+		}else{
+			inputs.attr('checked',"checked");
+		}
+	})
+});
+</script>
+</block>

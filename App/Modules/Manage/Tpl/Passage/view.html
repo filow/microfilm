@@ -1,0 +1,22 @@
+<extend name="Common:base" />
+<block name="title">通知预览</block>
+<block name="ext-nav-item">
+<li class="current"><a>通知预览</a></li>
+</block>
+<block name="extra_css">
+<style>
+	h3{margin-left:0px;}
+	.thecontent{background-color: white;}
+</style>
+</block>
+<block name="content">
+	<h3>{$data.title}</h3>
+	<div>起始时间：{$data.valid_from}&nbsp;&nbsp;&nbsp;
+		 截止时间：{$data.valid_to}&nbsp;&nbsp;&nbsp;
+		 发布时间：{$data.date}&nbsp;&nbsp;&nbsp;
+	</div>
+	<div class="thecontent">
+		{$data.content}
+	</div>
+
+</block>
