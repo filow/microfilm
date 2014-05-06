@@ -57,9 +57,8 @@ class IndexAction extends CommonAction {
             $slide['online_count']=M('session')->count();
             $slide['str']=array(
                 "当前系统共有".$slide['user_count']."个用户",
-                "目前有".$slide['online_count']."个在线用户",
+                "本网站是中国大学生计算机设计大赛的参赛作品，不做实际用途",
                 "网站共被访问". S('VISIT_COUNT')."次",
-                "奖金最高1000元，获奖作品可推荐参加2014年全国微课程大赛",
                 );
             if($slide['time_left']<=0){
                 $slide['str'][]="上传已截至，投票/发布作品功能已关闭！";  

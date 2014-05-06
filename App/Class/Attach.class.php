@@ -312,6 +312,73 @@ class Attach{
         else
             return false;
     }
+
+
+
+    public function uploadOpusThumb($opus_id){
+        import("ORG.Net.UploadFile");
+        $config =   array(
+            'maxSize'           =>  3*1024*1024,    // 上传文件的最大值
+            'supportMulti'      =>  false,    // 是否支持多文件上传
+            'allowExts'         =>  array('jpeg','png','jpg'),    // 允许上传的文件后缀 留空不作后缀检查
+            'autoSub'           =>  true,// 启用子目录保存文件
+            'subType'           =>  'custom',// 子目录创建方式
+            'subDir'            =>  'imgtmp/', // 子目录名称 subType为custom方式后有效
+            'savePath'          =>  './Upload/',// 上传文件保存路径
+        );
+        $upload = new UploadFile($config);
+        // 上传文件
+        if($upload->upload()){
+            import("ORG.Util.Image");
+            $attach=M('attach');
+            $opus=M('opus');
+            // 获取文件信息
+            $info=$upload->getUploadFileInfo();
+            $fileInfo=$info[0];
+            $path=$fileInfo['savepath'].$fileInfo['savename'];
+            $thumb_name=explode('/', $fileInfo['savename']);
+            // 获得第一个缩略图
+            $thumb1=Image::thumb2($path,"./Upload/thumb_large/".$thumb_name[1],'',400,320,false);
+            // 插入附件表
+            $attach_info=array(
+                'filename'=>$fileInfo['name'],
+                'access_key'=>md5($thumb1),
+                'time'=>time(),
+                'file_location'=>substr($thumb1, 1),
+                'is_image'=>1
+                );
+            $attach_id1=$attach->add($attach_info);
+            if($attach_id1){
+                // 删除原来的缩略图
+                $old_file_id=$opus->field('thumb')->find($opus_id);
+                $old_file=$attach->find($old_file_id['thumb']);
+                $attach->delete($old_file_id['thumb']);
+                unlink(".".$old_file['file_location']);
+                $opus->where(array('id'=>$opus_id))->setField('thumb',$attach_id1);
+            }else{
+                return array(0,"无法将文件信息插入附件表");
+            }
+            $thumb2=Image::thumb2($path,"./Upload/thumb/".$thumb_name[1],'',200,160,false);
+            $attach_info['access_key']=md5($thumb2);
+            $attach_info['file_location']=substr($thumb2, 1);
+            $attach_id2=$attach->add($attach_info);
+            if($attach_id2){
+                // 删除原来的小缩略图
+                $old_file_id=$opus->field('thumb_mini')->find($opus_id);
+                $old_file=$attach->find($old_file_id['thumb_mini']);
+                unlink(".".$old_file['file_location']);
+                $attach->delete($old_file_id['thumb_mini']);
+                $opus->where(array('id'=>$opus_id))->setField('thumb_mini',$attach_id2);
+            }else{
+                return array(0,"无法将文件信息插入附件表");
+            }
+            unlink($path);
+            return array(1,"缩略图更改成功");
+        }else{
+            return array(0,$upload->getErrorMsg());
+        }
+    }
+
     public static function deleteFile($opus_id){
         $att=M('attach');
         $opus_att=M('opus_attach');
@@ -327,4 +394,5 @@ class Attach{
             unset($att_info);
         }
     }
+
 }

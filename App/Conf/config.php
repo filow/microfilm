@@ -36,7 +36,7 @@ return array(
         '__DEPART__'    => '李仁海 陈洁 徐长栋小组，中国大学生计算机设计大赛'
 		),    
     'URL_CASE_INSENSITIVE' =>true,
-	'PASSWORD_SALT'     => '#^@2c',
+	'PASSWORD_SALT'     => '!DXSWDYDS^@2c',
 	//显示页面trace信息
 	'SHOW_PAGE_TRACE'	=> true,
 

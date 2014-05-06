@@ -1,11 +1,10 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta content="河海大学,远程与继续教育学院,远教院,微课程大赛,微课大赛" name="keywords">
-  <block name="SEO_SETTING"></block>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta content="大学生微电影大赛网站,中国大学生计算机设计大赛" name="keywords">
     <title><block name="title">{$title|default="首页"}</block>--__NAME__</title>
     <link rel="stylesheet" href="__PUBLIC__/bootstrap/bootstrap.css" />
     <link rel="stylesheet" href="__PUBLIC__/index/css/common.css">
@@ -16,9 +15,9 @@
 <div class="container">
     <div class="header">
         <div class="header_top">
-            <img src="__PUBLIC__/index/img/logo.jpg" alt="微课程大赛">
+            <img src="__PUBLIC__/index/img/logo.jpg" alt="大学生微电影大赛logo">
             <if condition="can_upload()">
-                <div class="notification alert alert-info">通知：大赛视频现已可以上传 <a href="/passage/7.html">[通知详情]</a></div>
+                <div class="notification alert alert-info">通知：大赛作品现已可以上传 <a href="/passage/1.html">[通知详情]</a></div>
             <else />
                 <div class="notification alert alert-warning">通知：目前不在作品上传时间内，无法投票/发布/取消发布。 </div>
             </if>
@@ -35,7 +34,7 @@
         <div class="header_nav">
             <ul>
                 <li <?php if(MODULE_NAME=="Index") echo "class=\"active\"" ?>><a href="{:U('Index/index')}"><i class="icon-home"></i>首 &nbsp;页</a></li>
-                <li><a href="{:U('/passage/6')}">大赛介绍</a></li>
+                <li><a href="{:U('/passage/1')}">大赛介绍</a></li>
                 <li <?php if(MODULE_NAME=="Opus") echo "class=\"active\"" ?>><a href="{:U('Opus/gallery')}">参赛作品</a></li>
                 <li <?php if(MODULE_NAME=="UserCenter") echo "class=\"active\"" ?>><a href="{:U('UserCenter/Index')}">用户中心</a></li>
                 <block name="extra_nav"></block>
@@ -52,8 +51,8 @@
 <div class="footer">
     <div class="footer_wrap">
         <div class="footer_logo">
-            <img src="__PUBLIC__/index/img/logo.jpg" alt="微课程大赛logo" width="230">
-            <div>河海大学远程与继续教育学院<br>第一届微课程大赛</div>
+            <img src="__PUBLIC__/index/img/logo.jpg" alt="大学生微电影大赛logo" width="230">
+            <div>__NAME__</div>
         </div>
         <div class="footer_question">
             <div class="qa_title">
@@ -64,7 +63,6 @@
                     <li><span>网站总访问量：</span>{:S('VISIT_COUNT')}</li>
                     <li><span>页面加载时间：</span>{$loadtime} 秒</li>
                     <li><span>当前在线人数：</span>{$online} </li>
-                    <li><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1000369442'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s22.cnzz.com/z_stat.php%3Fid%3D1000369442' type='text/javascript'%3E%3C/script%3E"));</script></li>
                 </ul>
             </div>
         </div>
@@ -72,17 +70,14 @@
             <div class="contact_weibo">
                 <span>友情链接</span>
                 <div class="friend_link">
-                    <a href="http://www.hhu.edu.cn/"><i class="icon-bookmark"></i>河海大学</a>
-                    <a href="http://jjy.hhu.edu.cn/"><i class="icon-bookmark"></i>河海大学远程与继续教育学院</a>
-                    <a href="http://www.ikejian.com/"><i class="icon-bookmark"></i>全国微课程大赛</a>
-                    <a href="http://jyt.weiba.cn/index.shtml"><i class="icon-bookmark"></i>全国首届微课程大赛官方平台</a>
+                    <a href="http://www.jsjds.org/"><i class="icon-bookmark"></i>中国大学生计算机设计大赛</a>
+                    <a href="http://www.vmovier.com/"><i class="icon-bookmark"></i>V电影--中国最大的微电影平台</a>
+
                 </div>
             </div>
         </div>
         <div class="footer_copyright">
-            Copyright © {:date('Y')} 主办：远程与继续教育学院 教务处 研究生院 <br>
-            承办：江苏水源有限公司 河海大学设计院<br> 
-            地址：江苏省南京市西康路1号 联系电话： 025-83787964
+            <br>Copyright © {:date('Y')} __DEPART__<br>
         </div>
         <div class="to_top"><div class="to_top_icon"></div></div>
     </div>{//foot_wrap}
