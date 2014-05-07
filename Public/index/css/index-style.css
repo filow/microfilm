@@ -12,7 +12,7 @@
 }
 .slidebox {
   width: 1040px;
-  height: 400px;
+  height: 431px;
   margin-bottom: 30px;
   display: block;
   position: relative;
@@ -20,9 +20,10 @@
 }
 .slidebox .poster_slide {
   width: 1040px;
-  height: 400px;
+  height: 431px;
   position: relative;
   overflow: auto;
+  overflow: hidden;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -39,7 +40,7 @@
 }
 .slidebox .poster_slide ul li img {
   width: 1040px;
-  height: 400px;
+  height: 431px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
