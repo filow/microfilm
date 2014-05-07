@@ -49,7 +49,12 @@ class UserAction extends CommonAction {
 		$uid=I('uid');
 		if(!$uid) {echo "-1";die;}
 		$user=M('user');
-		$result=$user->where(array('uid'=>$uid,'id'=>array('neq',$acc['id'])))->count();
+		if($acc['id']){
+			$result=$user->where(array('uid'=>$uid,'id'=>array('neq',$acc['id'])))->count();
+		}else{
+			$result=$user->where(array('uid'=>$uid))->count();
+		}
+		
 		if($result)
 			echo "1";
 		else
@@ -65,7 +70,6 @@ class UserAction extends CommonAction {
 		$opus=M('opus');
 		// 用户信息
 		$data=$user->where(array('uid'=>$uid))->find();
-		$data['department']=$user->getUserDepart($data['id']);
 		// 视频信息
 		$opus_data=M('opus')->
 						where(array('user_id'=>$data['id'],'status'=>0))->
@@ -112,22 +116,9 @@ class UserAction extends CommonAction {
             $this->error('密码不能为空！且必须大于6位');
 		// 密码单向加密
         $data['password']=passwordHash($data['uid'],$data['password']);
-        // 如果用户的类型为本校师生的话就把部门设置为河海大学
-        if($_POST['belong_type']==1) $data['department']="河海大学";
-
         $id=$user->add($data);
         if(!$id){
         	$this->error('用户添加失败！');
-        }
-
-        // 如果是河海大学师生的话就往部门信息表中插入信息
-        if($_POST['belong_type']==1){
-            $belong=M('user_belong');
-            $belong_data['user_id']=$id;
-            $belong_data['college']=$_POST['college'];
-            $belong_data['profession']=$_POST['profession'];
-            $belong_data['grade']=$_POST['grade'];
-            $belong->add($belong_data);
         }
         $this->success('用户添加成功！',U('UserCenter/Index'));
 	}

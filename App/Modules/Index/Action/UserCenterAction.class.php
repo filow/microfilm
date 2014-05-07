@@ -25,12 +25,6 @@ class UserCenterAction extends Action{
 		$user=D('User');
 		$acc=sess('acc');
 		$user_data=$user->where(array('id'=>$acc['id']))->find();
-		//所属部门处理
-		if($user_data['belong_type']=="1"){
-			$user_belong=M('user_belong');
-			$belong_data=$user_belong->where(array('user_id'=>$user_data['id']))->find();
-			$user_data['belong']=$belong_data;
-		}
 		$opus_data=$user->getOpus($acc['id']);
 		$vote_data=$user->getVoteOpus($acc['id'],"8");
 		$this->assign('acc',$user_data);
@@ -70,11 +64,6 @@ class UserCenterAction extends Action{
 		$acc=sess('acc');
 		$user=M('user');
 		$userInfo=$user->where(array('id'=>$acc['id']))->find();
-		if($userInfo['belong_type']=="1"){
-			$belong_data=M('user_belong')->where(array('user_id'=>$userInfo['id']))->find();
-			$userInfo['belong']=$belong_data;
-		}
-		// dump($userInfo);
 		$this->assign('data',$userInfo);
 		$this->display();
 	}
@@ -103,15 +92,6 @@ class UserCenterAction extends Action{
             unset($data['password']);
         }else{
             $data['password']=passwordHash($acc['uid'],$data['password']);
-        }
-        if($_POST['belong_type']==1){
-            $belong=M('user_belong');
-            $belong->where(array('user_id'=>$id))->delete();
-            $belong_data['user_id']=$id;
-            $belong_data['college']=$_POST['college'];
-            $belong_data['profession']=$_POST['profession'];
-            $belong_data['grade']=$_POST['grade'];
-            $belong->where(array('user_id'=>$id))->add($belong_data);
         }
         $result=$user->where(array('id'=>$id))->save($data);
         $this->success('修改完成！');
@@ -174,6 +154,23 @@ class UserCenterAction extends Action{
 		importP('Attach');
 		$this->assign('att_info',Attach::getDoc($opus_id));
 		
+		$this->display();
+	}
+	public function opusthumb(){
+		C('SHOW_PAGE_TRACE',false);
+		$opus_id=I('opus_id',0,'intval');
+		if(!$opus_id){
+			echo "没有传入作品ID";die;
+		}
+		$opus=M('opus');
+        if($_FILES){
+            importP("Attach");
+            $attach=new Attach();
+            $msg=$attach->uploadOpusThumb($opus_id);
+            $this->assign('msg',$msg);
+        }
+		$opusInfo=$opus->where(array('id'=>$opus_id))->field('thumb')->find();
+		$this->assign('aid',$opusInfo['thumb']);
 		$this->display();
 	}
 	public function editVideo($opus_id){
