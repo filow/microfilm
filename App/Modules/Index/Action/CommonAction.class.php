@@ -15,13 +15,13 @@ class CommonAction extends Action {
 		if($visit_inc%50==0) 
 			$config=M('config')->where(array('var'=>'VISIT_COUNT'))->setInc('value',50);
 
-		// 运行时间统计
-        G('beginTime',$GLOBALS['_beginTime']);
-        G('viewEndTime');
-        $this->assign('loadtime',G('beginTime','viewEndTime'));
-        // 在线人数统计
-        $online_count=M('session')->count();
-        $this->assign('online',$online_count);
+  	// 运行时间统计
+    G('beginTime',$GLOBALS['_beginTime']);
+    G('viewEndTime');
+    $this->assign('loadtime',G('beginTime','viewEndTime'));
+    // 在线人数统计
+    $online_count=M('session')->count();
+    $this->assign('online',$online_count);
 
 	}
 }
