@@ -80,17 +80,9 @@
 				<td colspan="3">{$li.idcard}</td>
 			</tr>
 			<tr>
-				<td>类型</td>
-				<td>
-					<eq name="li['belong_type']" value="1">本校学生
-					<else />其他</eq>
-				</td>
-				<td>所属部门</td>
+				<td>所属学校</td>
 				<td colspan="3">
 					{$li.department}
-					<present name="li['belong']">
-						/{$li.belong.college}/{$li.belong.profession}/{$li.belong.grade}
-					</present>
 				</td>
 			</tr>
 		</table>

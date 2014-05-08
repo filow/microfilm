@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div class="opus_upt">
-				<div class="opus_upt_views">播放次数：<span class="label label-success" id="opus_view_label">{$opus.view_count}</span></div>
+				<div class="opus_upt_views">浏览次数：<span class="label label-success" id="opus_view_label">{$opus.view_count}</span></div>
 				<div class="opus_upt_time">上传时间：{$opus.add_time|date="Y年m月d日",###}</div>
 			</div>
 			<div class="clear"></div>
@@ -145,7 +145,7 @@
 					<li>
 						<div class="hot_author">
 							<img src="{:getAvatar($li['avatar'])}" alt="{$li.nickname}">
-							<a href="{:U('User/userinfo',array('uid'=>$li['uid']))}">{$li.nickname} <span>{$li.department}</span></a>
+							<a href="{:U('User/userinfo',array('uid'=>$li['uid']))}" title="{$li.nickname}">{$li.nickname} <span>{$li.department}</span></a>
 						</div>
 					</li>
 					</volist>
@@ -168,9 +168,6 @@ $(document).ready(function(){
 		var vote_url=$(this).attr('href');
 		$.get(vote_url,function (result){
 			alert(result[1]);
-			if(typeof(_czc) != 'undefined'){
-                _czc.push(["_trackEvent","作品页投票",vote_url,1,"vote"]);
-            }
 			if(result[0]==1){
 				var count=parseInt($('#vote_count').html());
 				$('#vote_count').html(count+1);

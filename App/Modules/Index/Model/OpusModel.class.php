@@ -145,7 +145,6 @@ class OpusModel extends Model{
 		$new=array(
 			'opus_name' => htmlspecialchars(trim($data['opus_name'])),
 			'content'   => trim($this->simpleFilter($data['intro'])),
-			'belong'    => $data['belong'],
 			'add_time'  => time(),
 			'overview'  => trim(Input::deleteHtmlTags($data['intro'])),
 			'init'      => 0,

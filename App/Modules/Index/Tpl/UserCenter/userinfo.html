@@ -63,38 +63,11 @@
 							<td></td>
 						</tr>
 						<tr>
-							<td>用户类型</td>
-							<td>
-					<select name="belong_type" class="belong_type">
-						<option value="1" <?php if($data['belong_type']==1) echo 'selected';?>>河海大学师生</option>
-						<option value="0" <?php if($data['belong_type']==0) echo 'selected';?>>其他</option>
-					</select>
-							</td>
-							<td>
-								<div class="alert alert-info notify">
-									仅当您是河海大学师生时选择“河海大学师生”
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<td>所属单位</td>
+							<td>所属学校</td>
 							<td class="depart_td">
-								<eq name="data['belong_type']" value="1">
-					<div class="depart" style="display:none;">单位：<input type="text" name="department" value="{$data.department}" placeholder="单位"/></div>
-					<div class="college">学院：<input type="text" name="college"  value="{$data.belong.college}" /></div>
-					<div class="profession">专业：<input type="text" name="profession"  value="{$data.belong.profession}" /></div>
-					<div class="grade" >年级：<input type="text" name="grade"  value="{$data.belong.grade}" /></div>
-								<else />
-					<div class="depart">单位：<input type="text" name="department" value="{$data.department}" placeholder="单位"/></div>
-					<div class="college" style="display:none;">学院：<input type="text" name="college"/></div>
-					<div class="profession" style="display:none;">专业：<input type="text" name="profession" /></div>
-					<div class="grade" style="display:none;">年级：<input type="text" name="grade"  /></div>
-								</eq>
+					<input type="text" name="department" class="depart" value="{$data.department}" />
 							</td>
 							<td>
-								<div class="alert alert-info notify">
-									请填写对应单位的全称。如果是本校学生，请在后面三个框中依次写：学院，专业，年级
-								</div>
 							</td>
 						</tr>
 						<tr>
@@ -125,58 +98,23 @@
 <script>
 function checkform(){
 	var nickname=$(form.nickname).val();
-	if(nickname.length==""){
+	if(nickname.length==0){
 		alert("必须填写用户姓名！");
 		$(form.nickname).focus();
 		return false;
 	}
 	var password=$(form.password).val();
-	if(password.length!="" && password.length<6){
+	if(password!="" && password.length<6){
 		alert("密码长度必须大于6！");
 		$(form.password).focus();
 		return false;
 	}
-	var belong_type=$(form.belong_type).val();
 	var department=$(form.department).val();
-	if(belong_type=="1"){
-		if($(form.college).val().length==0){
-			alert("请填写学院！");
-			$(form.college).focus();
-			return false;
-		}
-		if($(form.profession).val().length==0){
-			alert("请填写专业！");
-			$(form.profession).focus();
-			return false;
-		}
-		if($(form.grade).val().length==0){
-			alert("请填写年级！");
-			$(form.grade).focus();
-			return false;
-		}
-	}else{
-		if(department.length==0){
-			alert("请填写单位！");
-			$(form.department).focus();
-			return false;
-		}
+	if(department.length==0){
+		alert("请填写学校名称");
+		$(form.department).focus();
+		return false;
 	}
 }
-$(document).ready(function(){
-	$('.belong_type').change(function(){
-		node=$(".depart_td");
-		if($(this).val()=="1"){
-			node.find('.depart').hide();
-			node.find('.college').show();
-			node.find('.profession').show();
-			node.find('.grade').show();
-		}else{
-			node.find('.depart').show();
-			node.find('.college').hide();
-			node.find('.profession').hide();
-			node.find('.grade').hide();
-		}
-	});
-});
 </script>
 </block>

@@ -36,11 +36,7 @@
 								</eq>
 							</tr>
 							<tr>
-								<td class="user_info_option">类型</td>
-								<td><eq name="user['belong_type']" value="1">本校师生<else />其他</eq></td>
-							</tr>
-							<tr>
-								<td class="user_info_option">单位：</td>
+								<td class="user_info_option">学校：</td>
 								<td>{$user.department}</td>
 							</tr>
 						</table>
@@ -113,21 +109,8 @@
 </div>
 </block>
 <block name="extra_js">
-<script type="text/javascript" src="__PUBLIC__/plugins/flowflash/flowplayer-3.2.12.min.js"></script>
 <script>
 $(document).ready(function(){
-	<notempty name="opus_first">
-		flowplayer("player", "__PUBLIC__/plugins/flowflash/flowplayer.swf", {
-            clip: {
-                autoPlay: false,
-                autoBuffering: true
-            },
-            canvas: {backgroundColor: "#000000"},
-            plugins: {
-            	<include file="Common:playerControl" />
-            }
-        });
-	</notempty>
 });
 </script>
 </block>

@@ -2,9 +2,7 @@
 <block name="title">作品管理</block>
 <block name="extra_css">
 	<link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css">
-	<style>
 
-	</style>
 </block>
 <block name="content">
 <div class="usercenter">
@@ -55,10 +53,6 @@
 			            </div>
 				        </volist>
 			            <div class="clear"></div>
-				        <!-- <div class="alert alert-info">
-				        	<h5>什么情况下作品会被禁用？</h5>
-				        	<p>当作品内容不符合比赛要求或者出现与国家法律法规不符的内容时，作品就将被禁用。<br>如果您对这个处理有问题，可以<a href="" >点击此处</a>反馈。</p>
-				        </div> -->
 				</div>
 			</div>
 		</div>
@@ -76,15 +70,13 @@
   	
   	<table class="table table-bordered">
     		<tr>
-    			<td colspan="4" id="body-thumb">
+    			<td colspan="4" id="body-thumb" width="140">
     				<img src="" alt="">
     			</td>
     		</tr>
     		<tr>
-    			<td>作品名称</td>
-    			<td id="opus_name"></td>
-    			<td>所属学科</td>
-    			<td id="opus_belong"></td>
+    			<td class="file_name">作品名称</td>
+    			<td id="opus_name" colspan="3"></td>
     		</tr>
     		<tr>
     			<td>作者</td>
@@ -123,14 +115,7 @@
 				<td colspan="3" id="opus_video">
 				</td>
 			</tr>
-			<tr>
-				<td>优酷视频ID</td>
-				<td id="opus_youkuid"></td>
-				<td>视频状态</td>
-				<td id="opus_youkustatus"></td>
-			</tr>
     	</table>
-    	<div class="alert alert-info">您上传的作品将被我们加密保存在优酷网以提供流畅的在线视频点播服务。请您放心，在没有您特别允许的情况下，视频源文件不会被传播。</div>
   </div>
   <div class="modal-footer">
   	<form action="{:U('opus_opreation')}" method="get" style="display:inline;">
@@ -161,7 +146,6 @@ $(document).ready(function(){
 				$('#modalHead').html(data.opus_name);
 				$('#body-thumb img').attr('src',data.thumb);
 				$('#opus_name').html(data.opus_name);
-				$('#opus_belong').html(data.belong);
 				$('#opus_author').html(data.author);
 				$('#opus_overview').html(data.overview);
 				$('#opus_vote').html(data.vote_count);
@@ -183,26 +167,6 @@ $(document).ready(function(){
 					$('#opus_video').html("未上传");
 				}
 				
-				var youkuid=data.youkuid;
-				var client_id="{:CF('CLIENT_ID')}";
-				$('#opus_youkuid').html(youkuid);
-				$('#opus_youkustatus').html("");
-				if(youkuid){
-					var youkustatus_url="https://openapi.youku.com/v2/videos/show_basic.json?client_id="+client_id+"&video_id="+youkuid;
-					$.get(youkustatus_url,function (status){
-						if(status.state){
-							var state_cn="";
-							switch(status.state){
-								case "normal":state_cn='<span class="label label-success">正常</span>';break;
-								case "encoding":state_cn='<span class="label label-info">转码中</span>';break;
-								case "fail":state_cn='<span class="label label-warning">转码失败</span>';break;
-								case "in_review":state_cn='<span class="label label-info">审核中</span>';break;
-								case "blocked":state_cn='<span class="label label-important">已屏蔽</span>';break;
-							}
-							$('#opus_youkustatus').html(state_cn);
-						}
-					});
-				}
 				switch(data.status){
 					case "0":
 						$('#opus_status').html('<span class="label label-success">正常</span>');

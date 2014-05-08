@@ -56,38 +56,13 @@ class UserModel extends Model{
 		import('ORG.Util.String');
 		$data=$this->where(array('forbidden'=>0))->order('popularity desc,id asc')->limit(7)->field('id,nickname,department,popularity,avatar,uid')->select();
 		foreach ($data as $key => $value) {
-			$data[$key]['department']=$this->getUserDepart($value['id']);
 			$data[$key]['nickname']=String::msubstr($value['nickname'],0,5,'utf-8',false);
-			$data[$key]['department']=String::msubstr($data[$key]['department'],0,8,'utf-8',false);
+			$data[$key]['department']=String::msubstr($value['department'],0,6,'utf-8',false);
 		}
 		return $data;
 	}
 	public function getUserInfo($userid=null){
 		$user=$this->where(array('id'=>$userid))->find();
-		$user_belong=M('user_belong');
-		//所属部门处理
-		if($user['belong_type']=="1"){
-			$belong_data=$user_belong->where(array('user_id'=>$user['id']))->find();
-			$user['belong']=$belong_data;
-			$user['department']=$belong_data['college'];
-			$user['belong']['merge']=$belong_data['college']."  ".$belong_data['profession']."  ".$belong_data['grade'];
-		}else{
-			$user['belong']['merge']=$user['department'];
-		}
 		return $user;
-	}
-	public function getUserDepart($user_id){
-		if(!$user_id) return;
-		$userinfo=$this->field('belong_type,department')->find($user_id);
-		if(!$userinfo) return;
-		else{
-			if($userinfo['belong_type']=="0"){
-				return $userinfo['department'];
-			}else{
-				$belong=M('user_belong')->where(array('user_id'=>$user_id))->find();
-				return $belong['college'];
-			}
-		}
-		
 	}
 }

@@ -63,6 +63,12 @@
 								</td>
 							</tr>
 							<tr>
+								<td colspan="2">上传缩略图
+									<iframe src="{:U('opusthumb',array('opus_id'=>$data['id']))}" frameborder="0" width="100%" height="180px" scrolling="no">
+								</iframe>
+								</td>
+							</tr>
+							<tr>
 								<td colspan="2">作品介绍：<textarea name="intro" id="editor" cols="30" rows="10">{$data.content}</textarea></td>
 							</tr>
 							<tr>

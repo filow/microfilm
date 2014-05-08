@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <link rel="stylesheet" href="__PUBLIC__/bootstrap/bootstrap.css" />
+</head>
+<body>
+	<div class="row-fluid">
+		<div class="span4">
+		    <a class="thumbnail">
+		      <img data-src="holder.js/200x200" style="width: 200px; height: 160px;" src="{:getThumb($aid)}" alt="">
+		    </a>
+		</div>
+		<div class="span8">
+			<div class="alert alert-info">
+				<present name="msg">{$msg[1]}<else /><b>作品缩略图上传提醒：</b><br>
+				您可以上传小于5M的jpg,png格式的图片，图片太大会自动裁剪为最终尺寸为400×320的图像。建议图片不要太小。</present>
+			</div>
+			<div>
+				<form action="{:U('opusthumb')}" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="opus_id" value="{:I('opus_id')}">
+					<input type="file" name="file" id=""/>
+					<input type="submit" value="上传" class="btn btn-primary span2">
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
