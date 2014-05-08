@@ -35,7 +35,6 @@ class SearchAction extends CommonAction {
 		if($result['opus']){
 			foreach ($result['opus'] as $key => $value) {
 				$userdata=$user->where(array('id'=>$value['user_id']))->find();
-				$userdata['department']=$user->getUserDepart($value['user_id']);
 				$result['opus'][$key]['userinfo']=$userdata;
 				$result['opus'][$key]['opus_name']=$this->setKeyWords($result['opus'][$key]['opus_name'],$query_words);
 			}
@@ -48,7 +47,6 @@ class SearchAction extends CommonAction {
 		if($result['user']){
 			foreach ($result['user'] as $key => $value) {
 				$result['user'][$key]['nickname']=$this->setKeyWords($result['user'][$key]['nickname'],$query_words);
-				$result['user'][$key]['department']=$user->getUserDepart($value['id']);
 				$result['user'][$key]['department']=$this->setKeyWords($result['user'][$key]['department'],$query_words);
 				$opuses=$opus->where(array('user_id'=>$value['id'],'status'=>0))->field('id,opus_name')->select();
 				$result['user'][$key]['opus']=$opuses;
@@ -64,6 +62,7 @@ class SearchAction extends CommonAction {
 				$result['news'][$key]['content_notag']=mb_substr($this->setKeyWords($result['news'][$key]['content_notag'],$query_words), 0,300);
 			}
 		}
+
 		$this->assign('key_words',$str);
 		$this->assign('result',$result);
 		$this->assign('count',$count);

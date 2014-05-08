@@ -48,7 +48,7 @@
 							<th width="300"></th>
 						</thead>
 						<tr>
-							<td>用户ID</td>
+							<td>用户ID(必填)</td>
 							<td><input type="text" name="uid" id="uid" value="{$data.uid}"  /></td>
 							<td>
 								<div class="alert alert-error hide" id="uiderr">
@@ -63,9 +63,9 @@
 							</td>
 						</tr>
 						<tr>
-							<td>用户姓名</td>
+							<td>用户姓名(必填)</td>
 							<td>
-								<input type="text" name="nickname" value="{$data.nickname}" datatype="zh2-5" errormsg="应当填写2-5位中文！" />
+								<input type="text" name="nickname" value="{$data.nickname}" />
 							</td>
 							<td>
 
@@ -75,7 +75,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>用户密码</td>
+							<td>用户密码(必填)</td>
 							<td><input type="text" name="password" data-type="*6-16" errormsg="密码要求6位以上,16位以下" /></td>
 							<td>
 								<div class="alert alert-info notify">
@@ -94,34 +94,16 @@
 							<td></td>
 						</tr>
 						<tr>
-							<td>用户类型</td>
-							<td>
-					<select name="belong_type" class="belong_type">
-						<option value="1">河海大学师生</option>
-						<option value="0">非本校师生</option>
-					</select>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td>所属单位</td>
+							<td>所在学校</td>
 							<td class="depart_td">
-					<div class="depart" style="display:none;">单位：<input type="text" name="department" value="" placeholder="单位"/></div>
-					<div class="college">学院(必填)：<input type="text" name="college"  placeholder="学院" /></div>
-					<div class="profession">专业(选填)：<input type="text" name="profession" placeholder="专业" /></div>
-					<div class="grade" >年级(选填)：<input type="text" name="grade" placeholder="年级" /></div>
+								<input type="text" name="department" class="depart" /><br>
 							</td>
 							<td>
-								<div class="alert alert-info notify">
-									请填写对应单位的全称。<br>
-									如果您是本校教师，则只需要填写学院即可，否则请将专业和年级也一并填好<br><br>
-									（年级填写示例：12级本科生/12级研究生）
-								</div>
 							</td>
 						</tr>
 						<tr>
 							<td>联系电话</td>
-							<td><input type="text" name="phone" value="{$data.phone}" /></td>
+							<td><input type="text" name="phone"/></td>
 							<td></td>
 						</tr>
 						<tr>
@@ -153,7 +135,7 @@ function checkform(){
 		return false;
 	}
 	var nickname=$(form.nickname).val();
-	if(nickname.length==""){
+	if(nickname.length==0){
 		alert("必须填写用户姓名！");
 		$(form.nickname).focus();
 		return false;
@@ -164,38 +146,15 @@ function checkform(){
 		$(form.password).focus();
 		return false;
 	}
-	var belong_type=$(form.belong_type).val();
 	var department=$(form.department).val();
-	if(belong_type=="1"){
-		if($(form.college).val().length==0){
-			alert("请填写学院！");
-			$(form.college).focus();
-			return false;
-		}
-	}else{
-		if(department.length==0){
-			alert("请填写单位！");
-			$(form.department).focus();
-			return false;
-		}
+	if(department.length==0){
+		alert("请填写学校名称！");
+		$(form.department).focus();
+		return false;
 	}
 	
 }
 $(document).ready(function(){
-	$('.belong_type').change(function(){
-		node=$(".depart_td");
-		if($(this).val()=="1"){
-			node.find('.depart').hide();
-			node.find('.college').show();
-			node.find('.profession').show();
-			node.find('.grade').show();
-		}else{
-			node.find('.depart').show();
-			node.find('.college').hide();
-			node.find('.profession').hide();
-			node.find('.grade').hide();
-		}
-	});
 	$('#uid').focusout(function(){
 		var selector=$(this);
 		var val=selector.val();
@@ -207,7 +166,6 @@ $(document).ready(function(){
 		}else{
 			url="{:U('checkUid')}"+"?uid="+$(this).val();
 			$.get(url,function (data){
-			console.log(data);
 				if(data=="0"){
 					selector.removeClass('error');
 					$('#uiderr').addClass('hide');

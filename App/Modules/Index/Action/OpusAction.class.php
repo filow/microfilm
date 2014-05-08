@@ -49,6 +49,7 @@ class OpusAction extends CommonAction{
 		$id=I('id','intval');
 		if(!$id) $this->error('没有指定视频代号！');
 		$opus=D('Opus');
+		// 查看作品
 		viewOpus($id);
 		$lock_hash=md5("refreshVoteCount_lock".$id);
 		if(!S($lock_hash)){
@@ -129,9 +130,6 @@ class OpusAction extends CommonAction{
 		$opus=D('Opus');
 		$result=$opus->where(array('user_id'=>sess('acc.id'),'id'=>$opus_id))->field('force_top,last_refesh,content',true)->find();
 		if($result){
-			$belong=M('opus_belong');
-			$belong_data=$belong->find($result['belong']);
-			if($belong_data) $result['belong']=$belong_data['profession'];
 			$authors=M('opus_author')->where(array('opus_id'=>$opus_id))->field('author')->select();
 			$author_str="";
 			foreach ($authors as $value) {

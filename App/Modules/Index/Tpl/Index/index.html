@@ -204,6 +204,7 @@
             <div class="hot_author_box">
                 <img src="__PUBLIC__/index/img/topAuthor.png" alt="人气选手" class="hot_box_title">
                 <hr>
+                <present name="user_rank_first">
                 <div class="top_author">
                     <a href="{:U('User/userinfo',array('uid'=>$user_rank_first['uid']))}"><img src="{:getAvatar($user_rank_first['avatar'])}" alt="{$user_rank_first.nickname}" class="top_author_headphoto"></a>
                     <div class="author_info">
@@ -212,6 +213,9 @@
                         <a><span><strong>{$user_rank_first.popularity}</strong></span>热度:</a>
                     </div>
                 </div>
+                <else />
+                    目前还没有注册用户！
+                </present>
                 <ul>
                     <volist name="user_rank" id="li">
                     <li>
@@ -231,16 +235,20 @@
                 <div class="top_work">
                     <img src="__PUBLIC__/index/img/topWork.png" alt="人气作品" class="hot_box_title">
                     <hr>
+                    <present name="opus_rank_first">
                     <div class="top_work">
                         <img src="{:getThumbMini($opus_rank_first['id'])}" alt="{$opus_rank_first.nickname}" class="video_thumb">
                         <div class="work_info">
-                            <a href="{:U('Opus/view',array('id'=>$opus_rank_first['id']))}" class="work_name" title="{$opus_rank_first.opus_name}">{$opus_rank_first.opus_name|mb_substr=0,9,"utf-8"}</a>
+                            <a href="{:U('Opus/view',array('id'=>$opus_rank_first['id']))}" class="work_name" title="{$opus_rank_first.opus_name|mb_substr=0,9,'utf-8'}">{$opus_rank_first.opus_name|mb_substr=0,9,"utf-8"}</a>
                             <div class="work_descrtion">
                                 <a href="{:U('User/userinfo',array('uid'=>$opus_rank_first['uid']))}">{$opus_rank_first.nickname} </a><br>
                                 <a><span><strong>{$opus_rank_first.popularity}</strong></span>热度：</a>
                             </div>
                         </div>
                     </div>{//top_work}
+                    <else />
+                        目前还没有已发布的作品！
+                    </present>
                 </div>
                 <ul>
                     <volist name="opus_rank" id="li" key="k">
@@ -259,6 +267,7 @@
         </div>{//sidebar}
     </div>
 </div>
+
 </block>
 <block name="extra_js">
 <script src="__PLUGIN__/sliders/slides.min.jquery.js" type="text/javascript"></script>
@@ -298,7 +307,7 @@ $(document).ready(function(){
             volume : 70,
             controlbar : "over",
             ak:"{:CF('BAIDU_AK')}",
-            sk:"{:CF('BAIDU_SK')}",
+            sk:"{:CF('BAIDU_SK')}"
         });
     });
     $('#video_exp_modal').on('hidden', function () {
@@ -313,9 +322,6 @@ $(document).ready(function(){
         var vote_url=selector.attr('href');
         $.get(vote_url,function (result){
             alert(result[1]+"（投票结果不会立即更新）");
-            if(typeof(_czc) != 'undefined'){
-                _czc.push(["_trackEvent","首页作品投票",vote_url,1,"vote_btn"]);
-            }
             if(result[0]==1){
                 var vote_count_feild=selector.parent().find('.vote_count');
                 var count=parseInt(vote_count_feild.html());

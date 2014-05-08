@@ -27,22 +27,8 @@
 						<tr>
 							<td>性别：</td>
 							<td><eq name="acc['sex']" value="0">男<else />女</eq></td>
-						</tr>
-						<tr>
-							<td>类型：</td>
-							<td>
-								<eq name="acc['belong_type']" value="1">本校学生
-								<else />其他</eq>
-							</td>
 							<td>所属单位：</td>
-							<td>
-							
-							<present name="acc['belong']">
-								{$acc['belong']['college']} / {$acc.belong.profession} / {$acc.belong.grade}
-							<else />
-								{$acc.department}
-							</present>
-							</td>
+							<td>{$acc.department}</td>
 						</tr>
 						<tr>
 							<td>电话号码：</td><td>{$acc.phone}</td>

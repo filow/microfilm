@@ -343,13 +343,11 @@ class UserCenterAction extends Action{
 				'opus_id' => $id,
 				'author'  => trim($value),
 				'sex'     => intval($_POST['sex'][$key]),
-				'idcard'  => trim($_POST['idcard'][$key]),
-				'belong'  => trim($_POST['author_belong'][$key]),
 				'phone'   => trim($_POST['phone'][$key]),
 				'email'   => trim($_POST['email'][$key])
 				);
 		}
-		unset($_POST['author_name'],$_POST['idcard'],$_POST['sex'],$_POST['author_belong']);
+		unset($_POST['author_name'],$_POST['sex']);
 		unset($_POST['phone'],$_POST['email'],$_POST['id']);
 		// 更改数据
 		$result2=$opus->updateOpusInfo($id,$_POST);
