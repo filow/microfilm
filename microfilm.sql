@@ -61,7 +61,7 @@ CREATE TABLE `mf_attach` (
   `user_id` int(11) NOT NULL COMMENT '所属用户的ID(仅适用于头像等缩略图)',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='附件';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 COMMENT='附件';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,6 +70,7 @@ CREATE TABLE `mf_attach` (
 
 LOCK TABLES `mf_attach` WRITE;
 /*!40000 ALTER TABLE `mf_attach` DISABLE KEYS */;
+INSERT INTO `mf_attach` VALUES (3,'53059f7856887.doc','6e4b8e57d29d6f90456cf98b648a8cbc',1399563894,'/Upload/OpusDoc/536ba67655886.doc',0,0),(4,'1.mp4','4eac532a557b78a32e2907a01e1647d7',1399563914,'/Upload/OpusVideo/536ba68a4e466.mp4',0,0),(9,'1.png','1703fbc46dadd5b45ddcdcfdbe90f259',1399640310,'/Upload/thumb_large/536cd0f65b8c0.png',1,0),(10,'1.png','2fafff0d87a429a8841e3c22f54762bc',1399640310,'/Upload/thumb/536cd0f65b8c0.png',1,0),(11,'2.png','fec88f7a8ce59ebcbdf77a1bb067c175',1399689473,'/Upload/thumb/536d91011024b.png',1,0),(12,'2.png','de28783cacc09adc94ba91dd0f79c521',1399689473,'/Upload/thumb_large/536d91011024b.png',1,0);
 /*!40000 ALTER TABLE `mf_attach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +90,7 @@ CREATE TABLE `mf_config` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `var` (`var`),
   KEY `range` (`range`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COMMENT='系统设置表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1 COMMENT='系统设置表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +99,7 @@ CREATE TABLE `mf_config` (
 
 LOCK TABLES `mf_config` WRITE;
 /*!40000 ALTER TABLE `mf_config` DISABLE KEYS */;
-INSERT INTO `mf_config` VALUES (1,'UPLOAD_DATE_FROM','1388505660','上传时间起始点',0),(2,'UPLOAD_DATE_TO','1398787440','上传时间终止点',0),(5,'VOTE_DATE_FROM','1386663198','投票起始日期',0),(6,'VOTE_DATE_TO','1398189840','投票截至日期',0),(7,'VOTE_NUMBER','5','每个ip能投票的次数总和',0),(8,'VOTE_PROFESSOR_DATE_FROM','1386663421','专家评审时间起始',0),(9,'VOTE_PROFESSOR_DATE_TO','1398600240','专家评审时间终止',0),(10,'LOGIN_FAIL_TIME_VERIFY','2','允许的最大登录失败次数（达到后会出现验证码）',2),(11,'LOGIN_FAIL_TIME_WAIT','5','允许的最大登录失败次数（达到后会有一段时间不允许尝试）',2),(12,'LOGIN_FAIL_TIMEOUT','180','达到限制次数后暂停登录尝试的等待时间（秒）',2),(13,'LOGIN_FAIL_TIME_SPAN','60','判定连续登录的时间间隔（秒）',2),(14,'AJAX_VERIFY','0','是否对AJAX方法启用验证',2),(15,'VISIT_COUNT','50','网站访问总量',0),(16,'BAIDU_AK','gqv4hLcw48y5zr8cMg33Vh9C','百度播放器APPKEY',0),(17,'BAIDU_SK','8z5NRKkz11O6cSAx','百度播放器SCREATKEY',0);
+INSERT INTO `mf_config` VALUES (1,'UPLOAD_DATE_FROM','1388505660','上传时间起始点',0),(2,'UPLOAD_DATE_TO','1419523920','上传时间终止点',0),(5,'VOTE_DATE_FROM','1386663198','投票起始日期',0),(6,'VOTE_DATE_TO','1400263500','投票截至日期',0),(7,'VOTE_NUMBER','5','每个ip能投票的次数总和',0),(8,'VOTE_PROFESSOR_DATE_FROM','1386663421','专家评审时间起始',0),(9,'VOTE_PROFESSOR_DATE_TO','1398600240','专家评审时间终止',0),(10,'LOGIN_FAIL_TIME_VERIFY','2','允许的最大登录失败次数（达到后会出现验证码）',2),(11,'LOGIN_FAIL_TIME_WAIT','5','允许的最大登录失败次数（达到后会有一段时间不允许尝试）',2),(12,'LOGIN_FAIL_TIMEOUT','180','达到限制次数后暂停登录尝试的等待时间（秒）',2),(13,'LOGIN_FAIL_TIME_SPAN','60','判定连续登录的时间间隔（秒）',2),(14,'AJAX_VERIFY','0','是否对AJAX方法启用验证',2),(15,'VISIT_COUNT','250','网站访问总量',0),(16,'BAIDU_AK','gqv4hLcw48y5zr8cMg33Vh9C','百度播放器APPKEY',0),(17,'BAIDU_SK','8z5NRKkz11O6cSAx','百度播放器SCREATKEY',0),(18,'CAN_UPLOAD_VIDEO','1','能否上传视频',0);
 /*!40000 ALTER TABLE `mf_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +116,7 @@ CREATE TABLE `mf_exp_video` (
   `location` varchar(255) NOT NULL COMMENT '示例视频的地址',
   `thumb` varchar(255) DEFAULT NULL COMMENT '缩略图',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='示例视频';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='示例视频';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,6 +125,7 @@ CREATE TABLE `mf_exp_video` (
 
 LOCK TABLES `mf_exp_video` WRITE;
 /*!40000 ALTER TABLE `mf_exp_video` DISABLE KEYS */;
+INSERT INTO `mf_exp_video` VALUES (1,'薄扶林，有落','XNzA4OTIxNzI0','http://g4.ykimg.com/1100641F46536A5036BF2A1602DB9363E378BC-FEAA-DEDF-F3A8-C6B3C6CFDCE0'),(2,'沙漏','XNTAzMDAwNzY4','http://g4.ykimg.com/1100401F4650F764ACDE9C0844307204ACE9C1-FB16-A4CE-74FE-00DE912109C6'),(3,'青春丶怒放','XNjkwODE2MjI0','http://g4.ykimg.com/1100641F465333D1024FD7159409192E91984D-8815-A9F5-BC31-03CE04428BF7');
 /*!40000 ALTER TABLE `mf_exp_video` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,7 +143,7 @@ CREATE TABLE `mf_intro` (
   `anchor` varchar(20) NOT NULL COMMENT '锚点',
   `sort` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='首页大赛介绍项目表';
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='首页大赛介绍项目表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -150,6 +152,7 @@ CREATE TABLE `mf_intro` (
 
 LOCK TABLES `mf_intro` WRITE;
 /*!40000 ALTER TABLE `mf_intro` DISABLE KEYS */;
+INSERT INTO `mf_intro` VALUES (6,'欢迎使用测试系统',1,'welcome',0);
 /*!40000 ALTER TABLE `mf_intro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,7 +204,7 @@ CREATE TABLE `mf_msg` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`has_read`),
   CONSTRAINT `mf_msg_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `mf_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='用户消息表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='用户消息表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,6 +213,7 @@ CREATE TABLE `mf_msg` (
 
 LOCK TABLES `mf_msg` WRITE;
 /*!40000 ALTER TABLE `mf_msg` DISABLE KEYS */;
+INSERT INTO `mf_msg` VALUES (1,1,'vfdbvgdbg','<p>fbgtbnhtbh</p>',1,1399690021,'系统管理员');
 /*!40000 ALTER TABLE `mf_msg` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -233,7 +237,7 @@ CREATE TABLE `mf_notification` (
   UNIQUE KEY `title` (`title`),
   KEY `valid_from` (`valid_from`),
   KEY `force_top` (`force_top`,`force_hide`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='系统消息';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='系统消息';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -242,6 +246,7 @@ CREATE TABLE `mf_notification` (
 
 LOCK TABLES `mf_notification` WRITE;
 /*!40000 ALTER TABLE `mf_notification` DISABLE KEYS */;
+INSERT INTO `mf_notification` VALUES (1,'欢迎使用大学生微电影大赛示例网站','<p>您好，本网站是由李仁海 陈洁 徐长栋制作的作品，用于参加中国大学生计算机设计大赛。</p><p>由于本站只做示例用途，也由于示例站点空间的限制，您可以创建用户和作品，但不能上传作品，本站已经提供了几个视频作为范例，通过这些范例您就基本可以了解本网站的设计构思，并方便大赛评委点评。</p><p><br/></p>','您好，本网站是由李仁海 陈洁 徐长栋制作的作品，用于参加中国大学生计算机设计大赛。由于本站只做示例用途，也由于示例站点空间的限制，您可以创建用户和作品，但不能上传作品，本站已经提供了几个视频作为范例，通过这些范例您就基本可以了解本网站的设计构思，并方便大赛评委点评。',1399388700,1399390267,0,0);
 /*!40000 ALTER TABLE `mf_notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,8 +289,6 @@ CREATE TABLE `mf_opus` (
   `user_id` int(11) NOT NULL COMMENT '作品所属用户id',
   `opus_name` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '作品名称',
   `content` text CHARACTER SET utf8 COMMENT '对作品的介绍',
-  `belong` int(11) NOT NULL DEFAULT '0' COMMENT '课程所属专业ID',
-  `youkuid` varchar(32) DEFAULT NULL COMMENT '作品所在的优酷ID',
   `add_time` int(11) NOT NULL COMMENT '上传时间',
   `vote_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评分数',
   `comment_count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '评论总数',
@@ -301,10 +304,9 @@ CREATE TABLE `mf_opus` (
   PRIMARY KEY (`id`),
   KEY `userid` (`user_id`,`add_time`,`vote_count`,`comment_count`,`force_top`),
   KEY `view_count` (`view_count`),
-  KEY `belong` (`belong`),
   KEY `last_refesh` (`last_refesh`),
   KEY `status` (`status`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='用户作品表';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COMMENT='用户作品表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -313,6 +315,7 @@ CREATE TABLE `mf_opus` (
 
 LOCK TABLES `mf_opus` WRITE;
 /*!40000 ALTER TABLE `mf_opus` DISABLE KEYS */;
+INSERT INTO `mf_opus` VALUES (1,1,'测试作品','<p>哈哈哈哈哈哈<br/></p>',1399563894,1,1,3,12,'哈哈哈哈哈哈',9,10,1,0,0,0),(5,1,'未命名作品',NULL,1399690927,0,0,0,0,NULL,NULL,NULL,1,1,1,0);
 /*!40000 ALTER TABLE `mf_opus` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,7 +337,7 @@ CREATE TABLE `mf_opus_attach` (
   KEY `opus_id` (`opus_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `mf_opus_attach_ibfk_3` FOREIGN KEY (`attach_id`) REFERENCES `mf_attach` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='作品附件表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COMMENT='作品附件表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -343,6 +346,7 @@ CREATE TABLE `mf_opus_attach` (
 
 LOCK TABLES `mf_opus_attach` WRITE;
 /*!40000 ALTER TABLE `mf_opus_attach` DISABLE KEYS */;
+INSERT INTO `mf_opus_attach` VALUES (1,1,1,3,'D'),(2,1,1,4,'V');
 /*!40000 ALTER TABLE `mf_opus_attach` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,14 +362,12 @@ CREATE TABLE `mf_opus_author` (
   `opus_id` int(11) NOT NULL COMMENT '作品ID',
   `author` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '作者姓名',
   `sex` tinyint(1) DEFAULT NULL COMMENT '0-男性，1-女性',
-  `idcard` varchar(18) DEFAULT NULL COMMENT '身份证号码',
-  `belong` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属部门',
   `phone` varchar(20) DEFAULT NULL COMMENT '手机号码',
   `email` varchar(80) CHARACTER SET utf8 DEFAULT NULL COMMENT '电子邮箱',
   PRIMARY KEY (`id`),
   KEY `opus_id` (`opus_id`),
   CONSTRAINT `mf_opus_author_ibfk_1` FOREIGN KEY (`opus_id`) REFERENCES `mf_opus` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='作品作者表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='作品作者表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -374,6 +376,7 @@ CREATE TABLE `mf_opus_author` (
 
 LOCK TABLES `mf_opus_author` WRITE;
 /*!40000 ALTER TABLE `mf_opus_author` DISABLE KEYS */;
+INSERT INTO `mf_opus_author` VALUES (1,1,'测试用户',0,'',''),(3,5,'测试用户',0,'0','');
 /*!40000 ALTER TABLE `mf_opus_author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,7 +400,7 @@ CREATE TABLE `mf_opus_comment` (
   KEY `force_hide` (`force_hide`),
   CONSTRAINT `mf_opus_comment_ibfk_1` FOREIGN KEY (`opus_id`) REFERENCES `mf_opus` (`id`) ON DELETE CASCADE,
   CONSTRAINT `mf_opus_comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `mf_user` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='作品评论表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='作品评论表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -406,6 +409,7 @@ CREATE TABLE `mf_opus_comment` (
 
 LOCK TABLES `mf_opus_comment` WRITE;
 /*!40000 ALTER TABLE `mf_opus_comment` DISABLE KEYS */;
+INSERT INTO `mf_opus_comment` VALUES (1,1,1,'vdfbdbthsdv',1399690267,0);
 /*!40000 ALTER TABLE `mf_opus_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -423,7 +427,7 @@ CREATE TABLE `mf_opus_view` (
   `time` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `opus_id` (`opus_id`,`ip`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COMMENT='用户查看作品表';
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='用户查看作品表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,6 +436,7 @@ CREATE TABLE `mf_opus_view` (
 
 LOCK TABLES `mf_opus_view` WRITE;
 /*!40000 ALTER TABLE `mf_opus_view` DISABLE KEYS */;
+INSERT INTO `mf_opus_view` VALUES (1,0,'127.0.0.1',1399562824),(2,1,'127.0.0.1',1399563927),(3,1,'127.0.0.1',1399639848),(4,1,'127.0.0.1',1399687285);
 /*!40000 ALTER TABLE `mf_opus_view` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -452,7 +457,7 @@ CREATE TABLE `mf_opus_vote` (
   KEY `opus_id` (`opus_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `mf_opus_vote_ibfk_1` FOREIGN KEY (`opus_id`) REFERENCES `mf_opus` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='投票表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='投票表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -461,6 +466,7 @@ CREATE TABLE `mf_opus_vote` (
 
 LOCK TABLES `mf_opus_vote` WRITE;
 /*!40000 ALTER TABLE `mf_opus_vote` DISABLE KEYS */;
+INSERT INTO `mf_opus_vote` VALUES (1,1,0,'127.0.0.1',1399639358);
 /*!40000 ALTER TABLE `mf_opus_vote` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -598,7 +604,7 @@ CREATE TABLE `mf_session` (
 
 LOCK TABLES `mf_session` WRITE;
 /*!40000 ALTER TABLE `mf_session` DISABLE KEYS */;
-INSERT INTO `mf_session` VALUES ('dlbt9pi5mjdvulorrqr29s5vj7',1399367124,'');
+INSERT INTO `mf_session` VALUES ('o9ip22v2n9ipc498ei38587743',1399704840,'_INDEX_|a:1:{s:3:\"acc\";a:15:{s:2:\"id\";s:1:\"1\";s:3:\"uid\";s:6:\"tester\";s:8:\"nickname\";s:12:\"测试用户\";s:8:\"password\";s:32:\"3bbff4b1fc3cc613579e3e43f7758cad\";s:5:\"intro\";N;s:3:\"sex\";s:1:\"0\";s:10:\"department\";s:12:\"河海大学\";s:5:\"phone\";s:1:\"0\";s:5:\"email\";s:0:\"\";s:9:\"forbidden\";s:1:\"0\";s:10:\"opus_count\";s:1:\"0\";s:10:\"msg_unread\";s:1:\"0\";s:6:\"avatar\";s:2:\"11\";s:12:\"avatar_large\";s:2:\"12\";s:10:\"popularity\";s:2:\"12\";}}');
 /*!40000 ALTER TABLE `mf_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -616,12 +622,9 @@ CREATE TABLE `mf_user` (
   `password` char(32) NOT NULL COMMENT '密码hash值',
   `intro` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户简介',
   `sex` tinyint(1) DEFAULT '0' COMMENT '性别(0-男，1-女)',
-  `idcard` char(18) NOT NULL COMMENT '身份证号码',
-  `belong_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0-其他用户，1-本校学生',
   `department` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属部门',
   `phone` bigint(20) NOT NULL COMMENT '手机号码',
   `email` varchar(150) NOT NULL COMMENT '电子邮箱',
-  `is_first_login` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否首次登录',
   `forbidden` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否禁止登录',
   `opus_count` smallint(6) NOT NULL DEFAULT '0' COMMENT '上传作品数',
   `msg_unread` mediumint(9) NOT NULL DEFAULT '0' COMMENT '未读消息数',
@@ -632,7 +635,7 @@ CREATE TABLE `mf_user` (
   UNIQUE KEY `userid` (`uid`),
   KEY `forbidden` (`forbidden`),
   KEY `popularity` (`popularity`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='用户表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -641,6 +644,7 @@ CREATE TABLE `mf_user` (
 
 LOCK TABLES `mf_user` WRITE;
 /*!40000 ALTER TABLE `mf_user` DISABLE KEYS */;
+INSERT INTO `mf_user` VALUES (1,'tester','测试用户','3bbff4b1fc3cc613579e3e43f7758cad',NULL,0,'河海大学',0,'',0,0,0,11,12,12);
 /*!40000 ALTER TABLE `mf_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -653,4 +657,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-05-06 21:55:56
+-- Dump completed on 2014-05-10 14:26:41
