@@ -23,12 +23,12 @@
 					<a>票数：<i class="icon-thumbs-o-up"></i><span id="vote_count">{$opus.vote_count}</span></a>
 					<if condition="getVoteStatus($opus['id'])">
 						<a class="btn btn-primary" disabled>已投票</a>
+					<else />
+						<if condition="can_vote()">
+							<a class="btn btn-primary" id="vote" href="{:U('vote',array('opus_id'=>$opus['id']))}" onclick="return ajaxvote()">投他一票</a>
 						<else />
-							<if condition="can_vote()">
-								<a class="btn btn-primary" id="vote" href="{:U('vote',array('opus_id'=>$opus['id']))}" onclick="return ajaxvote()">投他一票</a>
-							<else />
-								<a class="btn btn-primary" disabled>投票已截止</a>
-              </if>
+							<a class="btn btn-primary" disabled>投票已截止</a>
+	            	</if>
 					</if>
 					<a href="{:getdown($opus['documents']['access_key'])}" class="btn btn-warning">查看作品说明文档</a>
 				</div>

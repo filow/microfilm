@@ -7,22 +7,6 @@ class UserModel extends Model{
 		if(!$opus_data) return false;
 		return $opus_data;
 	}
-	public function getVoteOpus($userid=0,$limit=""){
-		if(!$userid) return false;
-		$opus=M('opus');
-		$vote=M('opus_vote');
-		$list=$vote->where(array('user_id'=>$userid))->limit($limit)->order('date desc')->select();
-		$result=array();
-		foreach ($list as $key => $value) {
-			$opus_data=$opus->where(array('id'=>$value['opus_id']))->find();
-			$nickname=$this->where(array('id'=>$value['user_id']))->field('nickname')->find();
-			$opus_data['nickname']=$nickname['nickname'];
-			$opus_data['vote_date']=$value['date'];
-			$result[]=$opus_data;
-			unset($opus_data);
-		}
-		return $result;
-	}
 	public function getMessage($userid=0,$limit=""){
 		if(!$userid) return false;
 		$msg=M('msg');

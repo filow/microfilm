@@ -29,7 +29,6 @@
 										<thead>
 											<th>姓名</th>
 											<th>性别</th>
-											<th>所属单位</th>
 											<th>手机号码</th>
 											<th>电子邮箱</th>
 											<th></th>
@@ -46,10 +45,7 @@
 												</select>
 											</td>
 											<td>
-												<input type="text" name="author_belong[]" value="{$li.department}">
-											</td>
-											<td>
-												<input type="text" name="phone[]" value="{$li.phone}">
+												<input type="text" name="phone[]" value="{$li.phone|default=""}">
 											</td>
 											<td>
 												<input type="text" name="email[]" value="{$li.email}">
@@ -72,7 +68,7 @@
 								<td colspan="2">作品介绍：<textarea name="intro" id="editor" cols="30" rows="10">{$data.content}</textarea></td>
 							</tr>
 							<tr>
-								<td>视频说明文档：</td>
+								<td>微电影说明文档：</td>
 								<td>
 									<if condition="$att_info['filename']">
 									<div class="alert alert-info">您已经上传了：{$att_info.filename},不需要再次上传。再次上传将覆盖原来的文件</div>
@@ -132,7 +128,7 @@ $(document).ready(function(){
     UE.getEditor('editor');
 
 	$('#add_author').click(function(){
-		$('#author_table').append('<tr><td><input type="text" name="author_name[]"></td><td><select name="sex[]"><option value="0">男</option><option value="1">女</option></select></td><td><input type="text" name="author_belong[]"></td><td><input type="text" name="phone[]"></td><td><input type="text" name="email[]"></td><td><a class="btn btn-danger btn-small deleteline"><i class="icon-minus"></i></a></td></tr>');
+		$('#author_table').append('<tr><td><input type="text" name="author_name[]"></td><td><select name="sex[]"><option value="0">男</option><option value="1">女</option></select></td><td><input type="text" name="phone[]"></td><td><input type="text" name="email[]"></td><td><a class="btn btn-danger btn-small deleteline"><i class="icon-minus"></i></a></td></tr>');
 	});
 	$('.deleteline').live("click",function(){
 		$(this).parent().parent().remove();

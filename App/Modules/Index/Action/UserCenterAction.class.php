@@ -26,10 +26,8 @@ class UserCenterAction extends Action{
 		$acc=sess('acc');
 		$user_data=$user->where(array('id'=>$acc['id']))->find();
 		$opus_data=$user->getOpus($acc['id']);
-		$vote_data=$user->getVoteOpus($acc['id'],"8");
 		$this->assign('acc',$user_data);
 		$this->assign('opus',$opus_data);
-		$this->assign('vote',$vote_data);
 		$this->display();
 	}
 	public function message(){
@@ -169,11 +167,13 @@ class UserCenterAction extends Action{
             $msg=$attach->uploadOpusThumb($opus_id);
             $this->assign('msg',$msg);
         }
-		$opusInfo=$opus->where(array('id'=>$opus_id))->field('thumb')->find();
-		$this->assign('aid',$opusInfo['thumb']);
+		$this->assign('opus_id',$opus_id);
 		$this->display();
 	}
 	public function editVideo($opus_id){
+		if(CF('CAN_UPLOAD_VIDEO')!="1"){
+			$this->error("抱歉，测试系统中不提供视频上传功能！",U('OpusManage'));
+		}
 		importP('Attach');
 		$has_uploaded=Attach::getVideo($opus_id);
 		$this->assign('old_video',$has_uploaded);
@@ -364,35 +364,6 @@ class UserCenterAction extends Action{
 		}
 	}
 
-
-
-
-
-
-	public function videoUploadFrame(){
-		C('SHOW_PAGE_TRACE',false);
-		$opus_id=I('opus_id');
-		if(!$opus_id) {
-			echo "没有指定视频ID!";die;
-		}
-		$this->display();
-	}
-	public function videoUploadHandle(){
-		importP('JqueryUpload');
-		$options=array(
-			"max_number_of_files"=> "/(\.|\/)(gif|jpe?g|png|mkv|mp4|flv|wmv)$",
-			"upload_dir" => "./Upload/opus/",
-			);
-		$upload_handler = new UploadHandler();
-	}
-	public function opusVote(){
-		$user=D('User');
-		$vote_data=$user->getVoteOpus(sess('acc.id'));
-		$count=count($vote_data);
-		$this->assign('count',$count);
-		$this->assign('vote_data',$vote_data);
-		$this->display();
-	}
 	public function OpusComment(){
 		$user=D('User');
 		$data=$user->getCommentByUserID(1,"50");

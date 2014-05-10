@@ -1,5 +1,5 @@
 <extend name="Common:base" />
-<block name="title">编辑作品基本信息</block>
+<block name="title">添加作品</block>
 <block name="extra_css">
 	<link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css">
 	<link rel="stylesheet" href="__PUBLIC__/plugins/bootstrap-select/bootstrap-select.css">
@@ -11,7 +11,7 @@
 		<include file="sidebar" />
 		<div class="main span9">
 			<div class="box">
-				<div class="box-header">编辑作品基本信息</div>
+				<div class="box-header">添加作品</div>
 				<div class="box-body">
 					<form action="{:U('editOpus_handle')}" method="post" enctype="multipart/form-data" >
 						<input type="hidden" name="id" value="{$data.id}" />
@@ -43,7 +43,7 @@
 												</select>
 											</td>
 											<td>
-												<input type="text" name="phone[]" value="{$user_data.phone}">
+												<input type="text" name="phone[]" value="{$user_data.phone|default=""}">
 											</td>
 											<td>
 												<input type="text" name="email[]" value="{$user_data.email}">

@@ -13,6 +13,15 @@ class OpusModel extends Model{
 			'init'	   => 1,
 			);
 		$id=$this->add($data);
+		$acc=sess('acc');
+		$author_data=array(
+			'opus_id' => $id,
+			'author' => $acc['nickname'],
+			'sex' => $acc['sex'],
+			'phone' => $acc['phone'],
+			'email' => $acc['email']
+			);
+		M('opus_author')->add($author_data);
 		return $id;
 	}
 	public function getOpusData($opus_id){

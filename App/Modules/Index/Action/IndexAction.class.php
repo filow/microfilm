@@ -51,12 +51,7 @@ class IndexAction extends CommonAction {
             }else{
                 $slide['time_left']=intval($time_left/(60))."分钟";
             }
-            // 用户总数
-            $slide['user_count']=M('user')->where(array('forbidden'=>0))->count();
-            // 在线总数
-            $slide['online_count']=M('session')->count();
             $slide['str']=array(
-                "当前系统共有".$slide['user_count']."个用户",
                 "本网站是中国大学生计算机设计大赛的参赛作品，不做实际用途",
                 "网站共被访问". S('VISIT_COUNT')."次",
                 );

@@ -27,11 +27,11 @@
 						<tr>
 							<td>性别：</td>
 							<td><eq name="acc['sex']" value="0">男<else />女</eq></td>
-							<td>所属单位：</td>
+							<td>学校：</td>
 							<td>{$acc.department}</td>
 						</tr>
 						<tr>
-							<td>电话号码：</td><td>{$acc.phone}</td>
+							<td>电话号码：</td><td>{$acc.phone|default=""}</td>
 							<td>电子邮箱：</td><td>{$acc.email}</td>
 						</tr>
 					</table>
@@ -40,20 +40,12 @@
 			<div class="user_work box">
 				<div class="box-header">作品管理</div>
 				<div class="box-body">
-					<div class="tabbable"> 
-					<div class="user_work_nav">
-						<ul>
-							<li class="active"><a href="#tab1" data-toggle="tab">我的作品</a></li>
-							<li><a href="#tab2" data-toggle="tab">我投票过的作品</a></li>
-						</ul>
-				    </div>{//user_work_nav}
-					<div class="tab-content">
-					    <div class="tab-pane active work_list " id="tab1">
+					    <div class="work_list">
 					      <ul>
 					      	<volist name="opus" id="li">
 					      	<li>
 					      		<div class="work_thumb"> 
-					      			<a href="{:U('Opus/view',array('id'=>$li['id']))}" class="thumbnail">
+					      			<a href="{:U('OpusManage')}" class="thumbnail">
                                       <img data-src="holder.js/160x120" src="{:getThumb($li['id'])}" alt="{$li.opus_name}" >
 					                </a>
 					            </div>
@@ -66,28 +58,6 @@
 					      	</volist>
 					      </ul>
 					      <div class="clear"></div>
-					    </div>
-					    <div class="tab-pane vote_list " id="tab2">
-							<ul>
-								<volist name="vote" id="li">
-						      	<li class="span3">
-						      		<div class="work_thumb"> 
-						      			<a href="{:U('Opus/view',array('id'=>$li['id']))}" class="thumbnail">
-	                                      <img data-src="holder.js/160x120" src="{:getThumb($li['id'])}" alt="{$li.opus_name}" />
-						                </a>
-						            </div>
-						      		<div class="user_work_info">
-						      			<div class="user_work_name">{$li.opus_name}</div>
-						      			<div class="user_work_author">作者:<span>{$li.nickname}</span></div>
-						      			<div class="user_work_vote">当前票数：<span>{$li.vote_count}</span></div>
-						      			<div class="user_work_uploadtime">投票时间:<span>{$li.vote_date|date="Y-m-d H:i",###}</span></div>
-						      		</div>
-						      	</li>
-							    </volist>
-					    	</ul>								 
-					    	<div class="clear"></div>   
-						</div>
-					</div>
 					</div>
 				</div>
 			</div>

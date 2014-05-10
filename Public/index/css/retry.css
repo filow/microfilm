@@ -7,7 +7,6 @@
 
 .retry_body{
 	padding: 15px 0;
-	border-right: 1px solid #E9E9E9;
 }
 
 .retry_head{margin-bottom: 20px;}
@@ -24,7 +23,12 @@
 }
 
 .retry_login{padding-right: 20px;}
-.retry_login form{padding-left: 100px}
+.retry_login form{
+	width: 350px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 .retry_input{margin: 15px 0;}
 .retry_input label,.retry_input input{display: inline-block;}
@@ -51,7 +55,6 @@
 
 .retry_logo{
 	position: absolute;
-	margin-top: 32px;
+	margin-top: 15px;
+	margin-left: -125px;
 }
-
-.helper ul li{margin: 5px 0;}

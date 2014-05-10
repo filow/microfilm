@@ -28,7 +28,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>用户ID</td>
+							<td>用户ID(登录用户名)</td>
 							<td>{$data.uid}</td>
 							<td></td>
 						</tr>
@@ -63,7 +63,7 @@
 							<td></td>
 						</tr>
 						<tr>
-							<td>所属学校</td>
+							<td>所属院校</td>
 							<td class="depart_td">
 					<input type="text" name="department" class="depart" value="{$data.department}" />
 							</td>
@@ -72,7 +72,7 @@
 						</tr>
 						<tr>
 							<td>联系电话</td>
-							<td><input type="text" name="phone" value="{$data.phone}" /></td>
+							<td><input type="text" name="phone" value="{$data.phone|default=""}" /></td>
 							<td></td>
 						</tr>
 						<tr>

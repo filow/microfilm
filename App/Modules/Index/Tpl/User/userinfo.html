@@ -59,7 +59,7 @@
 							该用户目前还未上传任何作品！
 						<else />
 						<div class="newest_work_video">
-							<a href="{$opus_first.video.file_location}" style="display:block;width:500px;height:380px;" id="player"> </a>
+							<img src="{:getThumb($opus_first['id'])}" width="500px" height="380px">
 						</div>
 						</div>
 						<div class="newest_work_info">
@@ -107,10 +107,4 @@
 		</div> <!-- main end -->
 	</div>
 </div>
-</block>
-<block name="extra_js">
-<script>
-$(document).ready(function(){
-});
-</script>
 </block>

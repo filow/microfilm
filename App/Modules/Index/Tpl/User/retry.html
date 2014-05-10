@@ -11,9 +11,10 @@
 	</if>
 </div>
 <div class="row-fliud">
-	<div class="retry_body span8">
+	<div class="retry_body span12">
 		<div class="retry_login">
 			<form action="{:U('User/login')}" method="post">
+				<div class="retry_logo"><img src="__PUBLIC__/index/img/login.png" alt=""></div>
 				<input type="hidden" name="redirect_url" value="{:I('redirect_url')}">
 				<div class="retry_input">
 					<label for="name">用户名：</label>
@@ -24,33 +25,13 @@
 					<input type="password" id="password" name="password">
 				</div>
 				<input type="submit" value="登 陆" class="btn btn-primary" id="submit_btn" >
-				<a href="{:U('forgot')}" id="forgot_link">忘记密码?</a>
 				
 			</form>
 			<div class="retry_register">还没有账号？<a href="{:U('User/reg')}">立即注册</a>。</div> <!-- retry_register end -->
 		</div><!--  retry_login end -->
 	</div><!-- retry_body end -->
-	<div class="retry_help span4">
-		<div class="retry_title">
-			<img src="__PUBLIC__/index/img/retry_help.png" alt="">
-		</div>
-		<div class="helper">
-			<br>
- 			<h5>忘记密码怎么办？</h5>
-			<p>您可以通过点击<a href="{:U('forgot')}">重置密码</a>来重置您的密码。
-				<ul>
-					<li>
-						如果您在注册时填写了手机号码信息，则只需要输入用户名和手机号码即可重置密码。
-					</li>
-					<li>
-						如果没有填写手机号码，则可以填写与您本人相关的信息由人工重置
-					</li>
-				</ul>
-				</p> 
-		</div>
-	</div><!-- retry_help end -->
 </div><!--  row-fluid end -->
-<div class="retry_logo"><img src="__PUBLIC__/index/img/login.png" alt=""></div>
+
 <div class="clear"></div>
 </div><!-- retry_wrapper end -->
 </block>

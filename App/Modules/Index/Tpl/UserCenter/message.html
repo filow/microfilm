@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css">
 	<style>
 		.bold{font-weight: bold;color:red;}
-		tr{
+		tr.message_line{
 			cursor: pointer;
 		}
 	</style>
@@ -26,12 +26,12 @@
 						</thead>
 						<tbody>
 							<volist name="msg" id="li" key="k">
-							<tr <?php if($li['has_read']=="0") echo "class=\"bold\"" ?> data-id="{$li.id}">
+							<tr class="message_line <?php if($li['has_read']=="0") echo "bold" ?>" data-id="{$li.id}">
 								<td>{$k}</td>
 								<td>{$li.title}</td>
 								<td>{$li.time|date="m-d H:i",###}</td>
 								<td>{$li.from}</td>
-							</tr>		
+							</tr>
 							</volist>
 						</tbody>
 					</table>
@@ -62,7 +62,7 @@
 <block name="extra_js">
 <script>
 $(document).ready(function(){
-	$('tr').click(function(){
+	$('tr.message_line').click(function(){
 		var thetr=$(this);
 		var id=thetr.attr('data-id');
 		url="{:U('getMsg')}"+"?id="+id;

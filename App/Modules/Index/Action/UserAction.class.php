@@ -16,9 +16,6 @@ class UserAction extends CommonAction {
 		if(passwordHash($uid,$password)==$result['password']){
 			// 设置用户信息
 			sess('acc',$result);
-			// 是否首次登录
-			if($result['is_first_login']!=0)
-				$user->where(array('id'=>$result['id']))->setField('is_first_login',0);
 			// 跳转
 			$this->redirect('UserCenter/index');
 		}else{
@@ -37,10 +34,6 @@ class UserAction extends CommonAction {
 	public function retry(){
 		$this->assign('message',XS('LOGIN_FAIL_MESSAGE'));
 		XS('LOGIN_FAIL_MESSAGE',null);
-		$this->display();
-	}
-	// 忘记密码
-	public function forgot(){
 		$this->display();
 	}
 	// 检查uid是否可用，ajax方法
@@ -75,18 +68,19 @@ class UserAction extends CommonAction {
 						where(array('user_id'=>$data['id'],'status'=>0))->
 						select();
 		$data['opus_count']=count($opus_data);
-		// 统计播放总数
 		$view_count=0;
-		foreach ($opus_data as $key => $value) {
-			$view_count+=$value['view_count'];
+		if(!empty($opus_data)){
+			// 统计播放总数
+			foreach ($opus_data as $key => $value) {
+				$view_count+=$value['view_count'];
+			}
+			// 用户观看第一个视频
+			viewOpus($opus_data[0]['id']);
+			importP('Attach');
+			$opus_data[0]['video']=Attach::getVideo($opus_data[0]['id']);
+			$this->assign('opus_first',$opus_data[0]);
+			unset($opus_data[0]);
 		}
-		// 用户观看第一个视频
-		viewOpus($opus_data[0]['id']);
-		importP('Attach');
-		$opus_data[0]['video']=Attach::getVideo($opus_data[0]['id']);
-		$this->assign('opus_first',$opus_data[0]);
-		unset($opus_data[0]);
-
 		// 其他信息
 		$this->assign('opus',$opus_data);
 		$this->assign('user',$data);
