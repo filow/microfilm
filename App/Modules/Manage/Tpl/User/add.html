@@ -52,8 +52,10 @@
 						<option value="1">女</option>
 					</select>
 				</td>
-				<td>手机号码</td>
-				<td><input type="text" name="phone" class="span2"></td>
+				<td>所属院校</td>
+				<td class="depart_td">
+					<input type="text" name="department" class="span2"  placeholder="所属院校"/>
+				</td>
 				<td>状态</td>
 				<td>
 					<select name="forbidden" class="span2">
@@ -63,53 +65,14 @@
 				</td>
 			</tr>
 			<tr>
+				<td>手机号码</td>
+				<td><input type="text" name="phone" class="span2"></td>
 				<td>邮箱</td>
 				<td><input type="text" name="email" class="span2"></td>
-				<td>身份证号码</td>
-				<td colspan="3"><input type="text" name="idcard" class="span4"></td>
-			</tr>
-			<tr>
-				<td>类型</td>
-				<td>
-					<select name="belong_type" class="span2">
-						<option value="1" selected>本校学生</option>
-						<option value="0">其他</option>
-					</select>
-				</td>
-				<td>所属部门</td>
-				<td colspan="3" class="depart_td">
-					<input type="text" name="department" class="span2"  placeholder="单位"/>
-					<input type="text" name="college" class="college span2" placeholder="学院" />
-					<input type="text" name="profession" class="profession span2" placeholder="专业" />
-					<input type="text" name="grade" class="grade span2" placeholder="年级" />
-				</td>
 			</tr>
 		</table>
 		<br><input type="submit" value="添加新用户" class="btn">
 		</form>
 	</div>
 </div>
-
-</block>
-<block name="extra_js">
-<script>
-$(document).ready(function(){
-	$(':input').change(function(){
-		var selector  =  $(this).parents('table');
-		selector.find('a.submit').removeAttr('disabled');
-		if($(this).attr('name')=="belong_type"){
-			if($(this).val()=="1"){
-				var node=selector.find('.depart_td');
-				node.append("<input type=\"text\" name=\"college\" class=\"college span2\" placeholder=\"学院\" /> ");
-				node.append("<input type=\"text\" name=\"profession\" class=\"college span2\" placeholder=\"专业\" /> ");
-				node.append("<input type=\"text\" name=\"grade\" class=\"college span2\" placeholder=\"年级\" />");
-			}else{
-				selector.find('.college').remove();
-				selector.find('.profession').remove();
-				selector.find('.grade').remove();
-			}
-		}
-	});
-});
-</script>
 </block>

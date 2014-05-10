@@ -35,7 +35,7 @@
 			<else />
 				<img src="__PUBLIC__/images/user.jpg" class="avatar" />
 			</if><br><br>
-			<a class="btn" id="upload_avatar" disabled>上传功能展示不能使用</a>
+			<a class="btn" id="upload_avatar" disabled>上传功能暂时不能使用</a>
 			</div>
 		</iframe>
 	</div>
@@ -58,8 +58,11 @@
 						<option value="1" <?php if($li['sex']=='女') echo 'selected';?>>女</option>
 					</select>
 				</td>
-				<td>手机号码</td>
-				<td><input type="text" name="phone" value="{$li.phone}" class="phone span2"></td>
+				<td>所属院校</td>
+				<td class="depart_td">
+					<input type="text" name="department" class="department span2" value="{$li.department}" placeholder="所属院校"/>
+				</td>
+				
 				<td>状态</td>
 				<td>
 					<select name="forbidden" class="forbidden span2">
@@ -69,34 +72,16 @@
 				</td>
 			</tr>
 			<tr>
+				<td>手机号码</td>
+				<td><input type="text" name="phone" value="{$li.phone|default=""}" class="phone span2"></td>
 				<td>邮箱</td>
 				<td><input type="text" name="email" value="{$li.email}" class="email span2"></td>
-				<td>身份证号码</td>
-				<td colspan="3"><input type="text" name="idcard" value="{$li.idcard}" class="idcard span4"></td>
-			</tr>
-			<tr>
-				<td>类型</td>
-				<td>
-					<select name="belong_type" class="belong_type span2">
-						<option value="1" <?php if($li['belong_type']==1) echo 'selected';?>>本校学生</option>
-						<option value="0" <?php if($li['belong_type']==0) echo 'selected';?>>其他</option>
-					</select>
-				</td>
-				<td>所属部门</td>
-				<td colspan="3" class="depart_td">
-					<input type="text" name="department" class="department span2" value="{$li.department}" placeholder="单位"/>
-					<eq name="li['belong_type']" value="1">
-						<input type="text" name="college" class="college span2" value="{$li.belong.college}" placeholder="学院" />
-						<input type="text" name="profession" class="profession span2" value="{$li.belong.profession}" placeholder="专业" />
-						<input type="text" name="grade" class="grade span2" value="{$li.belong.grade}" placeholder="年级" />
-					</eq>
-				</td>
-			</tr>
-			<tr>
 				<td>密码</td>
-				<td><input type="text" name="password" id="" class="password span2" /></td>
+				<td><input type="text" name="password" id="" class="password span2" placeholder="不修改则留空" /></td>
+			</tr>
+			<tr>
 				<td>确认提交</td>
-				<td colspan="3">
+				<td colspan="4">
 					<a class="submit btn" disabled="disabled">提交对该用户的更改</a>
 					<span class="status"></span>
 				</td>
@@ -118,43 +103,22 @@ $(document).ready(function(){
 		var phone     =  selector.find('.phone').val();
 		var forbidden =  selector.find('.forbidden').val();
 		var email     =  selector.find('.email').val();
-		var idcard    =  selector.find('.idcard').val();
-		var belong_type =  selector.find('.belong_type').val();
 		var password  =  selector.find('.password').val();
 		var department  =  selector.find('.department').val();
-		var college  =  selector.find('.college').val();
-		var profession  =  selector.find('.profession').val();
-		var grade  =  selector.find('.grade').val();
 		var queryString="id="+id+"&nickname="+nickname+"&sex="+sex+
 						"&phone="+phone+"&forbidden="+forbidden+
-						"&email="+email+"&idcard="+idcard+
-						"&belong_type="+belong_type+"&password="+password+
-						"&department="+department+"&college="+college+
-						"&profession="+profession+"&grade="+grade;
+						"&email="+email+"&password="+password+
+						"&department="+department;
 		var url="{:U('edit_handle')}";
 		$.post(url,queryString,function (data){
 			selector.find("span.status").html(data);
 			selector.find('a.submit').attr('disabled','disabled');
 		});
 	});
-	$(':input').change(function(){
+	$(':input').bind('change keyup',function(){
 		var selector  =  $(this).parents('table');
 		selector.find('a.submit').removeAttr('disabled');
-		if($(this).attr('name')=="belong_type"){
-			if($(this).val()=="1"){
-				var node=selector.find('.depart_td');
-				node.append("<input type=\"text\" name=\"college\" class=\"college span2\" placeholder=\"学院\" /> ");
-				node.append("<input type=\"text\" name=\"profession\" class=\"college span2\" placeholder=\"专业\" /> ");
-				node.append("<input type=\"text\" name=\"grade\" class=\"college span2\" placeholder=\"年级\" />");
-			}else{
-				selector.find('.college').remove();
-				selector.find('.profession').remove();
-				selector.find('.grade').remove();
-			}
-		}
 	});
-
-
 });
 </script>
 </block>

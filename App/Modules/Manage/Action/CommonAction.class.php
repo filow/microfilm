@@ -15,6 +15,10 @@ class CommonAction extends Action {
         if(XS('message')){
             $this->assign('msg',XS('message'));
         }
+
+        if($this->checkPermission('Account','Index')){
+            $this->assign("AccountManage",1);
+        }
     }
     function checkPermission($action=ACTION_NAME,$module=MODULE_NAME){
         //不开启验证时直接放行

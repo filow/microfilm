@@ -11,7 +11,6 @@ class CmtAction extends CommonAction {
         foreach ($cmt_data as $key => $value) {
             $cmt_data[$key]['message']=String::msubstr($value['message'],0,30);
         }
-        // dump($cmt_data);die;
         $this->assign('cmt_data',$cmt_data);
         $this->assign('show',$page->show());
         $this->display();

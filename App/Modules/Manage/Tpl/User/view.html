@@ -50,8 +50,10 @@
 			<tr>
 				<td>性别</td>
 				<td>{$li.sex}</td>
-				<td>手机号码</td>
-				<td>{$li.phone}</td>
+				<td>所属院校</td>
+				<td>
+					{$li.department}
+				</td>
 				<td>状态</td>
 				<td>
 				<eq name="li['forbidden']" value="0">
@@ -63,27 +65,11 @@
 			</tr>
 			<tr>
 				<td>上传作品数</td>
-				<td colspan="3">
-					{$li.opus_count}
-					[作品列表：]
-				</td>
-				<td>是否登录过</td>
-				<td>
-					<eq name="li['is_first_login']" value="1">从未登录过
-					<else />是</eq>
-				</td>
-			</tr>
-			<tr>
+				<td>{$li.opus_count}</td>
 				<td>邮箱</td>
 				<td>{$li.email}</td>
-				<td>身份证号码</td>
-				<td colspan="3">{$li.idcard}</td>
-			</tr>
-			<tr>
-				<td>所属学校</td>
-				<td colspan="3">
-					{$li.department}
-				</td>
+				<td>手机号码</td>
+				<td>{$li.phone|default=""}</td>
 			</tr>
 		</table>
 	</div>

@@ -2,9 +2,6 @@
 <block name="ext-nav-item">
 <li class="current"><a>重新上传视频</a></li>
 </block>
-<block name="extra_css">
-	<!-- <link rel="stylesheet" href="__PUBLIC__/index/css/usercenter.css"> -->
-</block>
 <block name="content">
 <div class="usercenter">
 	<div class="row-fluid">
@@ -63,7 +60,6 @@ $(function() {
 		'progressData' : 'speed',
 		'queueSizeLimit' : 1,
 		'removeCompleted' : false,
-		// 'auto'     : false,
 		'itemTemplate' : '<div id="${fileID}" class="well">'+
             '<span class="fileName">正在上传${fileName}</span><span class="label label-info">${fileSize}</span><span class="data"></span>'+
             '</div>',

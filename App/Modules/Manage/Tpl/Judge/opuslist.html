@@ -31,6 +31,7 @@ table.dataTable td {
 		<th>浏览数</th>
 		<th>评论数</th>
 		<th>热度</th>
+		<th>平均分</th>
 		<th>评审状态</th>
 	</thead>
 	<tbody>
@@ -50,6 +51,7 @@ table.dataTable td {
 			<td>{$li.view_count}</td>
 			<td>{$li.comment_count}</td>
 			<td>{$li.popularity}</td>
+			<td>{$li.avg}</td>
 			<td>
 				<if condition="$li['judged']==1">
 				<span class="label label-success"><i class="icon-check-circle"></i> 已评审</span>
@@ -74,7 +76,7 @@ $(document).ready(function(){
         },
         "aaSorting": [[ 2, "desc" ]],
 	    "aoColumns": [
-	        { "asSorting": [] },null,null,{ "asSorting": [] },null,null,null,null,null
+	        { "asSorting": [] },null,null,{ "asSorting": [] },null,null,null,null,null,null
         ] ,
         'iDisplayLength':25,
         "bStateSave": true

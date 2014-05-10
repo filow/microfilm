@@ -94,7 +94,7 @@
 							<td></td>
 						</tr>
 						<tr>
-							<td>所在学校</td>
+							<td>所属院校</td>
 							<td class="depart_td">
 								<input type="text" name="department" class="depart" /><br>
 							</td>
@@ -148,7 +148,7 @@ function checkform(){
 	}
 	var department=$(form.department).val();
 	if(department.length==0){
-		alert("请填写学校名称！");
+		alert("请填写院校名称！");
 		$(form.department).focus();
 		return false;
 	}

@@ -79,7 +79,7 @@
                                         <a href="{:U('UserCenter/index')}">{$acc.nickname}</a>
                                     </div>
                                     <div>作品数：<span>{$opus_count}</span></div>
-                                    <div>学校:<span>{$acc.department}</span></div>
+                                    <div>所属院校:<span>{$acc.department}</span></div>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -209,7 +209,7 @@
                     <a href="{:U('User/userinfo',array('uid'=>$user_rank_first['uid']))}"><img src="{:getAvatar($user_rank_first['avatar'])}" alt="{$user_rank_first.nickname}" class="top_author_headphoto"></a>
                     <div class="author_info">
                         <a href="{:U('User/userinfo',array('uid'=>$user_rank_first['uid']))}" class="author_name">{$user_rank_first.nickname}</a>
-                        <a><span>{$user_rank_first.department}</span>学校:</a>
+                        <a><span>{$user_rank_first.department}</span>所属院校:</a>
                         <a><span><strong>{$user_rank_first.popularity}</strong></span>热度:</a>
                     </div>
                 </div>

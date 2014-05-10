@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title><block name="title">网站管理中心</block>--__NAME__</title>
 	<!-- 让ie浏览器使用最新的渲染引擎 -->
+    <meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<css href="__PUBLIC__/dark_ui/uilib.css" />
 	<css href="__PUBLIC__/backyard/style.css" />
@@ -17,7 +18,7 @@
     <!--header-->
 		<div class="header">
 				<div class="header-logo">
-	                <a href="#"><img src="__PUBLIC__/backyard/img/logo.png" id="logo" /></a>
+	                <img src="__PUBLIC__/backyard/img/logo.png" id="logo" />
 	            </div>
 		</div>
 		<present name="show_info_box">
@@ -47,7 +48,6 @@
 					<input type="text" class="login-input" name="uid" id="login-name" placeholder="请输入用户名" value="{:I('uid')}" autofocus data-toggle="popover" title="" data-content="用户名不能为空" />
 					<div class="login-label">
 						<label for="login-password">密码：</label>
-						<a>忘记密码？</a>
 					</div>
 					<input type="password" name="password" class="login-input" placeholder="请输入密码" id="login-password" data-toggle="popover" title="" data-content="密码不能为空" />
 					<if condition="XS('show_verify') eq 1">
@@ -71,56 +71,50 @@
 <js href="__PUBLIC__/js/bootstrap.min.js" />
 
 <script>
-	function check()
-	{
-		var flag = true;
-		$("input").each(function(){
-			var value=$(this).val();
-			if(value=="")
-			{
-				$(this).css("border-color","red");
-				$(this).popover('show');
-				flag=false;
-			}
-		});
-		return flag;
-	}
+function check()
+{
+	var flag = true;
+	$("input").each(function(){
+		var value=$(this).val();
+		if(value=="")
+		{
+			$(this).css("border-color","red");
+			$(this).popover('show');
+			flag=false;
+		}
+	});
+	return flag;
+}
 
-	$(document).ready(function(){
-		$(".removing-tag").click(function(){
-			$(".login-alert").fadeOut();
-		});	
-	//close login-alert 
-		
-			var pic=$(".validate-pic");
-		$(".validate-pic").click(function(){
-			var url="{:U('vcode')}?"+Math.random();
-			pic.attr("src",url);
-		});
-
-		$("#change-pic").click(function(){
-			var url="{:U('vcode')}?"+Math.random();
-			pic.attr("src",url);
-		});
-	//change validate picture
-
-		$("input").focus(function(){
-  			$(this).css("border-color","#8b969d");
-		});
-	//close the tips
-
-			var TIME_OUT =parseInt($(".time-data").html());
-            var interval=setInterval(function(){
-                $(".time-data").html(TIME_OUT--);
-                if(TIME_OUT == -1) 
-                {
-             		clearInterval(interval)
-                    location.href = "{:U('Public/Index')}?"+Math.random();
-                }
-            },1000);
-    //Shows the remaining time. 
+$(document).ready(function(){
+	$(".removing-tag").click(function(){
+		$(".login-alert").fadeOut();
+	});	
+	
+	var pic=$(".validate-pic");
+	$(".validate-pic").click(function(){
+		var url="{:U('vcode')}?"+Math.random();
+		pic.attr("src",url);
 	});
 
+	$("#change-pic").click(function(){
+		var url="{:U('vcode')}?"+Math.random();
+		pic.attr("src",url);
+	});
 
+	$("input").focus(function(){
+			$(this).css("border-color","#8b969d");
+	});
+
+	var TIME_OUT =parseInt($(".time-data").html());
+    var interval=setInterval(function(){
+        $(".time-data").html(TIME_OUT--);
+        if(TIME_OUT == -1) 
+        {
+     		clearInterval(interval)
+            location.href = "{:U('Public/Index')}?"+Math.random();
+        }
+    },1000);
+});
 </script>
 </html>

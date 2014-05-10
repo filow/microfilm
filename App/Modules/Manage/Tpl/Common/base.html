@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
     <title><block name="title">{$title|default="网站管理中心"}</block>--__NAME__</title>
+    <!-- 让ie浏览器使用最新的渲染引擎 -->
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="__PUBLIC__/dark_ui/uilib.css" />
     <link rel="stylesheet" href="__PUBLIC__/plugins/icheck/skins/square/blue.css">
     <link rel="stylesheet" href="__PUBLIC__/plugins/bootstrap-select/bootstrap-select.css">
@@ -21,8 +24,10 @@
         </div>
         <!-- 用户信息栏 -->
 		<div class="pull-right userinfo" id="nav-bar">
-            <button class="btn">{:session('realname')} {:session('uid')}</button> 
+            <button class="btn">{:session('realname')} {:session('uid')}</button>
+            <present name="AccountManage">
             <a class="btn" href="{:U('Account/Index')}">账户管理</a>
+            </present>
             <a class="btn" href="{:U('Index/Index/Index')}">回到前台</a>
             <a class="btn btn-warning" href="{:U('Public/logout')}">退出登录</a>
 		</div>

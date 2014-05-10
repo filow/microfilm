@@ -20,6 +20,5 @@ class AccountAction extends CommonAction {
     $data['realname']=mysql_escape_string($_POST['realname']);
     $admin->where(array('id'=>$info['id']))->save($data);
     $this->success('保存成功！');
-    dump($data);
   }
 }

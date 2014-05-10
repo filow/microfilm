@@ -171,7 +171,6 @@ class PermissionAction extends CommonAction {
                 }
             }
         }
-        // dump($node);die;
         $this->assign("node",$node);
         $this->display();
     }

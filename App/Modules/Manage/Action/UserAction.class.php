@@ -4,6 +4,7 @@ class UserAction extends CommonAction {
     {
     	$user=D('User');
     	$user_data=$user->getUserInfo(null,'');
+        
     	$this->assign('user_data',$user_data);
 		$this->display();
     }
@@ -61,19 +62,6 @@ class UserAction extends CommonAction {
         }else{
             $data['password']=passwordHash($user_data['uid'],$data['password']);
         }
-        if($_POST['belong_type']==1){
-            $belong=M('user_belong');
-            $belong_data['user_id']=$_POST['id'];
-            $belong_data['college']=$_POST['college']=="undefined"?"":$_POST['college'];
-            $belong_data['profession']=$_POST['profession']=="undefined"?"":$_POST['profession'];
-            $belong_data['grade']=$_POST['grade']=="undefined"?"":$_POST['grade'];
-            $belong->where(array('user_id'=>$belong_data['user_id']))->delete();
-            if($belong->add($belong_data)){
-                echo "<a class='text-success'>用户所在院系修改成功</a>";
-            }else{
-                echo "<a class='text-error'>用户所在院系修改失败</a>";
-            }
-        }
         $result=$user->where(array('id'=>$data['id']))->save($data);
         if($result){
             echo "<a class='text-success'>用户信息修改成功</a>";
@@ -115,7 +103,6 @@ class UserAction extends CommonAction {
     }
     private function delete(){
     	$this->error('目前删除用户功能暂不开放');
-    	// $this->display('edit');
     }
     public function add(){
         $this->display();
@@ -133,15 +120,6 @@ class UserAction extends CommonAction {
             $this->error($user->getError());
         }else{
             if($userid=$user->add($result)){
-                //添加用户所属
-                if($_POST['belong_type']==1){
-                    $belong=M('user_belong');
-                    $belong_data['user_id']=$userid;
-                    $belong_data['college']=$_POST['college'];
-                    $belong_data['profession']=$_POST['profession'];
-                    $belong_data['grade']==$_POST['grade'];
-                    $belong->add($belong_data);
-                }
                 XS('message',array(1,"添加用户".$_POST['nickname']."成功"));
                 $this->redirect('index');
             }else{
