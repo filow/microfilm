@@ -393,6 +393,7 @@
 .hot_author_box .top_author_headphoto {
   width: 70px;
   height: 70px;
+  float: left;
 }
 .hot_author_box .top_author {
   padding: 8px;
@@ -402,7 +403,6 @@
 }
 .hot_author_box .top_author .author_info {
   margin-left: 83px;
-  margin-top: -72px;
 }
 .hot_author_box .top_author .author_info a {
   display: block;
@@ -426,6 +426,7 @@
 .hot_author_box .hot_author img {
   width: 27px;
   height: 27px;
+  float: left;
 }
 .hot_author_box .hot_author .thumb {
   width: 35px;
@@ -445,6 +446,7 @@
 .hot_work_box .top_work .video_thumb {
   width: 100px;
   height: 80px;
+  float: left;
 }
 .hot_work_box .top_work .work_descrtion a span {
   float: right;
@@ -455,7 +457,6 @@
 .hot_work_box .top_work .work_info {
   font-size: 14px;
   color: #646464;
-  margin-top: -75px;
   margin-left: 2px;
 }
 .hot_work_box .top_work .work_info a {

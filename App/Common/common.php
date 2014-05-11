@@ -85,15 +85,15 @@ function atcLocation($attach_id){
 		return 0;
 }
 function getAvatar($attach_id){
-	if(!$attach_id) return "/Public/images/user.jpg";
+	if(!$attach_id) return __ROOT__."/Public/images/user.jpg";
 	$attach=M('attach');
 	$file=$attach->where(array('id'=>$attach_id))->find();
 
 	if($file){
 		if(file_exists(".".$file['file_location'])){
-			return $file['file_location'];
+			return __ROOT__.$file['file_location'];
 		}else{
-			return "/Public/images/user.jpg";
+			return __ROOT__."/Public/images/user.jpg";
 		}
 	}else{
 		return "";
@@ -101,7 +101,7 @@ function getAvatar($attach_id){
 }
 
 function getThumb($opus_id){
-	$result="/Public/images/nothumb.jpg";
+	$result=__ROOT__."/Public/images/nothumb.jpg";
 	if(!$opus_id) return $result;
 
 	// 缓存读取
@@ -118,7 +118,7 @@ function getThumb($opus_id){
 		$file=$attach->where(array('id'=>$opus_data['thumb']))->find();
 		if($file){
 			if(file_exists(".".$file['file_location'])){
-				$result=$file['file_location'];
+				$result=__ROOT__.$file['file_location'];
 			}
 		}
 	}else{
@@ -132,7 +132,7 @@ function getThumb($opus_id){
 			$dir=dirname($video['file_location'])."/";
 			$jpgfile=$dir.$filename;
 			if(file_exists(".".$jpgfile)){
-				$result=$jpgfile;
+				$result=__ROOT__.$jpgfile;
 			}
 		}
 	}
@@ -141,7 +141,7 @@ function getThumb($opus_id){
 }
 
 function getThumbMini($opus_id){
-	$result="/Public/images/nothumb_mini.jpg";
+	$result=__ROOT__."/Public/images/nothumb_mini.jpg";
 	if(!$opus_id) return $result;
 
 	// 缓存读取
@@ -158,7 +158,7 @@ function getThumbMini($opus_id){
 		$file=$attach->where(array('id'=>$opus_data['thumb_mini']))->find();
 		if($file){
 			if(file_exists(".".$file['file_location'])){
-				$result=$file['file_location'];
+				$result=__ROOT__.$file['file_location'];
 			}
 		}
 	}else{
@@ -172,7 +172,7 @@ function getThumbMini($opus_id){
 			$dir=dirname($video['file_location'])."/";
 			$jpgfile=$dir.$filename;
 			if(file_exists(".".$jpgfile)){
-				$result=$jpgfile;
+				$result=__ROOT__.$jpgfile;
 			}
 		}
 	}
