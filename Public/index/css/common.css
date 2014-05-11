@@ -28,10 +28,11 @@ a:hover {
   width: 415px;
 }
 .header_top {
-  margin: 10px 0;
+  margin: 14px 0;
 }
 .header_top img {
   float: left;
+  width: 240px;
 }
 #ie7_margin {
   height: 20px;
@@ -65,7 +66,7 @@ a:hover {
 }
 /******* 导航条 *******/
 .header_nav {
-  width: 760px;
+  width: 1040px;
   height: 42px;
   -webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
@@ -74,8 +75,7 @@ a:hover {
   -moz-border-radius: 5px;
   border-radius: 5px;
   float: left;
-  margin-left: 280px;
-  margin-top: -52px;
+  margin-top: -5px;
 }
 .header_nav ul {
   width: 100%;
