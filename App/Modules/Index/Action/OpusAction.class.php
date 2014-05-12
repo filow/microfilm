@@ -129,6 +129,7 @@ class OpusAction extends CommonAction{
 		if(!sess('acc.id')) return;
 		$opus=D('Opus');
 		$result=$opus->where(array('user_id'=>sess('acc.id'),'id'=>$opus_id))->field('force_top,last_refesh,content',true)->find();
+		$result['thumb']=getThumb($result['thumb']);
 		if($result){
 			$authors=M('opus_author')->where(array('opus_id'=>$opus_id))->field('author')->select();
 			$author_str="";

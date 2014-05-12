@@ -104,12 +104,6 @@ function getThumb($opus_id){
 	$result=__ROOT__."/Public/images/nothumb.jpg";
 	if(!$opus_id) return $result;
 
-	// 缓存读取
-	$key="getThumb".$opus_id."BIGIMG";
-	if($data=S($key)){
-		return $data;
-	}
-
 	$opus=M('opus');
 	$attach=M('attach');
 	$opus_data=$opus->field("thumb")->find($opus_id);
@@ -136,19 +130,12 @@ function getThumb($opus_id){
 			}
 		}
 	}
-	S($key,$result,300);
 	return $result;
 }
 
 function getThumbMini($opus_id){
 	$result=__ROOT__."/Public/images/nothumb_mini.jpg";
 	if(!$opus_id) return $result;
-
-	// 缓存读取
-	$key="getThumb".$opus_id."SMALLIMG";
-	if($data=S($key)){
-		return $data;
-	}
 
 	$opus=M('opus');
 	$attach=M('attach');
@@ -176,7 +163,6 @@ function getThumbMini($opus_id){
 			}
 		}
 	}
-	S($key,$result,300);
 	return $result;
 }
 
