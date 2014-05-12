@@ -101,7 +101,7 @@ function getAvatar($attach_id){
 }
 
 function getThumb($opus_id){
-	$result=__ROOT__."/Public/images/nothumb.jpg";
+	$result="/Public/images/nothumb.jpg";
 	if(!$opus_id) return $result;
 
 	$opus=M('opus');
@@ -112,7 +112,7 @@ function getThumb($opus_id){
 		$file=$attach->where(array('id'=>$opus_data['thumb']))->find();
 		if($file){
 			if(file_exists(".".$file['file_location'])){
-				$result=__ROOT__.$file['file_location'];
+				$result=$file['file_location'];
 			}
 		}
 	}else{
@@ -126,7 +126,7 @@ function getThumb($opus_id){
 			$dir=dirname($video['file_location'])."/";
 			$jpgfile=$dir.$filename;
 			if(file_exists(".".$jpgfile)){
-				$result=__ROOT__.$jpgfile;
+				$result=$jpgfile;
 			}
 		}
 	}
@@ -134,7 +134,7 @@ function getThumb($opus_id){
 }
 
 function getThumbMini($opus_id){
-	$result=__ROOT__."/Public/images/nothumb_mini.jpg";
+	$result="/Public/images/nothumb_mini.jpg";
 	if(!$opus_id) return $result;
 
 	$opus=M('opus');
@@ -145,7 +145,7 @@ function getThumbMini($opus_id){
 		$file=$attach->where(array('id'=>$opus_data['thumb_mini']))->find();
 		if($file){
 			if(file_exists(".".$file['file_location'])){
-				$result=__ROOT__.$file['file_location'];
+				$result=$file['file_location'];
 			}
 		}
 	}else{
@@ -159,7 +159,7 @@ function getThumbMini($opus_id){
 			$dir=dirname($video['file_location'])."/";
 			$jpgfile=$dir.$filename;
 			if(file_exists(".".$jpgfile)){
-				$result=__ROOT__.$jpgfile;
+				$result=$jpgfile;
 			}
 		}
 	}
