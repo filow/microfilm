@@ -130,7 +130,7 @@ function getThumb($opus_id){
 			}
 		}
 	}
-	return $result;
+	return __ROOT__.$result;
 }
 
 function getThumbMini($opus_id){
@@ -163,7 +163,7 @@ function getThumbMini($opus_id){
 			}
 		}
 	}
-	return $result;
+	return __ROOT__.$result;
 }
 
 function getClientIP() {

@@ -38,7 +38,7 @@ return array(
     'URL_CASE_INSENSITIVE' =>true,
 	'PASSWORD_SALT'     => '!DXSWDYDS^@2c',
 	//显示页面trace信息
-	'SHOW_PAGE_TRACE'	=> true,
+	'SHOW_PAGE_TRACE'	=> false,
 
     'TMPL_EXCEPTION_FILE' => './App/Tpl/exception.html',
     'TMPL_ACTION_ERROR' => './App/Tpl/jump.html',
