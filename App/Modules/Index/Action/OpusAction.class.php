@@ -41,6 +41,7 @@ class OpusAction extends CommonAction{
 			unset($user_data);
 		}
 		$this->assign('show',$page->show());
+		$this->assign('count',$count);
 		$this->assign('opus',$opus_data);
 		$this->display();
 	}

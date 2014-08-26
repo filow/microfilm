@@ -12,6 +12,7 @@
 			<li><a href="{:U('gallery',array('order'=>'vote'))}" <?php if(I('order')=="vote") echo "class=\"active\""; ?>>最多票数</a></li>
 			<li><a href="{:U('gallery',array('order'=>'view'))}" <?php if(I('order')=="view") echo "class=\"active\""; ?>>最多播放</a></li>
 			<li><a href="{:U('gallery',array('order'=>'comment'))}" <?php if(I('order')=="comment") echo "class=\"active\""; ?>>最多评论</a></li>
+			<li><a class="disabled">共有{$count}个参赛作品</a></li>
 			<div class="clear"></div>
 		</ul>
 		<div class="clear"></div>

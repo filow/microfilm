@@ -34,6 +34,9 @@
 	background-color: #509cda;
 	color: #fff;
 }
+.works_nav ul li a.disabled{
+	color: #A7A7A7;
+}
 .works_nav hr{
 	border-bottom: 1px solid #ddd;
 	border-top: none;
